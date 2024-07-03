@@ -11,7 +11,9 @@
     {{ session('success')}}
 </div>
 @endif
-<a href="/dosen/create" class="btn btn-primary">Tambah Data Dosen</a>
+
+<a href="/dosen/create" class="btn btn-primary mb-1">Tambah Data Dosen</a>
+
 @if (auth()->check())
 <div class="card col-lg-8">
     <div class="card-body">

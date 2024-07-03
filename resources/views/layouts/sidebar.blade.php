@@ -48,6 +48,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('suratketetapan') ? 'active' : '' }}"
+                        aria-current="page" href="/suratketetapan">
+                        <svg class="bi">
+                            <use xlink:href="#file-earmark-text" />
+                        </svg>
+                        <span class="text-sidebar">Data ST/SK</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('user') ? 'active' : '' }}"
                         aria-current="page" href="/user">
                         <svg class="bi">

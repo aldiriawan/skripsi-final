@@ -5,6 +5,7 @@ use App\Http\Controllers\DosenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PublikasiController;
 use App\Http\Controllers\SuratTugasController;
+use App\Http\Controllers\SuratKetetapanController;
 
 Route::get('/', function () {
     return view('dashboard.index', [
@@ -25,4 +26,5 @@ Route::post('surattugas/import', [SuratTugasController::class, 'ImportExcelData'
 Route::resource('/dosen', DosenController::class)->middleware('auth');
 Route::resource('/surattugas', SuratTugasController::class)->middleware('auth');
 Route::resource('/publikasi', PublikasiController::class)->middleware('auth');
+Route::resource('/suratketetapan', SuratKetetapanController::class)->middleware('auth');
 
