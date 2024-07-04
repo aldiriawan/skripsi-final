@@ -144,17 +144,10 @@
                             @php
                                 $waktu_akhir = \Carbon\Carbon::parse($data->waktu_akhir);
                                 $now = now();
+                                $colorClass = $waktu_akhir->greaterThan($now->copy()->addDays(7)) ? 'bg-success' : ($waktu_akhir->greaterThan($now->copy()->addDays(2)) ? 'bg-warning' : 'bg-danger');
                             @endphp
-            
-                            <div class="indicator 
-                                @if($waktu_akhir > $now->addDays(7)) 
-                                    bg-success 
-                                @elseif($waktu_akhir > $now->addDays(2)) 
-                                    bg-warning 
-                                @else 
-                                    bg-danger 
-                                @endif">
-                            </div>
+                    
+                            <div class="indicator {{ $colorClass }}"></div>
                             <!-- Keterangan -->
                             <div>
                                 {{ $data->keterangan }} - {{ \Carbon\Carbon::parse($data->waktu_awal)->format('d M Y') }} - {{ \Carbon\Carbon::parse($data->waktu_akhir)->format('d M Y') }}
@@ -162,6 +155,7 @@
                         </div>
                     @endforeach
                 </ul>
+                
             </div>
         </div>
         @endif
