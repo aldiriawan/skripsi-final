@@ -49,6 +49,79 @@
                 <canvas id="barChart" style="max-height: 300px;"></canvas>
             </div>
         </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            var ctx = document.getElementById('barChart').getContext('2d');
+        
+            var labels = @json($years);
+            var pengabdianData = @json($pengabdianData);
+            var penunjangData = @json($penunjangData);
+            var penelitianData = @json($penelitianData);
+            var pengajaranData = @json($pengajaranData);
+        
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Pengabdian',
+                            data: pengabdianData,
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Penunjang',
+                            data: penunjangData,
+                            backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                            borderColor: 'rgba(255, 206, 86, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Penelitian',
+                            data: penelitianData,
+                            backgroundColor: 'rgba(153, 102, 255, 0.6)',
+                            borderColor: 'rgba(153, 102, 255, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Pengajaran',
+                            data: pengajaranData,
+                            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.dataset.label + ': ' + tooltipItem.raw;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+        
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
@@ -86,107 +159,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/js/dashboard.js"></script>
-
-<script>
-    // Data dummy untuk grafik batang
-    var labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-    var data = [65, 59, 80, 81, 56, 55];
-
-    // Mendapatkan konteks dari elemen canvas
-    var ctx = document.getElementById('barChart').getContext('2d');
-    if (!ctx) {
-        console.error('Canvas dengan ID "barChart" tidak ditemukan.');
-    } else {
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels, // Label di sumbu x
-                datasets: [{
-                    label: 'Kinerja Dosen per Tahun',
-                    data: data, // Data untuk grafik batang
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Warna latar belakang batang
-                    borderColor: 'rgba(75, 192, 192, 1)', // Warna border batang
-                    borderWidth: 1 // Lebar border batang
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true // Mulai sumbu y dari 0
-                    }
-                }
-            }
-        });
-    }
-
-    // Data dummy untuk grafik pie
-    var pieData = {
-        labels: ['Teaching', 'Research', 'Community Service'],
-        datasets: [{
-            data: [300, 50, 100],
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-        }]
-    };
-
-    var ctxPie = document.getElementById('pieChart').getContext('2d');
-    if (!ctxPie) {
-        console.error('Canvas dengan ID "pieChart" tidak ditemukan.');
-    } else {
-        var pieChart = new Chart(ctxPie, {
-            type: 'pie',
-            data: pieData
-        });
-    }
-
-    var ctxPie1 = document.getElementById('pieChart1').getContext('2d');
-    if (!ctxPie1) {
-        console.error('Canvas dengan ID "pieChart1" tidak ditemukan.');
-    } else {
-        var pieChart1 = new Chart(ctxPie1, {
-            type: 'pie',
-            data: pieData
-        });
-    }
-
-    var ctxPie2 = document.getElementById('pieChart2').getContext('2d');
-    if (!ctxPie2) {
-        console.error('Canvas dengan ID "pieChart2" tidak ditemukan.');
-    } else {
-        var pieChart2 = new Chart(ctxPie2, {
-            type: 'pie',
-            data: pieData
-        });
-    }
-
-    // Data untuk grafik batang dosen dengan beban terbesar
-    var topDosenLabels = {!! json_encode($topDosenLabels) !!};
-    var topDosenData = {!! json_encode($topDosenData) !!};
-
-    var ctxTopDosen = document.getElementById('barChartTopDosen').getContext('2d');
-    if (!ctxTopDosen) {
-        console.error('Canvas dengan ID "barChartTopDosen" tidak ditemukan.');
-    } else {
-        var barChartTopDosen = new Chart(ctxTopDosen, {
-            type: 'bar',
-            data: {
-                labels: topDosenLabels, // Label di sumbu x
-                datasets: [{
-                    label: 'Beban Terbesar',
-                    data: topDosenData, // Data untuk grafik batang
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)', // Warna latar belakang batang
-                    borderColor: 'rgba(255, 99, 132, 1)', // Warna border batang
-                    borderWidth: 1 // Lebar border batang
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true // Mulai sumbu y dari 0
-                    }
-                }
-            }
-        });
-    }
-</script>
 @endpush

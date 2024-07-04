@@ -87,7 +87,7 @@ class DosenController extends Controller
                 ->count();
         }
 
-        $selectedDosenId = $request->query('dosen_id');
+    $selectedDosenId = $request->query('dosen_id');
     $selectedDosen = Dosen::find($selectedDosenId);
 
     // Query untuk menghitung jumlah berdasarkan jenis_id per tahun
