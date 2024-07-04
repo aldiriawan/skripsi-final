@@ -125,7 +125,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <h4 class="my-3">Scope Kegiatan</h4>
                     <h4 class="my-3">Publikasi</h4>
-                    <a href="/publikasi" class="btn btn-primary btn-sm">Detail</a>
+                    <a href="/publikasi" class="btn btn-secondary">Detail</a>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
