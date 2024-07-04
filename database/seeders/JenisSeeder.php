@@ -14,7 +14,7 @@ class JenisSeeder extends Seeder
     public function run(): void
     {
         Jenis::create([
-            'nama_jenis' => 'Lokakarya'
+            'nama_jenis' => 'Pengabdian'
         ]);
 
         Jenis::create([
@@ -22,39 +22,11 @@ class JenisSeeder extends Seeder
         ]);
 
         Jenis::create([
-            'nama_jenis' => 'Publikasi'
-        ]);
-
-        Jenis::create([
-            'nama_jenis' => 'Seminar'
-        ]);
-
-        Jenis::create([
-            'nama_jenis' => 'Asesor BKD'
+            'nama_jenis' => 'Pengajaran'
         ]);
 
         Jenis::create([
             'nama_jenis' => 'Penelitian'
-        ]);
-
-        Jenis::create([
-            'nama_jenis' => 'Pengabdian'
-        ]);
-
-        Jenis::create([
-            'nama_jenis' => 'Reviewer'
-        ]);
-
-        Jenis::create([
-            'nama_jenis' => 'Seminar'
-        ]);
-
-        Jenis::create([
-            'nama_jenis' => 'Tim Khusus'
-        ]);
-
-        Jenis::create([
-            'nama_jenis' => 'Pembimbing'
         ]);
     }
 }

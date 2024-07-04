@@ -53,7 +53,6 @@
             <tr>
                 <th scope="col" class="judul-col">Judul</th>
                 <th scope="col">Penulis Dosen</th>
-                <th scope="col">Penulis Non-Dosen</th>
                 <th scope="col">Tingkat</th>
             </tr>
         </thead>
@@ -62,7 +61,6 @@
             <tr>
                 <td class="judul-col">{{ $s->keterangan }}</td>
                 <td>{{ $s->dosen ? $s->dosen->nama : 'Dosen tidak ditemukan' }}</td>
-                <td></td>
                 <td>{{ $s->tingkat ? $s->tingkat->nama_tingkat : 'Tingkat tidak ditemukan' }}</td>
             </tr>
             @endforeach

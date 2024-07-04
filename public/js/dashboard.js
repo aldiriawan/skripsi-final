@@ -4,7 +4,7 @@
   'use strict'
 
   // Graphs
-  const ctx = document.getElementById('myChart')
+  const ctx = document.getElementById('myChart').getContext('2d') // Tambahkan .getContext('2d')
   // eslint-disable-next-line no-unused-vars
   const myChart = new Chart(ctx, {
     type: 'line',

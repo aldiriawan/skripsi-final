@@ -10,10 +10,9 @@
                     <h4 class="my-3">Komposisi Beban Dosen</h4>
                     <div class="btn-group mb-1">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Pilih Tahun
+                            2024
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/#">2021</a></li>
                             <li><a class="dropdown-item" href="/#">2022</a></li>
                             <li><a class="dropdown-item" href="/#">2023</a></li>
                             <li><a class="dropdown-item" href="/#">2024</a></li>
@@ -22,11 +21,22 @@
                 </div>
                 <canvas id="pieChart" style="max-height: 300px;"></canvas>
             </div>
-            <div class="col-md-12">
-                <h4 class="my-3">Grafik Garis Lurus</h4>
-                <svg height="100" width="100%">
-                    <line x1="0" y1="50" x2="100%" y2="50" style="stroke:rgb(0,0,0);stroke-width:2" />
-                </svg>
+            <div class="col-md-12 mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="my-3">Dosen dengan Beban Terbesar</h4>
+                    <div class="btn-group mb-1">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            2024
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/#">2022</a></li>
+                            <li><a class="dropdown-item" href="/#">2023</a></li>
+                            <li><a class="dropdown-item" href="/#">2024</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <canvas id="barChartTopDosen" style="max-height: 300px;"></canvas>
+                <h4 class="my-3">Dosen dengan Beban Terendah</h4>
             </div>
         </div>
     </div>
@@ -75,6 +85,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/js/dashboard.js"></script>
 
 <script>
     // Data dummy untuk grafik batang
@@ -83,28 +94,30 @@
 
     // Mendapatkan konteks dari elemen canvas
     var ctx = document.getElementById('barChart').getContext('2d');
-
-    // Membuat objek grafik batang
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels, // Label di sumbu x
-            datasets: [{
-                label: 'Kinerja Dosen per Tahun',
-                data: data, // Data untuk grafik batang
-                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Warna latar belakang batang
-                borderColor: 'rgba(75, 192, 192, 1)', // Warna border batang
-                borderWidth: 1 // Lebar border batang
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true // Mulai sumbu y dari 0
+    if (!ctx) {
+        console.error('Canvas dengan ID "barChart" tidak ditemukan.');
+    } else {
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels, // Label di sumbu x
+                datasets: [{
+                    label: 'Kinerja Dosen per Tahun',
+                    data: data, // Data untuk grafik batang
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Warna latar belakang batang
+                    borderColor: 'rgba(75, 192, 192, 1)', // Warna border batang
+                    borderWidth: 1 // Lebar border batang
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true // Mulai sumbu y dari 0
+                    }
                 }
             }
-        }
-    });
+        });
+    }
 
     // Data dummy untuk grafik pie
     var pieData = {
@@ -117,21 +130,63 @@
     };
 
     var ctxPie = document.getElementById('pieChart').getContext('2d');
-    var pieChart = new Chart(ctxPie, {
-        type: 'pie',
-        data: pieData
-    });
+    if (!ctxPie) {
+        console.error('Canvas dengan ID "pieChart" tidak ditemukan.');
+    } else {
+        var pieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: pieData
+        });
+    }
 
     var ctxPie1 = document.getElementById('pieChart1').getContext('2d');
-    var pieChart1 = new Chart(ctxPie1, {
-        type: 'pie',
-        data: pieData
-    });
+    if (!ctxPie1) {
+        console.error('Canvas dengan ID "pieChart1" tidak ditemukan.');
+    } else {
+        var pieChart1 = new Chart(ctxPie1, {
+            type: 'pie',
+            data: pieData
+        });
+    }
 
     var ctxPie2 = document.getElementById('pieChart2').getContext('2d');
-    var pieChart2 = new Chart(ctxPie2, {
-        type: 'pie',
-        data: pieData
-    });
+    if (!ctxPie2) {
+        console.error('Canvas dengan ID "pieChart2" tidak ditemukan.');
+    } else {
+        var pieChart2 = new Chart(ctxPie2, {
+            type: 'pie',
+            data: pieData
+        });
+    }
+
+    // Data untuk grafik batang dosen dengan beban terbesar
+    var topDosenLabels = {!! json_encode($topDosenLabels) !!};
+    var topDosenData = {!! json_encode($topDosenData) !!};
+
+    var ctxTopDosen = document.getElementById('barChartTopDosen').getContext('2d');
+    if (!ctxTopDosen) {
+        console.error('Canvas dengan ID "barChartTopDosen" tidak ditemukan.');
+    } else {
+        var barChartTopDosen = new Chart(ctxTopDosen, {
+            type: 'bar',
+            data: {
+                labels: topDosenLabels, // Label di sumbu x
+                datasets: [{
+                    label: 'Beban Terbesar',
+                    data: topDosenData, // Data untuk grafik batang
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)', // Warna latar belakang batang
+                    borderColor: 'rgba(255, 99, 132, 1)', // Warna border batang
+                    borderWidth: 1 // Lebar border batang
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true // Mulai sumbu y dari 0
+                    }
+                }
+            }
+        });
+    }
 </script>
 @endpush

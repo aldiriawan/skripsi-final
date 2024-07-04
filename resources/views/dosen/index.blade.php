@@ -163,44 +163,69 @@
                     @endforeach
                 </ul>
             </div>
-            
-            
         </div>
         @endif
     </div>
 </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            // Data dummy untuk grafik batang
-            var labels = ['2021', '2022', '2023', '2024'];
-            var data = [15, 14, 13, 6, 5, 12];
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var labels = ['2022', '2023', '2024'];
+    var pengabdianData = @json($pengabdianData);
+    var penunjangData = @json($penunjangData);
+    var penelitianData = @json($penelitianData);
+    var pengajaranData = @json($pengajaranData);
 
-            // Mendapatkan konteks dari elemen canvas
-            var ctx = document.getElementById('barChart').getContext('2d');
+    var ctx = document.getElementById('barChart').getContext('2d');
 
-            // Membuat objek grafik batang
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels, // Label di sumbu x
-                    datasets: [{
-                        label: 'Kinerja Dosen per Tahun',
-                        data: data, // Data untuk grafik batang
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Warna latar belakang batang
-                        borderColor: 'rgba(75, 192, 192, 1)', // Warna border batang
-                        borderWidth: 1 // Lebar border batang
-                    }]
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Pengabdian',
+                    data: pengabdianData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
                 },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true // Mulai sumbu y dari 0
-                        }
-                    }
+                {
+                    label: 'Penunjang',
+                    data: penunjangData,
+                    backgroundColor: 'rgba(255, 206, 86, 0.5)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Penelitian',
+                    data: penelitianData,
+                    backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Pengajaran',
+                    data: pengajaranData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
                 }
-            });
-        </script>
+            ]
+        },
+        options: {
+            scales: {
+                x: {
+                    stacked: true
+                },
+                y: {
+                    stacked: true,
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -226,6 +251,5 @@
         background-color: red !important;
     }
 </style>
-
 
 @endsection

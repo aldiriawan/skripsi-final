@@ -6,6 +6,7 @@ use App\Models\Dosen;
 use App\Models\SuratTugas;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class DosenController extends Controller
 {
@@ -86,6 +87,36 @@ class DosenController extends Controller
                 ->count();
         }
 
+        $selectedDosenId = $request->query('dosen_id');
+    $selectedDosen = Dosen::find($selectedDosenId);
+
+    // Query untuk menghitung jumlah berdasarkan jenis_id per tahun
+    $suratTugasCounts = DB::table('surat_tugas')
+        ->select(DB::raw('YEAR(tanggal) as tahun'), 
+                 DB::raw('SUM(CASE WHEN jenis_id = 1 THEN 1 ELSE 0 END) as total_pengabdian'), // Pengabdian
+                 DB::raw('SUM(CASE WHEN jenis_id = 2 THEN 1 ELSE 0 END) as total_penunjang'),  // Penunjang
+                 DB::raw('SUM(CASE WHEN jenis_id = 3 THEN 1 ELSE 0 END) as total_penelitian'), // Penelitian
+                 DB::raw('SUM(CASE WHEN jenis_id = 4 THEN 1 ELSE 0 END) as total_pengajaran')) // Pengajaran
+        ->where('dosen_id', $selectedDosenId)
+        ->groupBy(DB::raw('YEAR(tanggal)'))
+        ->orderBy('tahun')
+        ->get();
+    
+    $years = [2022, 2023, 2024];
+    $pengabdianData = [];
+    $penunjangData = [];
+    $penelitianData = [];
+    $pengajaranData = [];
+
+    foreach ($years as $year) {
+        $data = $suratTugasCounts->firstWhere('tahun', $year);
+
+        $pengabdianData[] = $data ? $data->total_pengabdian : 0;
+        $penunjangData[] = $data ? $data->total_penunjang : 0;
+        $penelitianData[] = $data ? $data->total_penelitian : 0;
+        $pengajaranData[] = $data ? $data->total_pengajaran : 0;
+    }
+
         return view('dosen.index', [
             'title' => 'Data Dosen',
             'dosen' => $dosen,
@@ -97,6 +128,10 @@ class DosenController extends Controller
             'selectedDosenId' => $selectedDosenId,
             'tahun' => $tahun, // Menambahkan tahun ke view
             'tingkatSuratCounts' => $tingkatSuratCounts,
+            'pengabdianData' => $pengabdianData,
+            'penunjangData' => $penunjangData,
+            'penelitianData' => $penelitianData,
+            'pengajaranData' => $pengajaranData,
         ]);
     }
 
