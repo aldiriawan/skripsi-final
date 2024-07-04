@@ -60,13 +60,20 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <h4 class="mt-3">{{ $selectedDosen->nama }}</h4>
                     <div class="d-flex">
-                        <a href="/dosen/{{ $selectedDosen->id }}/edit" class="btn btn-warning btn-sm me-2"><i class="bi bi-pencil-square"></i></a>
+                        <a href="/dosen/{{ $selectedDosen->id }}/edit" class="btn btn-warning btn-sm me-2">
+                            <i class="bi bi-pencil-square"></i>
+                            <span class="visually-hidden">Edit</span>
+                        </a>
                         <form action="/dosen/{{ $selectedDosen->id }}" method="post" class="d-inline">
                             @method('delete')
                             @csrf
-                            <button class="btn btn-danger btn-sm border-0" onclick="return confirm('Apakah Anda yakin?')"><i class="bi bi-trash"></i></button>
+                            <button class="btn btn-danger btn-sm border-0" onclick="return confirm('Apakah Anda yakin?')">
+                                <i class="bi bi-trash"></i>
+                                <span class="visually-hidden">Delete</span>
+                            </button>
                         </form>
                     </div>
+                    
                 </div>
                 <hr></hr>
                 <!-- Grafik Batang -->
@@ -136,7 +143,10 @@
                         
             <div class="col-md-12">
                 <!-- List -->
-                <h4>Penunjang</h4>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">Penunjang</h4>
+                    <a href="/suratketetapan" class="btn btn-secondary">Detail</a>
+                </div>
                 <ul>
                     @foreach ($penunjang as $data)
                         <div class="d-flex align-items-center mb-2">
@@ -244,6 +254,15 @@
     .bg-danger {
         background-color: red !important;
     }
+
+.btn {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+
+.btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+}
+
 </style>
 
 @endsection

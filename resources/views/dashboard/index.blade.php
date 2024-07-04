@@ -3,7 +3,6 @@
 @section('container')
 <div class="row">
     <div class="col-md-6">
-        <!-- Bagian kiri atas: Grafik Pie dan Grafik Garis Lurus -->
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
@@ -42,7 +41,6 @@
     </div>
 
     <div class="col-md-6">
-        <!-- Bagian kanan: Grafik Batang dan List -->
         <div class="row">
             <div class="col-md-12 mb-3">
                 <h4 class="my-3">Kinerja Dosen per Tahun</h4>
@@ -125,8 +123,8 @@
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="my-3">Grafik Pie 1</h4>
-                    <h4 class="my-3">Grafik Pie 2</h4>
+                    <h4 class="my-3">Scope Kegiatan</h4>
+                    <h4 class="my-3">Publikasi</h4>
                     <a href="/publikasi" class="btn btn-primary btn-sm">Detail</a>
                 </div>
                 <div class="row">
@@ -141,12 +139,11 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h4 class="my-3">List</h4>
+                <h4 class="my-3">ST/SK Berakhir</h4>
                 <ul>
                     <li>Data 1</li>
                     <li>Data 2</li>
                     <li>Data 3</li>
-                    <!-- Tambahkan item list lainnya sesuai kebutuhan -->
                 </ul>
             </div>
         </div>

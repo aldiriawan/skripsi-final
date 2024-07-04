@@ -14,14 +14,13 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        // Ambil data dari tabel surat_tugas
         $years = [2022, 2023, 2024];
 
         // Inisialisasi data array untuk masing-masing jenis
         $pengabdianData = [];
         $penunjangData = [];
-        $penelitianData = [];
         $pengajaranData = [];
+        $penelitianData = [];
 
         foreach ($years as $year) {
             $pengabdianData[$year] = SuratTugas::where('jenis_id', 1) // Jenis 1 adalah Pengabdian
@@ -32,11 +31,11 @@ class DashboardController extends Controller
                 ->whereYear('tanggal', $year)
                 ->count();
 
-            $penelitianData[$year] = SuratTugas::where('jenis_id', 3) // Jenis 3 adalah Penelitian
+            $pengajaranData[$year] = SuratTugas::where('jenis_id', 3) // Jenis 3 adalah Pengajaran
                 ->whereYear('tanggal', $year)
                 ->count();
 
-            $pengajaranData[$year] = SuratTugas::where('jenis_id', 4) // Jenis 4 adalah Pengajaran
+            $penelitianData[$year] = SuratTugas::where('jenis_id', 4) // Jenis 4 adalah Penelitian
                 ->whereYear('tanggal', $year)
                 ->count();
         }
@@ -46,8 +45,8 @@ class DashboardController extends Controller
             'years' => $years,
             'pengabdianData' => array_values($pengabdianData),
             'penunjangData' => array_values($penunjangData),
-            'penelitianData' => array_values($penelitianData),
             'pengajaranData' => array_values($pengajaranData),
+            'penelitianData' => array_values($penelitianData),
         ]);
     }
 
