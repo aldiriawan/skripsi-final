@@ -187,35 +187,27 @@
         data: {
             labels: labels,
             datasets: [
-                {
-                    label: 'Pengabdian',
-                    data: pengabdianData,
-                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Penunjang',
-                    data: penunjangData,
-                    backgroundColor: 'rgba(255, 206, 86, 0.5)',
-                    borderColor: 'rgba(255, 206, 86, 1)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Penelitian',
-                    data: penelitianData,
-                    backgroundColor: 'rgba(153, 102, 255, 0.5)',
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    borderWidth: 1
-                },
-                {
-                    label: 'Pengajaran',
-                    data: pengajaranData,
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }
-            ]
+                    {
+                        label: 'Pengajaran',
+                        data: pengajaranData,
+                        backgroundColor: ['#3366CC'],
+                    },
+                    {
+                        label: 'Penelitian',
+                        data: penelitianData,
+                        backgroundColor: ['#4BC0C0'],
+                    },
+                    {
+                        label: 'Pengabdian',
+                        data: pengabdianData,
+                        backgroundColor: ['#00FF7F'],
+                    },
+                    {
+                        label: 'Penunjang',
+                        data: penunjangData,
+                        backgroundColor: ['#FF6384'],
+                    }
+                ]
         },
         options: {
             scales: {

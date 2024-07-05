@@ -14,19 +14,19 @@ class JenisSeeder extends Seeder
     public function run(): void
     {
         Jenis::create([
-            'nama_jenis' => 'Pengabdian'
-        ]);
-
-        Jenis::create([
-            'nama_jenis' => 'Penunjang'
-        ]);
-
-        Jenis::create([
             'nama_jenis' => 'Pengajaran'
         ]);
 
         Jenis::create([
             'nama_jenis' => 'Penelitian'
+        ]);
+
+        Jenis::create([
+            'nama_jenis' => 'Pengabdian'
+        ]);
+
+        Jenis::create([
+            'nama_jenis' => 'Penunjang'
         ]);
     }
 }
