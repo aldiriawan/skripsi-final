@@ -147,26 +147,29 @@
                     <h4 class="mb-0">Penunjang</h4>
                     <a href="/suratketetapan" class="btn btn-secondary">Detail</a>
                 </div>
-                <ul>
+                <ul class="list-unstyled">
                     @foreach ($penunjang as $data)
-                        <div class="d-flex align-items-center mb-2">
+                        <li class="d-flex align-items-center mb-2">
                             <!-- Indikator bulat -->
                             @php
                                 $waktu_akhir = \Carbon\Carbon::parse($data->waktu_akhir);
                                 $now = now();
-                                $colorClass = $waktu_akhir->greaterThan($now->copy()->addDays(7)) ? 'bg-success' : ($waktu_akhir->greaterThan($now->copy()->addDays(2)) ? 'bg-warning' : 'bg-danger');
+                                $colorClass = $waktu_akhir->isFuture() ? 
+                                    ($waktu_akhir->lessThanOrEqualTo($now->copy()->addDays(7)) ? 'bg-warning' : 'bg-success') :
+                                    'bg-danger';
                             @endphp
-                    
+            
                             <div class="indicator {{ $colorClass }}"></div>
                             <!-- Keterangan -->
-                            <div>
-                                {{ $data->keterangan }} - {{ \Carbon\Carbon::parse($data->waktu_awal)->format('d M Y') }} - {{ \Carbon\Carbon::parse($data->waktu_akhir)->format('d M Y') }}
+                            <div class="ms-2 text-truncate" style="max-width: 100%; font-size: 0.8rem;">
+                                {{ $data->keterangan }} | {{ \Carbon\Carbon::parse($data->waktu_awal)->format('d M Y') }} - {{ \Carbon\Carbon::parse($data->waktu_akhir)->format('d M Y') }}
                             </div>
-                        </div>
+                        </li>
                     @endforeach
                 </ul>
-                
             </div>
+            
+                                 
         </div>
         @endif
     </div>
@@ -231,21 +234,25 @@
 
 <style>
     .indicator {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        margin-right: 10px;
-        display: inline-block;
-    }
-    .bg-success {
-        background-color: green !important;
-    }
-    .bg-warning {
-        background-color: yellow !important;
-    }
-    .bg-danger {
-        background-color: red !important;
-    }
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.bg-success {
+    background-color: green !important;
+}
+
+.bg-warning {
+    background-color: yellow !important;
+}
+
+.bg-danger {
+    background-color: red !important;
+}
+
 
 .btn {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow */

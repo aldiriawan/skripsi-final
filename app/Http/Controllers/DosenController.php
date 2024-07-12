@@ -40,12 +40,14 @@ class DosenController extends Controller
             $selectedDosen = Dosen::find($dosen_id);
             if ($selectedDosen) {
                 $penunjang = SuratTugas::where('dosen_id', $dosen_id)
-                    ->where('jenis_id', 2)
+                    ->where('jenis_id', 4)
                     ->when($tahun, function ($query) use ($tahun) {
                         $query->whereYear('waktu_awal', $tahun);
                     })
+                    ->orderBy('waktu_akhir', 'desc')  // Urutkan berdasarkan waktu_akhir dari terbaru ke terlama
+                    ->limit(8)  // Batasi hasil maksimal 8 data
                     ->get();
-
+        
                 $selectedDosenId = $request->input('dosen_id');
                 // Menghitung jumlah tingkat surat untuk setiap tingkat (S1, S2, S3, S4, S5, S6)
                 $tingkatSuratCounts = [
@@ -58,6 +60,8 @@ class DosenController extends Controller
                 ];
             }
         }
+        
+        
 
         // Mengambil jumlah publikasi internasional
         $jumlahPublikasiInternasional = 0;
