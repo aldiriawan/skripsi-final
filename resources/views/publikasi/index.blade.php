@@ -32,6 +32,18 @@
             Jurnal Nasional
         @elseif($selectedTingkat === 'Internasional')
             Jurnal Internasional
+        @elseif($selectedTingkat === 'Sinta 1')
+            Sinta 1
+        @elseif($selectedTingkat === 'Sinta 2')
+            Sinta 2
+        @elseif($selectedTingkat === 'Sinta 3')
+            Sinta 3
+        @elseif($selectedTingkat === 'Sinta 4')
+            Sinta 4
+        @elseif($selectedTingkat === 'Sinta 5')
+            Sinta 5
+        @elseif($selectedTingkat === 'Sinta 6')
+            Sinta 6
         @else
             {{ $selectedTingkat }}
         @endif

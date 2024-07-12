@@ -23,7 +23,7 @@ class PublikasiController extends Controller
         $selectedTingkat = $request->query('tingkat');
 
         // Filter berdasarkan tingkat jika dipilih
-        $surattugasQuery = SuratTugas::where('jenis_id', 3);
+        $surattugasQuery = SuratTugas::where('jenis_id', 2); //penelitian
 
         if ($selectedTingkat) {
             $surattugasQuery->whereHas('tingkat', function ($query) use ($selectedTingkat) {
