@@ -3,7 +3,7 @@
 @section('container')
 <div class="row">
     <!-- Komposisi Beban Dosen -->
-    <div class="col-md-6">
+    <div class="col-md-5">
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
@@ -37,11 +37,11 @@
     </div>
 
     <!-- Kinerja Dosen per Tahun -->
-    <div class="col-md-6">
+    <div class="col-md-7">
         <div class="row">
             <div class="col-md-12 mb-3">
                 <h4 class="my-3">Kinerja Dosen per Tahun</h4>
-                <canvas id="barChart" style="max-height: 300px;"></canvas>
+                <canvas id="barChart" class="large-bar-chart"></canvas>
             </div>
         </div>
     </div>
@@ -57,6 +57,10 @@
         max-width: 150px;
         max-height: 150px;
         margin: 0 auto;
+    }
+    .large-bar-chart {
+        max-width: 100%;
+        max-height: 350px;
     }
 </style>
 
@@ -84,8 +88,8 @@
                     legend: {
                         position: 'right',
                         labels: {
-                            boxWidth: 15, // Width of the color box in the legend
-                            padding: 10,  // Space between the legend items
+                            boxWidth: 15,
+                            padding: 10,
                         },
                     },
                     tooltip: {
@@ -106,7 +110,7 @@
                 },
                 layout: {
                     padding: {
-                        right: 20 // Add padding to the right side of the chart
+                        right: 20
                     }
                 }
             },
@@ -130,11 +134,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'right',
-                        labels: {
-                            boxWidth: 15, // Width of the color box in the legend
-                            padding: 10,  // Space between the legend items
-                        },
+                        display: false // Menyembunyikan legenda untuk grafik pie Informatika
                     },
                     tooltip: {
                         callbacks: {
@@ -150,11 +150,6 @@
                                 return label;
                             }
                         }
-                    }
-                },
-                layout: {
-                    padding: {
-                        right: 20 // Add padding to the right side of the chart
                     }
                 }
             },
@@ -178,11 +173,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'right',
-                        labels: {
-                            boxWidth: 15, // Width of the color box in the legend
-                            padding: 10,  // Space between the legend items
-                        },
+                        display: false // Menyembunyikan legenda untuk grafik pie Sistem Informasi
                     },
                     tooltip: {
                         callbacks: {
@@ -198,11 +189,6 @@
                                 return label;
                             }
                         }
-                    }
-                },
-                layout: {
-                    padding: {
-                        right: 20 // Add padding to the right side of the chart
                     }
                 }
             },
@@ -224,22 +210,37 @@
                     {
                         label: 'Pengajaran',
                         data: pengajaranData,
-                        backgroundColor: ['#3366CC'],
+                        backgroundColor: '#3366CC',
+                        // Define bar width and space between bars
+                        barThickness: 20,
+                        // Define bar space for grouping
+                        categoryPercentage: 0.2,
+                        // Define spacing between groups
+                        barPercentage: 0.8
                     },
                     {
                         label: 'Penelitian',
                         data: penelitianData,
-                        backgroundColor: ['#4BC0C0'],
+                        backgroundColor: '#4BC0C0',
+                        barThickness: 20,
+                        categoryPercentage: 0.2,
+                        barPercentage: 0.8
                     },
                     {
                         label: 'Pengabdian',
                         data: pengabdianData,
-                        backgroundColor: ['#00FF7F'],
+                        backgroundColor: '#00FF7F',
+                        barThickness: 20,
+                        categoryPercentage: 0.2,
+                        barPercentage: 0.8
                     },
                     {
                         label: 'Penunjang',
                         data: penunjangData,
-                        backgroundColor: ['#FF6384'],
+                        backgroundColor: '#FF6384',
+                        barThickness: 20,
+                        categoryPercentage: 0.2,
+                        barPercentage: 0.8
                     }
                 ]
             },
@@ -259,10 +260,15 @@
                 },
                 scales: {
                     x: {
-                        stacked: true,
+                        stacked: false,
+                        // Define label rotation for better visibility
+                        ticks: {
+                            maxRotation: 90,
+                            minRotation: 45
+                        },
                     },
                     y: {
-                        stacked: true,
+                        stacked: false,
                         beginAtZero: true
                     }
                 }
