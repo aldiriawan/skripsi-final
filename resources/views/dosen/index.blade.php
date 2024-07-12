@@ -146,7 +146,7 @@
                     <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jumlah Paten:</strong></p>
                 </div>
             </div>
-                        
+   <!-- Penunjang -->                     
             <div class="col-md-12 mt-3">
                 <!-- List -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
