@@ -77,7 +77,7 @@
                 </div>
                 <hr></hr>
                 <!-- Grafik Batang -->
-                <h5 class="text-center">Kinerja Dosen Pertahun</h5>
+                <h4 class="text-center">Kinerja Dosen Pertahun</h4>
                 <canvas id="barChart" style="max-height: 200px; max-width: auto"></canvas>
             </div>
 
@@ -100,6 +100,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        {{-- Jurnal Nasional --}}
                         <table class="table table-small table-striped">
                             <thead>
                                 <tr>
@@ -116,6 +117,7 @@
                                     @endforeach
                             </tbody>
                         </table>
+                        {{-- Jurnal Internasional --}}
                         <table class="table table-small table-striped">
                             <thead>
                                 <tr>
@@ -126,39 +128,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <td colspan="2" style="text-align: center;">Jurnal Nasional</td>
+                                <td colspan="2" style="text-align: center;">Jurnal Internasional</td>
                                 @foreach ($tingkatSuratCounts as $tingkat => $count)
                                 <td>{{ $count }}</td>              
                                     @endforeach
                             </tbody>
                         </table>    
-                    </div>
-                    
-                    {{-- <div class="col-md-3">
-                        <!-- Tabel Jurnal Internasional -->
-                        <div class="table-responsive">
-                            <table class="table table-small table-striped">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2" style="text-align: center;">Internasional</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div>
-                            <p><strong>Jurnal Nasional:</strong> {{ $jumlahPublikasiNasional }}</p>
-                            <p><strong>Jurnal Internasional:</strong> {{ $jumlahPublikasiInternasional }}</p>
-                            <p><strong>Jumlah HKI:</strong> {{ $jumlahHKI }}</p>
-                            <p><strong>Jumlah Paten:</strong></p>
-                        </div>
-                    </div>
-                </div> --}}
+                    </div>                  
+                </div>
+                
+            </div>
+            <div class="col-md-12">
+                <div style="display: flex; flex-wrap: wrap; align-items: center;">
+                    <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jurnal Nasional:</strong> {{ $jumlahPublikasiNasional }}</p>
+                    <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jurnal Internasional:</strong> {{ $jumlahPublikasiInternasional }}</p>
+                    <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jumlah HKI:</strong> {{ $jumlahHKI }}</p>
+                    <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jumlah Paten:</strong></p>
+                </div>
             </div>
                         
-            <div class="col-md-12">
+            <div class="col-md-12 mt-3">
                 <!-- List -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="mb-0">Penunjang</h4>

@@ -45,7 +45,7 @@ class DosenController extends Controller
                         $query->whereYear('waktu_awal', $tahun);
                     })
                     ->orderBy('waktu_akhir', 'desc')  // Urutkan berdasarkan waktu_akhir dari terbaru ke terlama
-                    ->limit(8)  // Batasi hasil maksimal 8 data
+                    ->limit(10)  // Batasi hasil maksimal 10 data
                     ->get();
         
                 $selectedDosenId = $request->input('dosen_id');
