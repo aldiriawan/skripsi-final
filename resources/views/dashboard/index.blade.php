@@ -47,6 +47,17 @@
     </div>
 </div>
 
+<div class="row mt-4">
+    <div class="col-md-6">
+        <h4 class="my-3">Dosen dengan Beban Terbesar</h4>
+        <canvas id="topDosenChart" class="large-bar-chart"></canvas>
+    </div>
+    <div class="col-md-6">
+        <h4 class="my-3">Dosen dengan Beban Terkecil</h4>
+        <canvas id="bottomDosenChart" class="large-bar-chart"></canvas>
+    </div>
+</div>
+
 <style>
     .small-pie-chart {
         max-width: 400px;
@@ -211,11 +222,8 @@
                         label: 'Pengajaran',
                         data: pengajaranData,
                         backgroundColor: '#3366CC',
-                        // Define bar width and space between bars
                         barThickness: 20,
-                        // Define bar space for grouping
                         categoryPercentage: 0.2,
-                        // Define spacing between groups
                         barPercentage: 0.8
                     },
                     {
@@ -261,7 +269,6 @@
                 scales: {
                     x: {
                         stacked: false,
-                        // Define label rotation for better visibility
                         ticks: {
                             maxRotation: 90,
                             minRotation: 45
@@ -269,6 +276,152 @@
                     },
                     y: {
                         stacked: false,
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Data for Top Dosen Chart
+        var topDosenCtx = document.getElementById('topDosenChart').getContext('2d');
+        var topDosenData = @json($topDosenData);
+        var topDosenNames = Object.keys(topDosenData);
+        var topDosenLabels = topDosenNames;
+        var topDosenCounts = topDosenNames.map(name => {
+            return Object.values(topDosenData[name].reduce((acc, cur) => {
+                acc[cur.jenis_id] = (acc[cur.jenis_id] || 0) + cur.count;
+                return acc;
+            }, {}));
+        });
+
+        var topDosenChart = new Chart(topDosenCtx, {
+            type: 'bar',
+            data: {
+                labels: topDosenLabels,
+                datasets: [
+                    {
+                        label: 'Pengajaran',
+                        data: topDosenCounts.map(counts => counts[0] || 0),
+                        backgroundColor: '#3366CC',
+                        stack: 'stack1'
+                    },
+                    {
+                        label: 'Penelitian',
+                        data: topDosenCounts.map(counts => counts[1] || 0),
+                        backgroundColor: '#4BC0C0',
+                        stack: 'stack1'
+                    },
+                    {
+                        label: 'Pengabdian',
+                        data: topDosenCounts.map(counts => counts[2] || 0),
+                        backgroundColor: '#00FF7F',
+                        stack: 'stack1'
+                    },
+                    {
+                        label: 'Penunjang',
+                        data: topDosenCounts.map(counts => counts[3] || 0),
+                        backgroundColor: '#FF6384',
+                        stack: 'stack1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.dataset.label + ': ' + tooltipItem.raw;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        ticks: {
+                            maxRotation: 90,
+                            minRotation: 45
+                        },
+                    },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Data for Bottom Dosen Chart
+        var bottomDosenCtx = document.getElementById('bottomDosenChart').getContext('2d');
+        var bottomDosenData = @json($bottomDosenData);
+        var bottomDosenNames = Object.keys(bottomDosenData);
+        var bottomDosenLabels = bottomDosenNames;
+        var bottomDosenCounts = bottomDosenNames.map(name => {
+            return Object.values(bottomDosenData[name].reduce((acc, cur) => {
+                acc[cur.jenis_id] = (acc[cur.jenis_id] || 0) + cur.count;
+                return acc;
+            }, {}));
+        });
+
+        var bottomDosenChart = new Chart(bottomDosenCtx, {
+            type: 'bar',
+            data: {
+                labels: bottomDosenLabels,
+                datasets: [
+                    {
+                        label: 'Pengajaran',
+                        data: bottomDosenCounts.map(counts => counts[0] || 0),
+                        backgroundColor: '#3366CC',
+                        stack: 'stack2'
+                    },
+                    {
+                        label: 'Penelitian',
+                        data: bottomDosenCounts.map(counts => counts[1] || 0),
+                        backgroundColor: '#4BC0C0',
+                        stack: 'stack2'
+                    },
+                    {
+                        label: 'Pengabdian',
+                        data: bottomDosenCounts.map(counts => counts[2] || 0),
+                        backgroundColor: '#00FF7F',
+                        stack: 'stack2'
+                    },
+                    {
+                        label: 'Penunjang',
+                        data: bottomDosenCounts.map(counts => counts[3] || 0),
+                        backgroundColor: '#FF6384',
+                        stack: 'stack2'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.dataset.label + ': ' + tooltipItem.raw;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        ticks: {
+                            maxRotation: 90,
+                            minRotation: 45
+                        },
+                    },
+                    y: {
+                        stacked: true,
                         beginAtZero: true
                     }
                 }
