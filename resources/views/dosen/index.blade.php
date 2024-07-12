@@ -99,25 +99,42 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-12">
                         <table class="table table-small table-striped">
                             <thead>
                                 <tr>
-                                    <th colspan="2" style="text-align: center;">Jurnal Nasional</th>
+                                    <th colspan="2"></th>
+                                    @foreach ($tingkatSuratCounts as $tingkat => $count)
+                                    <th>{{ $tingkat }}</th>             
+                                    @endforeach
                                 </tr>
                             </thead>
                             <tbody>
+                                <td colspan="2" style="text-align: center;">Jurnal Nasional</td>
                                 @foreach ($tingkatSuratCounts as $tingkat => $count)
-                                <tr>
-                                    <td>{{ $tingkat }}</td>
-                                    <td>{{ $count }}</td>
-                                </tr>
-                                @endforeach
+                                <td>{{ $count }}</td>              
+                                    @endforeach
                             </tbody>
                         </table>
+                        <table class="table table-small table-striped">
+                            <thead>
+                                <tr>
+                                    <th colspan="2"></th>
+                                    @foreach ($tingkatSuratCounts as $tingkat => $count)
+                                    <th>{{ $tingkat }}</th>             
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <td colspan="2" style="text-align: center;">Jurnal Nasional</td>
+                                @foreach ($tingkatSuratCounts as $tingkat => $count)
+                                <td>{{ $count }}</td>              
+                                    @endforeach
+                            </tbody>
+                        </table>    
                     </div>
                     
-                    <div class="col-md-3">
+                    {{-- <div class="col-md-3">
                         <!-- Tabel Jurnal Internasional -->
                         <div class="table-responsive">
                             <table class="table table-small table-striped">
@@ -138,7 +155,7 @@
                             <p><strong>Jumlah Paten:</strong></p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
                         
             <div class="col-md-12">
@@ -167,9 +184,7 @@
                         </li>
                     @endforeach
                 </ul>
-            </div>
-            
-                                 
+            </div>               
         </div>
         @endif
     </div>
