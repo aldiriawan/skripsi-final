@@ -285,51 +285,26 @@
         // Data for Top Dosen Chart
         var topDosenCtx = document.getElementById('topDosenChart').getContext('2d');
         var topDosenData = @json($topDosenData);
-        var topDosenNames = Object.keys(topDosenData);
-        var topDosenLabels = topDosenNames;
-        var topDosenCounts = topDosenNames.map(name => {
-            return Object.values(topDosenData[name].reduce((acc, cur) => {
-                acc[cur.jenis_id] = (acc[cur.jenis_id] || 0) + cur.count;
-                return acc;
-            }, {}));
-        });
+        var dosenNames = @json($dosenNames);
+        var topDosenLabels = Object.keys(topDosenData).map(dosenId => dosenNames[dosenId]);
+        var topDosenCounts = Object.values(topDosenData);
 
         var topDosenChart = new Chart(topDosenCtx, {
             type: 'bar',
             data: {
                 labels: topDosenLabels,
-                datasets: [
-                    {
-                        label: 'Pengajaran',
-                        data: topDosenCounts.map(counts => counts[0] || 0),
-                        backgroundColor: '#3366CC',
-                        stack: 'stack1'
-                    },
-                    {
-                        label: 'Penelitian',
-                        data: topDosenCounts.map(counts => counts[1] || 0),
-                        backgroundColor: '#4BC0C0',
-                        stack: 'stack1'
-                    },
-                    {
-                        label: 'Pengabdian',
-                        data: topDosenCounts.map(counts => counts[2] || 0),
-                        backgroundColor: '#00FF7F',
-                        stack: 'stack1'
-                    },
-                    {
-                        label: 'Penunjang',
-                        data: topDosenCounts.map(counts => counts[3] || 0),
-                        backgroundColor: '#FF6384',
-                        stack: 'stack1'
-                    }
-                ]
+                datasets: [{
+                    label: 'Jumlah Surat Tugas',
+                    data: topDosenCounts,
+                    backgroundColor: '#FF6384',
+                }]
             },
             options: {
                 responsive: true,
+                indexAxis: 'y', // Grafik batang menyamping
                 plugins: {
                     legend: {
-                        position: 'bottom',
+                        display: false,
                     },
                     tooltip: {
                         callbacks: {
@@ -341,15 +316,17 @@
                 },
                 scales: {
                     x: {
-                        stacked: true,
-                        ticks: {
-                            maxRotation: 90,
-                            minRotation: 45
-                        },
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Jumlah Surat Tugas'
+                        }
                     },
                     y: {
-                        stacked: true,
-                        beginAtZero: true
+                        title: {
+                            display: true,
+                            text: 'Nama Dosen'
+                        }
                     }
                 }
             }
@@ -358,51 +335,26 @@
         // Data for Bottom Dosen Chart
         var bottomDosenCtx = document.getElementById('bottomDosenChart').getContext('2d');
         var bottomDosenData = @json($bottomDosenData);
-        var bottomDosenNames = Object.keys(bottomDosenData);
-        var bottomDosenLabels = bottomDosenNames;
-        var bottomDosenCounts = bottomDosenNames.map(name => {
-            return Object.values(bottomDosenData[name].reduce((acc, cur) => {
-                acc[cur.jenis_id] = (acc[cur.jenis_id] || 0) + cur.count;
-                return acc;
-            }, {}));
-        });
+        var bottomDosenNames = @json($dosenNames);
+        var bottomDosenLabels = Object.keys(bottomDosenData).map(dosenId => bottomDosenNames[dosenId]);
+        var bottomDosenCounts = Object.values(bottomDosenData);
 
         var bottomDosenChart = new Chart(bottomDosenCtx, {
             type: 'bar',
             data: {
                 labels: bottomDosenLabels,
-                datasets: [
-                    {
-                        label: 'Pengajaran',
-                        data: bottomDosenCounts.map(counts => counts[0] || 0),
-                        backgroundColor: '#3366CC',
-                        stack: 'stack2'
-                    },
-                    {
-                        label: 'Penelitian',
-                        data: bottomDosenCounts.map(counts => counts[1] || 0),
-                        backgroundColor: '#4BC0C0',
-                        stack: 'stack2'
-                    },
-                    {
-                        label: 'Pengabdian',
-                        data: bottomDosenCounts.map(counts => counts[2] || 0),
-                        backgroundColor: '#00FF7F',
-                        stack: 'stack2'
-                    },
-                    {
-                        label: 'Penunjang',
-                        data: bottomDosenCounts.map(counts => counts[3] || 0),
-                        backgroundColor: '#FF6384',
-                        stack: 'stack2'
-                    }
-                ]
+                datasets: [{
+                    label: 'Jumlah Surat Tugas',
+                    data: bottomDosenCounts,
+                    backgroundColor: '#4BC0C0',
+                }]
             },
             options: {
                 responsive: true,
+                indexAxis: 'y', // Grafik batang menyamping
                 plugins: {
                     legend: {
-                        position: 'bottom',
+                        display: false,
                     },
                     tooltip: {
                         callbacks: {
@@ -414,15 +366,17 @@
                 },
                 scales: {
                     x: {
-                        stacked: true,
-                        ticks: {
-                            maxRotation: 90,
-                            minRotation: 45
-                        },
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Jumlah Surat Tugas'
+                        }
                     },
                     y: {
-                        stacked: true,
-                        beginAtZero: true
+                        title: {
+                            display: true,
+                            text: 'Nama Dosen'
+                        }
                     }
                 }
             }

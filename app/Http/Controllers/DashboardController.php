@@ -64,40 +64,32 @@ class DashboardController extends Controller
                 ->count();
         }
     
-        // Koding untuk Beban Dosen Terbesar dan Terendah : -----------------------
-        $topDosenData = DB::table('surat_tugas')
-            ->select(DB::raw('dosen_id, jenis_id, COUNT(*) as count'))
-            ->groupBy('dosen_id', 'jenis_id')
-            ->orderByRaw('COUNT(*) DESC')
-            ->limit(10)
-            ->get()
-            ->groupBy('dosen_id')
-            ->mapWithKeys(function ($group, $dosenId) {
-                return [$dosenId => $group->map(function ($item) {
-                    return [
-                        'jenis_id' => $item->jenis_id,
-                        'count' => $item->count
-                    ];
-                })->toArray()];
-            })
-            ->toArray();
-    
-        $bottomDosenData = DB::table('surat_tugas')
-            ->select(DB::raw('dosen_id, jenis_id, COUNT(*) as count'))
-            ->groupBy('dosen_id', 'jenis_id')
-            ->orderByRaw('COUNT(*) ASC')
-            ->limit(10)
-            ->get()
-            ->groupBy('dosen_id')
-            ->mapWithKeys(function ($group, $dosenId) {
-                return [$dosenId => $group->map(function ($item) {
-                    return [
-                        'jenis_id' => $item->jenis_id,
-                        'count' => $item->count
-                    ];
-                })->toArray()];
-            })
-            ->toArray();
+        // Ambil data dosen dengan surat tugas terbanyak
+$topDosenData = DB::table('surat_tugas')
+->select(DB::raw('dosen_id, COUNT(*) as count'))
+->groupBy('dosen_id')
+->orderByRaw('COUNT(*) DESC')
+->limit(3)
+->get()
+->mapWithKeys(function ($item) {
+    return [$item->dosen_id => $item->count];
+});
+
+// Ambil data dosen dengan surat tugas tersedikit
+$bottomDosenData = DB::table('surat_tugas')
+->select(DB::raw('dosen_id, COUNT(*) as count'))
+->groupBy('dosen_id')
+->orderByRaw('COUNT(*) ASC')
+->limit(3)
+->get()
+->mapWithKeys(function ($item) {
+    return [$item->dosen_id => $item->count];
+});
+
+// Ambil nama dosen dari tabel dosen
+$dosenNames = DB::table('dosen')
+->whereIn('id', array_merge(array_keys($topDosenData->toArray()), array_keys($bottomDosenData->toArray())))
+->pluck('nama', 'id');
     
         return view('dashboard.index', [
             'title' => 'Dashboard',
@@ -114,6 +106,7 @@ class DashboardController extends Controller
             // View untuk Beban Dosen Terbesar dan Terendah :
             'topDosenData' => $topDosenData,
             'bottomDosenData' => $bottomDosenData,
+            'dosenNames' => $dosenNames,
         ]);
     }
     
