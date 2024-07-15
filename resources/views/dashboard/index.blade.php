@@ -94,8 +94,20 @@
                 <canvas id="scopeKegiatanChart" class="large-bar-chart"></canvas>
             </div>
             <div class="col-md-12 mb-3">
+                <div class="d-flex justify-content-between align-items-center">
                 <h4 class="my-3">Publikasi</h4>
+                <div class="btn-group mb-1">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        2024
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/#">2022</a></li>
+                        <li><a class="dropdown-item" href="/#">2023</a></li>
+                        <li><a class="dropdown-item" href="/#">2024</a></li>
+                    </ul>
+                </div>
                 <canvas id="publikasiChart" class="large-bar-chart"></canvas>
+            </div>
             </div>
         </div>
     </div>
