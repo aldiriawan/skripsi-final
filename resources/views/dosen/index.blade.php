@@ -100,6 +100,31 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        {{-- Jurnal Internasional --}}
+                        <table class="table table-small table-striped">
+                            <thead>
+                                <tr>
+                                    <th colspan="2"></th>
+                                    <th>Q1</th>
+                                    <th>Q2</th>
+                                    <th>Q3</th>
+                                    <th>Q4</th>
+                                    <th>Q</th>
+                                    <th>-</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" style="text-align: left;">Jurnal Internasional</td>
+                                    <td>soon</td>
+                                    <td>soon</td>
+                                    <td>soon</td>
+                                    <td>soon</td>
+                                    <td>soon</td>
+                                    <td>soon</td>
+                                </tr>
+                            </tbody>
+                        </table>    
                         {{-- Jurnal Nasional --}}
                         <table class="table table-small table-striped">
                             <thead>
@@ -112,32 +137,13 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td colspan="2" style="text-align: center;">Jurnal Nasional</td>
+                                    <td colspan="2" style="text-align: left;">Jurnal Nasional</td>
                                     @foreach ($tingkatSuratCounts as $tingkat => $count)
                                     <td>{{ $count }}</td>              
                                     @endforeach
                                 </tr>
                             </tbody>
                         </table>
-                        {{-- Jurnal Internasional --}}
-                        <table class="table table-small table-striped">
-                            <thead>
-                                <tr>
-                                    <th colspan="2"></th>
-                                    @foreach ($tingkatSuratCounts as $tingkat => $count)
-                                    <th>{{ $tingkat }}</th>             
-                                    @endforeach
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td colspan="2" style="text-align: center;">Jurnal Internasional</td>
-                                    @foreach ($tingkatSuratCounts as $tingkat => $count)
-                                    <td>{{ $count }}</td>              
-                                    @endforeach
-                                </tr>
-                            </tbody>
-                        </table>    
                     </div>                  
                 </div>
             </div>
@@ -146,10 +152,10 @@
             </div>
             <div class="col-md-12">
         <div style="display: flex; flex-wrap: wrap; align-items: center;">
-            <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jurnal Nasional:</strong> {{ $jumlahPublikasiNasional }}</p>
-            <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jurnal Internasional:</strong> {{ $jumlahPublikasiInternasional }}</p>
-            <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jumlah HKI:</strong> {{ $jumlahHKI }}</p>
-            <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jumlah Paten:</strong></p>
+            <p style="margin-bottom: 0; margin-right: 3rem; font-size: 14px;"><strong>Jurnal Nasional:</strong> {{ $jumlahPublikasiNasional }}</p>
+            <p style="margin-bottom: 0; margin-right: 3rem;  font-size: 14px;"><strong>Jurnal Internasional:</strong> {{ $jumlahPublikasiInternasional }}</p>
+            <p style="margin-bottom: 0; margin-right: 3rem;  font-size: 14px;"><strong>Jumlah HKI:</strong> {{ $jumlahHKI }}</p>
+            <p style="margin-bottom: 0; margin-right: 3rem;  font-size: 14px;"><strong>Jumlah Paten:</strong></p>
         </div>
     </div>
    <!-- Penunjang -->                     

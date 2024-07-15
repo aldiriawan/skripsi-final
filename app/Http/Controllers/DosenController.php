@@ -19,7 +19,6 @@ class DosenController extends Controller
         $program_studi = $request->query('program_studi');
         $dosen_id = $request->query('dosen_id'); // Mendapatkan ID dosen yang dipilih
         $tahun = $request->query('tahun'); // Mendapatkan tahun yang dipilih
-
         $query = Dosen::query();
 
         if ($search) {
@@ -36,6 +35,7 @@ class DosenController extends Controller
         $tingkatSuratCounts = [];
         $selectedDosenId = null; // Inisialisasi variabel
 
+        // Koding Bagian Penunjang
         if ($dosen_id) {
             $selectedDosen = Dosen::find($dosen_id);
             if ($selectedDosen) {
@@ -57,25 +57,26 @@ class DosenController extends Controller
                     'S4' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 7)->whereYear('waktu_awal', $tahun)->count(),
                     'S5' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 8)->whereYear('waktu_awal', $tahun)->count(),
                     'S6' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 9)->whereYear('waktu_awal', $tahun)->count(),
+                    '-' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 2)->whereYear('waktu_awal', $tahun)->count(),
                 ];
             }
         }
 
-        // Mengambil jumlah publikasi internasional
+        // Mengambil jumlah publikasi
         $jumlahPublikasiInternasional = 0;
         $jumlahPublikasiNasional = 0;
         $jumlahHKI = 0;
 
         if ($selectedDosenId) {
             $jumlahPublikasiInternasional = SuratTugas::where('dosen_id', $selectedDosenId)
-                ->where('publikasi_id', 1)
+                ->where('tingkat_id', 1)
                 ->when($tahun, function ($query) use ($tahun) {
                     $query->whereYear('waktu_awal', $tahun);
                 })
                 ->count();
 
             $jumlahPublikasiNasional = SuratTugas::where('dosen_id', $selectedDosenId)
-                ->where('publikasi_id', 2)
+                ->where('tingkat_id', 2)
                 ->when($tahun, function ($query) use ($tahun) {
                     $query->whereYear('waktu_awal', $tahun);
                 })
