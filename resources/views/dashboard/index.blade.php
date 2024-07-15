@@ -47,14 +47,57 @@
     </div>
 </div>
 
+<!-- Dosen dengan Beban Terbesar dan Terendah -->
 <div class="row mt-4">
-    <div class="col-md-6">
-        <h4 class="my-3">Dosen dengan Beban Terbesar</h4>
-        <canvas id="topDosenChart" class="large-bar-chart"></canvas>
+    <div class="col-md-5">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="my-3">Dosen dengan Beban Terbesar</h4>
+                    <div class="btn-group mb-1">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            2024
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/#">2022</a></li>
+                            <li><a class="dropdown-item" href="/#">2023</a></li>
+                            <li><a class="dropdown-item" href="/#">2024</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <canvas id="topDosenChart" class="large-bar-chart"></canvas>
+            </div>
+            <div class="col-md-12 mb-3">
+                <h4 class="my-3">Dosen dengan Beban Terendah</h4>
+                <canvas id="bottomDosenChart" class="large-bar-chart"></canvas>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6">
-        <h4 class="my-3">Dosen dengan Beban Terkecil</h4>
-        <canvas id="bottomDosenChart" class="large-bar-chart"></canvas>
+
+    <!-- Scope Kegiatan dan Publikasi -->
+    <div class="col-md-5">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="my-3">Scope Kegiatan</h4>
+                    <div class="btn-group mb-1">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            2024
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/#">2022</a></li>
+                            <li><a class="dropdown-item" href="/#">2023</a></li>
+                            <li><a class="dropdown-item" href="/#">2024</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <canvas id="scopeKegiatanChart" class="large-bar-chart"></canvas>
+            </div>
+            <div class="col-md-12 mb-3">
+                <h4 class="my-3">Publikasi</h4>
+                <canvas id="publikasiChart" class="large-bar-chart"></canvas>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -322,12 +365,6 @@
                             text: 'Jumlah Surat Tugas'
                         }
                     },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Nama Dosen'
-                        }
-                    }
                 }
             }
         });
@@ -372,12 +409,6 @@
                             text: 'Jumlah Surat Tugas'
                         }
                     },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Nama Dosen'
-                        }
-                    }
                 }
             }
         });
