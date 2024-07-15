@@ -111,10 +111,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <td colspan="2" style="text-align: center;">Jurnal Nasional</td>
-                                @foreach ($tingkatSuratCounts as $tingkat => $count)
-                                <td>{{ $count }}</td>              
+                                <tr>
+                                    <td colspan="2" style="text-align: center;">Jurnal Nasional</td>
+                                    @foreach ($tingkatSuratCounts as $tingkat => $count)
+                                    <td>{{ $count }}</td>              
                                     @endforeach
+                                </tr>
                             </tbody>
                         </table>
                         {{-- Jurnal Internasional --}}
@@ -128,24 +130,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <td colspan="2" style="text-align: center;">Jurnal Internasional</td>
-                                @foreach ($tingkatSuratCounts as $tingkat => $count)
-                                <td>{{ $count }}</td>              
+                                <tr>
+                                    <td colspan="2" style="text-align: center;">Jurnal Internasional</td>
+                                    @foreach ($tingkatSuratCounts as $tingkat => $count)
+                                    <td>{{ $count }}</td>              
                                     @endforeach
+                                </tr>
                             </tbody>
                         </table>    
                     </div>                  
                 </div>
+            </div>
+            
                 
             </div>
             <div class="col-md-12">
-                <div style="display: flex; flex-wrap: wrap; align-items: center;">
-                    <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jurnal Nasional:</strong> {{ $jumlahPublikasiNasional }}</p>
-                    <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jurnal Internasional:</strong> {{ $jumlahPublikasiInternasional }}</p>
-                    <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jumlah HKI:</strong> {{ $jumlahHKI }}</p>
-                    <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jumlah Paten:</strong></p>
-                </div>
-            </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center;">
+            <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jurnal Nasional:</strong> {{ $jumlahPublikasiNasional }}</p>
+            <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jurnal Internasional:</strong> {{ $jumlahPublikasiInternasional }}</p>
+            <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jumlah HKI:</strong> {{ $jumlahHKI }}</p>
+            <p style="margin-bottom: 0; margin-right: 3rem;"><strong>Jumlah Paten:</strong></p>
+        </div>
+    </div>
    <!-- Penunjang -->                     
             <div class="col-md-12 mt-3">
                 <!-- List -->

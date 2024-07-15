@@ -51,17 +51,15 @@ class DosenController extends Controller
                 $selectedDosenId = $request->input('dosen_id');
                 // Menghitung jumlah tingkat surat untuk setiap tingkat (S1, S2, S3, S4, S5, S6)
                 $tingkatSuratCounts = [
-                    'S1' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 4)->count(),
-                    'S2' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 5)->count(),
-                    'S3' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 6)->count(),
-                    'S4' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 7)->count(),
-                    'S5' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 8)->count(),
-                    'S6' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 9)->count(),
+                    'S1' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 4)->whereYear('waktu_awal', $tahun)->count(),
+                    'S2' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 5)->whereYear('waktu_awal', $tahun)->count(),
+                    'S3' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 6)->whereYear('waktu_awal', $tahun)->count(),
+                    'S4' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 7)->whereYear('waktu_awal', $tahun)->count(),
+                    'S5' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 8)->whereYear('waktu_awal', $tahun)->count(),
+                    'S6' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 9)->whereYear('waktu_awal', $tahun)->count(),
                 ];
             }
         }
-        
-        
 
         // Mengambil jumlah publikasi internasional
         $jumlahPublikasiInternasional = 0;
