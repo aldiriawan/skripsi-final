@@ -70,7 +70,7 @@ class DashboardController extends Controller
         ->select(DB::raw('dosen_id, COUNT(*) as count'))
         ->groupBy('dosen_id')
         ->orderByRaw('COUNT(*) DESC')
-        ->limit(3)
+        ->limit(5)
         ->get()
         ->mapWithKeys(function ($item) {
             return [$item->dosen_id => $item->count];
@@ -81,7 +81,7 @@ class DashboardController extends Controller
         ->select(DB::raw('dosen_id, COUNT(*) as count'))
         ->groupBy('dosen_id')
         ->orderByRaw('COUNT(*) ASC')
-        ->limit(3)
+        ->limit(5)
         ->get()
         ->mapWithKeys(function ($item) {
             return [$item->dosen_id => $item->count];
