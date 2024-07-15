@@ -181,11 +181,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    var labels = ['2022', '2023', '2024'];
+    var labels = ['2021', '2022', '2023', '2024'];
+    var pengajaranData = @json($pengajaranData);
+    var penelitianData = @json($penelitianData);
     var pengabdianData = @json($pengabdianData);
     var penunjangData = @json($penunjangData);
-    var penelitianData = @json($penelitianData);
-    var pengajaranData = @json($pengajaranData);
 
     var ctx = document.getElementById('barChart').getContext('2d');
 

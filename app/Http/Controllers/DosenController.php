@@ -106,7 +106,7 @@ class DosenController extends Controller
         ->orderBy('tahun')
         ->get();
     
-    $years = [2022, 2023, 2024];
+    $years = [2021, 2022, 2023, 2024]; // Tambahkan tahun 2021
     $pengajaranData = [];
     $penelitianData = [];
     $pengabdianData = [];
