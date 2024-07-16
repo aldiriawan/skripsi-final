@@ -31,3 +31,5 @@ Route::resource('/surattugas', SuratTugasController::class)->middleware('auth');
 Route::resource('/publikasi', PublikasiController::class)->middleware('auth');
 Route::resource('/suratketetapan', SuratKetetapanController::class)->middleware('auth');
 
+Route::patch('/surat_tugas/{id}/toggle-visibility', [DosenController::class, 'toggleVisibility'])->name('surat_tugas.toggleVisibility');
+

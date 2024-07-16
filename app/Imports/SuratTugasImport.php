@@ -27,6 +27,7 @@ class SuratTugasImport implements ToCollection, WithHeadingRow
                 'tingkat_id' => $row['tingkat'],
                 'peran_id' => $row['peran_id'],
                 'publikasi_id' => $row['publikasi_id'],
+                'visibility' => true, // Atur nilai visibility menjadi true
             ]);
         }
     }

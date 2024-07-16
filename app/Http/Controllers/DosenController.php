@@ -40,13 +40,15 @@ class DosenController extends Controller
             $selectedDosen = Dosen::find($dosen_id);
             if ($selectedDosen) {
                 $penunjang = SuratTugas::where('dosen_id', $dosen_id)
-                    ->where('jenis_id', 4)
-                    ->when($tahun, function ($query) use ($tahun) {
-                        $query->whereYear('waktu_awal', $tahun);
-                    })
-                    ->orderBy('waktu_akhir', 'desc')  // Urutkan berdasarkan waktu_akhir dari terbaru ke terlama
-                    ->limit(10)  // Batasi hasil maksimal 10 data
-                    ->get();
+                ->where('jenis_id', 4)
+                ->where('visibility', true)
+                ->when($tahun, function ($query) use ($tahun) {
+                    $query->whereYear('waktu_awal', $tahun);
+                })
+                ->orderBy('waktu_akhir', 'desc')  // Urutkan berdasarkan waktu_akhir dari terbaru ke terlama
+                ->limit(10)  // Batasi hasil maksimal 10 data
+                ->get();
+
         
                 $selectedDosenId = $request->input('dosen_id');
                 // Menghitung jumlah tingkat surat untuk setiap tingkat (S1, S2, S3, S4, S5, S6)
@@ -202,4 +204,14 @@ class DosenController extends Controller
         Dosen::destroy($dosen->id);
         return redirect('/dosen')->with('success', 'Data sudah terhapus!');
     }
+
+    public function toggleVisibility(Request $request, $id)
+    {
+    $suratTugas = SuratTugas::findOrFail($id);
+    $suratTugas->visibility = !$suratTugas->visibility;
+    $suratTugas->save();
+
+    return back()->with('success', 'Visibilitas berhasil diubah!');
+    }
+
 }
