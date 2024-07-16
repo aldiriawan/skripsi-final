@@ -91,6 +91,35 @@ class DashboardController extends Controller
         $dosenNames = DB::table('dosen')
         ->whereIn('id', array_merge(array_keys($topDosenData->toArray()), array_keys($bottomDosenData->toArray())))
         ->pluck('nama', 'id');
+
+        // Koding untuk Publikasi : -----------------------
+        // Fetch data for Jurnal Nasional
+    $jurnalNasionalData = SuratTugas::whereIn('tingkat_id', [2, 4, 5, 6, 7, 8, 9])
+    ->selectRaw('tingkat_id, COUNT(*) as count')
+    ->groupBy('tingkat_id')
+    ->pluck('count', 'tingkat_id');
+
+    $jurnalNasionalData = [
+    $jurnalNasionalData[2] ?? 0,
+    $jurnalNasionalData[4] ?? 0,
+    $jurnalNasionalData[5] ?? 0,
+    $jurnalNasionalData[6] ?? 0,
+    $jurnalNasionalData[7] ?? 0,
+    $jurnalNasionalData[8] ?? 0,
+    $jurnalNasionalData[9] ?? 0
+    ];
+
+    // Fetch data for Prosiding
+    $prosidingData = SuratTugas::whereIn('publikasi_id', [1, 2])
+    ->selectRaw('publikasi_id, COUNT(*) as count')
+    ->groupBy('publikasi_id')
+    ->pluck('count', 'publikasi_id');
+
+    $prosidingData = [
+    $prosidingData[1] ?? 0,
+    $prosidingData[2] ?? 0
+    ];
+        
     
         return view('dashboard.index', [
             'title' => 'Dashboard',
@@ -108,6 +137,9 @@ class DashboardController extends Controller
             'topDosenData' => $topDosenData,
             'bottomDosenData' => $bottomDosenData,
             'dosenNames' => $dosenNames,
+            // View untuk Publikasi
+            'jurnalNasionalData' => $jurnalNasionalData,
+            'prosidingData' => $prosidingData
         ]);
     }
     

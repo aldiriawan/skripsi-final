@@ -23,13 +23,13 @@
             </div>
 
             <!-- Pie Chart Informatika -->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-4">
                 <h8 class="my-3">Informatika</h8>
                 <canvas id="pieChartInformatika" class="smaller-pie-chart"></canvas>
             </div>
 
             <!-- Pie Chart Sistem Informasi -->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-4">
                 <h8 class="my-3">Sistem Informasi</h8>
                 <canvas id="pieChartSistemInformasi" class="smaller-pie-chart"></canvas>
             </div>
@@ -93,21 +93,20 @@
                 </div>
                 <canvas id="scopeKegiatanChart" class="large-bar-chart"></canvas>
             </div>
+            <!-- Publikasi -->
             <div class="col-md-12 mb-3">
-                <div class="d-flex justify-content-between align-items-center">
                 <h4 class="my-3">Publikasi</h4>
-                <div class="btn-group mb-1">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        2024
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/#">2022</a></li>
-                        <li><a class="dropdown-item" href="/#">2023</a></li>
-                        <li><a class="dropdown-item" href="/#">2024</a></li>
-                    </ul>
+                <div class="row">
+                    <div class="col-md-5">
+                        <canvas id="jurnalInternasionalChart" class="large-pie-chart"></canvas>
+                    </div>
+                    <div class="col-md-5">
+                        <canvas id="jurnalNasionalChart" class="large-pie-chart"></canvas>
+                    </div>
+                    <div class="col-md-5">
+                        <canvas id="prosidingChart" class="smaller-pie-chart"></canvas>
+                    </div>
                 </div>
-                <canvas id="publikasiChart" class="large-bar-chart"></canvas>
-            </div>
             </div>
         </div>
     </div>
@@ -420,6 +419,79 @@
                             display: true,
                             text: 'Jumlah Surat Tugas'
                         }
+                    },
+                }
+            }
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        // Jurnal Internasional
+        var jurnalInternasionalCtx = document.getElementById('jurnalInternasionalChart').getContext('2d');
+        var jurnalInternasionalData = [25, 20, 15, 10, 5, 25]; // Dummy data for Q1, Q2, Q3, Q4, No Q, -
+        var jurnalInternasionalLabels = ['Q1', 'Q2', 'Q3', 'Q4', 'No Q', '-'];
+
+        var jurnalInternasionalChart = new Chart(jurnalInternasionalCtx, {
+            type: 'pie',
+            data: {
+                labels: jurnalInternasionalLabels,
+                datasets: [{
+                    data: jurnalInternasionalData,
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                }
+            }
+        });
+
+        // Jurnal Nasional
+        var jurnalNasionalCtx = document.getElementById('jurnalNasionalChart').getContext('2d');
+        var jurnalNasionalData = @json($jurnalNasionalData);
+        var jurnalNasionalLabels = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', '-'];
+
+        var jurnalNasionalChart = new Chart(jurnalNasionalCtx, {
+            type: 'pie',
+            data: {
+                labels: jurnalNasionalLabels,
+                datasets: [{
+                    data: jurnalNasionalData,
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C0C0C0'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                }
+            }
+        });
+
+        // Prosiding
+        var prosidingCtx = document.getElementById('prosidingChart').getContext('2d');
+        var prosidingData = @json($prosidingData);
+        var prosidingLabels = ['Nasional', 'Internasional'];
+
+        var prosidingChart = new Chart(prosidingCtx, {
+            type: 'pie',
+            data: {
+                labels: prosidingLabels,
+                datasets: [{
+                    data: prosidingData,
+                    backgroundColor: ['#FF6384', '#36A2EB'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
                     },
                 }
             }
