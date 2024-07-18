@@ -21,14 +21,14 @@ class DashboardController extends Controller
             ->groupBy('jenis_id')
             ->pluck('count', 'jenis_id')->toArray();
     
-        // Data untuk Informatika
-        $dataInformatika = DB::table('surat_tugas')
-            ->join('dosen', 'surat_tugas.dosen_id', '=', 'dosen.id')
-            ->where('dosen.program_studi', 'Informatika')
-            ->select(DB::raw('jenis_id, COUNT(*) as count'))
-            ->groupBy('jenis_id')
-            ->pluck('count', 'jenis_id')->toArray();
-    
+            // Data untuk Informatika
+            $dataInformatika = DB::table('surat_tugas')
+                ->join('dosen', 'surat_tugas.dosen_id', '=', 'dosen.id')
+                ->where('dosen.program_studi', 'Informatika')
+                ->select(DB::raw('jenis_id, COUNT(*) as count'))
+                ->groupBy('jenis_id')
+                ->pluck('count', 'jenis_id')->toArray();
+            
         // Data untuk Sistem Informasi
         $dataSistemInformasi = DB::table('surat_tugas')
             ->join('dosen', 'surat_tugas.dosen_id', '=', 'dosen.id')
@@ -99,26 +99,26 @@ class DashboardController extends Controller
     ->groupBy('tingkat_id')
     ->pluck('count', 'tingkat_id');
 
-    $jurnalNasionalData = [
-    $jurnalNasionalData[2] ?? 0,
-    $jurnalNasionalData[4] ?? 0,
-    $jurnalNasionalData[5] ?? 0,
-    $jurnalNasionalData[6] ?? 0,
-    $jurnalNasionalData[7] ?? 0,
-    $jurnalNasionalData[8] ?? 0,
-    $jurnalNasionalData[9] ?? 0
-    ];
+$jurnalNasionalData = [
+$jurnalNasionalData[2] ?? 0,
+$jurnalNasionalData[4] ?? 0,
+$jurnalNasionalData[5] ?? 0,
+$jurnalNasionalData[6] ?? 0,
+$jurnalNasionalData[7] ?? 0,
+$jurnalNasionalData[8] ?? 0,
+$jurnalNasionalData[9] ?? 0
+];
 
-    // Fetch data for Prosiding
-    $prosidingData = SuratTugas::whereIn('publikasi_id', [1, 2])
-    ->selectRaw('publikasi_id, COUNT(*) as count')
-    ->groupBy('publikasi_id')
-    ->pluck('count', 'publikasi_id');
+// Fetch data for Prosiding
+$prosidingData = SuratTugas::whereIn('publikasi_id', [1, 2])
+->selectRaw('publikasi_id, COUNT(*) as count')
+->groupBy('publikasi_id')
+->pluck('count', 'publikasi_id');
 
-    $prosidingData = [
-    $prosidingData[1] ?? 0,
-    $prosidingData[2] ?? 0
-    ];
+$prosidingData = [
+$prosidingData[1] ?? 0,
+$prosidingData[2] ?? 0
+];
         
     
         return view('dashboard.index', [
