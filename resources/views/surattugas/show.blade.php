@@ -1,26 +1,31 @@
 @extends('layouts.main')
 
 @section('container')
-<div class="card">
+<div class="card mt-2">
     <div class="card-header">
         <h3>{{ $title }}</h3>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
-                <p><strong>Nomor Surat:</strong> {{ $suratTugas->nomor ?? '[-]' }}</p>
-                <p><strong>Nama Dosen:</strong> {{ optional($suratTugas->dosen)->nama ?? '[-]' }}</p>
-                <p><strong>Tanggal Dibuat:</strong> {{ \Carbon\Carbon::parse($suratTugas->tanggal)->format('d M Y') ?? '[-]' }}</p>
-                <p><strong>Keterangan:</strong> {{ $suratTugas->keterangan ?? '[-]' }}</p>
-                <p><strong>Waktu Awal:</strong> {{ \Carbon\Carbon::parse($suratTugas->waktu_awal)->format('d M Y') ?? '[-]' }}</p>
-                <p><strong>Waktu Akhir:</strong> {{ \Carbon\Carbon::parse($suratTugas->waktu_akhir)->format('d M Y') ?? '[-]' }}</p>
+                <p><strong>Nomor Surat :</strong> {{ $suratTugas->nomor ?? '[-]' }}</p>
+                <p><strong>Tanggal Surat Dibuat :</strong> {{ \Carbon\Carbon::parse($suratTugas->tanggal)->locale('id')->translatedFormat('d F Y') ?? '[-]' }}</p>
+                <p><strong>Waktu Awal :</strong> {{ \Carbon\Carbon::parse($suratTugas->waktu_awal)->locale('id')->translatedFormat('d F Y') ?? '[-]' }}</p>
+                <p><strong>Waktu Akhir :</strong> {{ \Carbon\Carbon::parse($suratTugas->waktu_akhir)->locale('id')->translatedFormat('d F Y') ?? '[-]' }}</p>
+                <p><strong>Keterangan :</strong> {{ $suratTugas->keterangan ?? '[-]' }}</p>
+                <p><strong>Nama Dosen :</strong></p>
+                <ul>
+                    @foreach($allDosen as $dosen)
+                        <li>{{ $dosen->nama }}</li>
+                    @endforeach
+                </ul>
             </div>
             <div class="col-md-6">
-                <p><strong>Bukti:</strong> {{ optional($suratTugas->bukti)->nama ?? '[-]' }}</p>
-                <p><strong>Jenis:</strong> {{ optional($suratTugas->jenis)->nama ?? '[-]' }}</p>
-                <p><strong>Tingkat:</strong> {{ optional($suratTugas->tingkat)->nama ?? '[-]' }}</p>
-                <p><strong>Peran:</strong> {{ optional($suratTugas->peran)->nama ?? '[-]' }}</p>
-                <p><strong>Publikasi:</strong> {{ optional($suratTugas->publikasi)->nama ?? '[-]' }}</p>
+                <p><strong>Bukti :</strong> {{ optional($suratTugas->bukti)->nama ?? '[-]' }}</p>
+                <p><strong>Jenis :</strong> {{ optional($suratTugas->jenis)->nama ?? '[-]' }}</p>
+                <p><strong>Tingkat :</strong> {{ optional($suratTugas->tingkat)->nama ?? '[-]' }}</p>
+                <p><strong>Peran :</strong> {{ optional($suratTugas->peran)->nama ?? '[-]' }}</p>
+                <p><strong>Publikasi :</strong> {{ optional($suratTugas->publikasi)->nama ?? '[-]' }}</p>
             </div>
         </div>
         <div class="d-flex justify-content-between mt-4">

@@ -49,7 +49,7 @@ class SuratTugasController extends Controller
              $formattedSuratTugas->push([
                  'nomor' => $items->first()->nomor,
                  'nama_dosen' => $namaDosen,
-                 'tanggal' => \Carbon\Carbon::parse($items->first()->tanggal)->format('d M Y'),
+                 'tanggal' => \Carbon\Carbon::parse($items->first()->tanggal)->locale('id')->translatedFormat('d F Y'),
                  'keterangan' => $keterangan,
                  'id' => $items->first()->id, // jika perlu menambahkan ID untuk link detail
              ]);
@@ -72,10 +72,6 @@ class SuratTugasController extends Controller
              'surattugas' => $suratTugasPaginated,
          ]);
      }
-
-
-
-
 
     public function ImportExcelData(Request $request)
     {
@@ -142,63 +138,104 @@ public function store(Request $request)
      * Display the specified resource.
      */
     public function show($id)
-    {
-        $suratTugas = SuratTugas::with(['dosen', 'peran', 'jenis', 'bukti', 'tingkat', 'publikasi'])->findOrFail($id);
-
-        return view('surattugas.show', [
-            'title' => 'Detail Surat Tugas',
-            'suratTugas' => $suratTugas,
-        ]);
-    }
+{
+    $suratTugas = SuratTugas::with(['dosen', 'peran', 'jenis', 'bukti', 'tingkat', 'publikasi'])->findOrFail($id);
+    
+    // Mengumpulkan semua dosen yang terlibat dalam keterangan yang sama
+    $relatedSuratTugas = SuratTugas::where('keterangan', $suratTugas->keterangan)
+                                    ->with('dosen')
+                                    ->get();
+    $allDosen = $relatedSuratTugas->pluck('dosen')->flatten()->unique('id');
+    
+    return view('surattugas.show', [
+        'title' => 'Detail Surat Tugas',
+        'suratTugas' => $suratTugas,
+        'allDosen' => $allDosen,
+    ]);
+}
 
     /**
      * Show the form for editing the specified resource.
      */
     // app/Http/Controllers/SuratTugasController.php
 
-public function edit($id)
-{
-    $suratTugas = SuratTugas::findOrFail($id);
-    $dosen = Dosen::all(); // Ambil semua data dosen untuk dropdown
+    public function edit($id)
+    {
+        $suratTugas = SuratTugas::findOrFail($id);
+        $dosenList = Dosen::all(); // Semua dosen untuk dropdown
+    
+        // Ambil semua surat tugas dengan keterangan yang sama
+        $sameKeteranganSuratTugas = SuratTugas::where('keterangan', $suratTugas->keterangan)->get();
+    
+        return view('surattugas.edit', [
+            'title' => 'Edit Surat Tugas',
+            'suratTugas' => $suratTugas,
+            'dosenList' => $dosenList,
+            'sameKeteranganSuratTugas' => $sameKeteranganSuratTugas,
+            'peran' => Peran::all(),
+            'jenis' => Jenis::all(),
+            'bukti' => Bukti::all(),
+            'tingkat' => Tingkat::all(),
+            'publikasi' => Publikasi::all(),
+        ]);
+    }    
 
-    return view('surattugas.edit', [
-        'title' => 'Edit Surat Tugas',
-        'suratTugas' => $suratTugas,
-        'dosen' => $dosen,
-        'peran' => Peran::all(),
-        'jenis' => Jenis::all(),
-        'bukti' => Bukti::all(),
-        'tingkat' => Tingkat::all(),
-        'publikasi' => Publikasi::all(),
-    ]);
-}
-
-
-
-public function update(Request $request, $id)
-{
-    $validatedData = $request->validate([
-        'nomor' => 'required',
-        'dosen_id' => 'required|array',
-        'tanggal' => 'required|date',
-        'keterangan' => 'required',
-        'waktu_awal' => 'required|date',
-        'waktu_akhir' => 'required|date',
-        'bukti_id' => 'required',
-        'jenis_id' => 'required',
-        'tingkat_id' => 'required',
-        'peran_id' => 'required',
-        'publikasi_id' => 'required'
-    ]);
-
-    $suratTugas = SuratTugas::findOrFail($id);
-    $suratTugas->update($validatedData);
-
-    // Update dosen relations
-    $suratTugas->dosen()->sync($validatedData['dosen_id']);
-
-    return redirect('/surattugas')->with('success', 'Data Surat tugas berhasil diperbarui!');
-}
+    public function update(Request $request, $id)
+    {
+        $suratTugas = SuratTugas::findOrFail($id);
+    
+        // Validasi input sesuai kebutuhan Anda
+        $request->validate([
+            'nomor' => 'required|string',
+            'tanggal' => 'required|date',
+            'waktu_awal' => 'required|date',
+            'waktu_akhir' => 'required|date',
+            'bukti_id' => 'required|integer',
+            'jenis_id' => 'required|integer',
+            'publikasi_id' => 'required|integer',
+            'tingkat_id' => 'required|integer',
+            'keterangan' => 'required|string',
+            'peran_id' => 'required|integer',
+            'dosen_id' => 'required|array', // Pastikan dosen_id adalah array
+            'dosen_id.*' => 'integer', // Pastikan setiap elemen dalam array adalah integer
+        ]);
+    
+        // Update SuratTugas utama
+        $suratTugas->update([
+            'nomor' => $request->nomor,
+            'tanggal' => $request->tanggal,
+            'waktu_awal' => $request->waktu_awal,
+            'waktu_akhir' => $request->waktu_akhir,
+            'bukti_id' => $request->bukti_id,
+            'jenis_id' => $request->jenis_id,
+            'publikasi_id' => $request->publikasi_id,
+            'tingkat_id' => $request->tingkat_id,
+            'keterangan' => $request->keterangan,
+            'peran_id' => $request->peran_id,
+        ]);
+    
+        // Hapus semua surat tugas dengan keterangan yang sama terlebih dahulu
+        SuratTugas::where('keterangan', $suratTugas->keterangan)->delete();
+    
+        // Tambahkan kembali surat tugas dengan keterangan yang sama dan dosen yang baru
+        foreach ($request->dosen_id as $dosenId) {
+            SuratTugas::create([
+                'nomor' => $suratTugas->nomor,
+                'tanggal' => $suratTugas->tanggal,
+                'waktu_awal' => $suratTugas->waktu_awal,
+                'waktu_akhir' => $suratTugas->waktu_akhir,
+                'bukti_id' => $suratTugas->bukti_id,
+                'jenis_id' => $suratTugas->jenis_id,
+                'publikasi_id' => $suratTugas->publikasi_id,
+                'tingkat_id' => $suratTugas->tingkat_id,
+                'keterangan' => $suratTugas->keterangan,
+                'peran_id' => $suratTugas->peran_id,
+                'dosen_id' => $dosenId,
+            ]);
+        }
+    
+        return redirect('/surattugas')->with('success', 'Surat Tugas berhasil diupdate');
+    }
 
     /**
      * Remove the specified resource from storage.

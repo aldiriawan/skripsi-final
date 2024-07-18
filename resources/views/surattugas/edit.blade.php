@@ -102,19 +102,22 @@
                 </select>
             </div>
         </div>
-{{-- 
+
         <div id="dosen-container" class="row mb-3">
-            @foreach ($suratTugas->dosen as $dosenTugas)
-            <div class="col-md-4">
+            @foreach ($sameKeteranganSuratTugas as $st)
+            <div class="col-md-4 dosen-field">
                 <label for="dosen_id" class="form-label">Dosen</label>
-                <select class="form-select" id="dosen_id" name="dosen_id">
-                    @foreach ($dosen as $d)
-                    <option value="{{ $d->id }}" {{ $suratTugas->dosen_id == $d->id ? 'selected' : '' }}>{{ $d->nama }}</option>
-                    @endforeach
-                </select>
+                <div class="input-group">
+                    <select class="form-select" name="dosen_id[]">
+                        @foreach ($dosenList as $d)
+                        <option value="{{ $d->id }}" {{ $st->dosen_id == $d->id ? 'selected' : '' }}>{{ $d->nama }}</option>
+                        @endforeach
+                    </select>
+                    <button type="button" class="btn btn-danger remove-dosen-button">-</button>
+                </div>
             </div>
             @endforeach
-        </div> --}}
+        </div>
 
         <button type="button" class="btn btn-success" id="add-dosen-button">+ Dosen</button>
         <button type="submit" class="btn btn-primary">Update Surat Tugas</button>
@@ -127,10 +130,10 @@
         var newDosenField = document.createElement('div');
         newDosenField.classList.add('col-md-4', 'dosen-field');
         newDosenField.innerHTML = `
-            <label for="dosen" class="form-label">Nama Dosen</label>
+            <label for="dosen_id" class="form-label">Dosen</label>
             <div class="input-group">
                 <select class="form-select" name="dosen_id[]">
-                    @foreach ($dosen as $d)
+                    @foreach ($dosenList as $d)
                     <option value="{{ $d->id }}">{{ $d->nama }}</option>
                     @endforeach
                 </select>
