@@ -53,45 +53,49 @@ class SuratTugasController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('surattugas.create', [
-            'title' => 'Buat Surat Tugas Baru',
-            'surattugas' => SuratTugas::all(),
-            'dosen' => Dosen::all(),
-            'peran' => Peran::all(),
-            'jenis' => Jenis::all(),
-            'bukti' => Bukti::all(),
-            'tingkat' => Tingkat::all(),
-            'publikasi' => Publikasi::all(),
-        ]);
+{
+    return view('surattugas.create', [
+        'title' => 'Buat Surat Tugas Baru',
+        'surattugas' => SuratTugas::all(),
+        'dosen' => Dosen::all(),
+        'peran' => Peran::all(),
+        'jenis' => Jenis::all(),
+        'bukti' => Bukti::all(),
+        'tingkat' => Tingkat::all(),
+        'publikasi' => Publikasi::all(),
+    ]);
+}
+
+/**
+ * Store a newly created resource in storage.
+ */
+public function store(Request $request)
+{
+    $validatedData = $request->validate([
+        'nomor' => 'required',
+        'dosen_id' => 'required|array',
+        'tanggal' => 'required|date',
+        'keterangan' => 'required',
+        'waktu_awal' => 'required|date',
+        'waktu_akhir' => 'required|date',
+        'bukti_id' => 'required',
+        'jenis_id' => 'required',
+        'tingkat_id' => 'required',
+        'peran_id' => 'required',
+        'publikasi_id' => 'required'
+    ]);
+
+    $validatedData['user_id'] = auth()->user()->id;
+
+    foreach ($validatedData['dosen_id'] as $dosenId) {
+        $suratTugasData = $validatedData;
+        $suratTugasData['dosen_id'] = $dosenId;
+        SuratTugas::create($suratTugasData);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'nomor' => 'required',
-            'dosen_id' => 'required',
-            'tanggal' => 'required',
-            'keterangan' => 'required',
-            'waktu_awal' => 'required',
-            'waktu_akhir' => 'required',
-            'bukti_id' => 'required',
-            'jenis_id' => 'required',
-            'tingkat_id' => 'required',
-            'akreditasi' => 'required',
-            'peran_id' => 'required',
-            'publikasi_id' => 'required'
-        ]);
+    return redirect('/surattugas')->with('success', 'Data Surat baru sukses ditambahkan!');
+}
 
-        $validatedData['user_id'] = auth()->user()->id;
-
-        SuratTugas::create($validatedData);
-
-        return redirect('/surattugas')->with('success', 'Data Surat baru sukses ditambahkan!');
-    }
 
     /**
      * Display the specified resource.
@@ -134,7 +138,6 @@ class SuratTugasController extends Controller
             'bukti_id' => 'required',
             'jenis_id' => 'required',
             'publikasi_id' => 'nullable',
-            'akreditasi' => 'required',
             'tingkat_id' => 'required',
         ]);
 

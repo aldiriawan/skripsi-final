@@ -57,7 +57,7 @@
             </table>
         </div>
         @else
-        <p class="text-center fs-4">No Data Found.</p>
+        <p class="text-center fs-4">Data Tidak Ditemukan.</p>
         @endif
     </div>
 
