@@ -13,6 +13,7 @@ class PublikasiController extends Controller
     public function index(Request $request)
 {
     $selectedTingkat = $request->query('tingkat');
+    $search = $request->query('search');
 
     // Filter berdasarkan tingkat jika dipilih
     $surattugasQuery = DB::table('surat_tugas')
@@ -26,6 +27,14 @@ class PublikasiController extends Controller
         $surattugasQuery->where('tingkat.nama_tingkat', $selectedTingkat);
     }
 
+    if ($search) {
+        $surattugasQuery->where(function($query) use ($search) {
+            $query->where('keterangan', 'like', "%{$search}%")
+                  ->orWhere('dosen.nama', 'like', "%{$search}%")
+                  ->orWhere('tingkat.nama_tingkat', 'like', "%{$search}%");
+        });
+    }
+
     // Mendapatkan data surat tugas dengan pagination
     $surattugas = $surattugasQuery->orderBy('surat_tugas.created_at', 'desc')->paginate(10);
 
@@ -33,6 +42,7 @@ class PublikasiController extends Controller
         'title' => 'Daftar Publikasi',
         'surattugas' => $surattugas,
         'selectedTingkat' => $selectedTingkat, // Mengirimkan parameter yang dipilih ke view
+        'search' => $search, // Mengirimkan kata kunci pencarian ke view
     ]);
 }
 }

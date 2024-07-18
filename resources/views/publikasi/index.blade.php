@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="mt-3">Detail Publikasi</h3>
+    <h3 class="mt-3">Daftar Publikasi</h3>
     <div class="btn-group">
         @php
             $selectedTingkat = request('tingkat');
@@ -24,6 +24,18 @@
         </ul>
     </div>
 </div>
+
+<form method="GET" action="/publikasi">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+    </div>
+</form>
+
 <h4>
     @if($selectedTingkat)
         @if($selectedTingkat === 'Lokal')
@@ -50,7 +62,6 @@
     @else
     @endif
 </h4>
-
 
 @if (session()->has('success'))
 <div class="alert alert-success col-lg-8" role="alert">

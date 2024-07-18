@@ -4,9 +4,8 @@
 <div class="row">
     <div class="col-md-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3 class="my-3">Dosen</h3>
+            <h3 class="mt-3">Daftar Dosen</h3>
             <div class="btn-group">
-                
                 {{-- FILTER BERDASARKAN PRODI
                 @php
                     $selectedProgramStudi = request('program_studi');
@@ -19,13 +18,6 @@
                     <li><a class="dropdown-item" href="/dosen?program_studi=Informatika">Informatika</a></li>
                     <li><a class="dropdown-item" href="/dosen?program_studi=Sistem%20Informasi">Sistem Informasi</a></li>
                 </ul> --}}
-                {{-- Form Pencarian --}}
-                <form action="/dosen" method="GET" class="d-flex align-items-center">
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="Cari Nama Dosen" value="{{ request('search') }}">
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
-                    </div>
-                </form>
             </div>
         </div>
         
@@ -34,6 +26,18 @@
             {{ session('success')}}
         </div>
         @endif
+
+{{-- Form Pencarian --}}
+<form action="/dosen" method="GET" class="d-flex align-items-center">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+    </div>
+</form>
 
         @if ($dosen->count())
         <div class="table-responsive small">

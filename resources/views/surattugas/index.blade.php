@@ -2,18 +2,12 @@
 
 @section('container')
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="my-3">Daftar Surat Tugas</h3>
+    <h3 class="mt-3">Daftar Surat Tugas</h3>
     <form action="/surattugas/import" method="post" enctype="multipart/form-data" class="d-flex align-items-center">
         @csrf
         <div class="input-group">
             <input type="file" class="form-control-file" name="import_file">
             <button type="submit" class="btn btn-primary btn-sm">Import</button>
-        </div>
-    </form>
-    <form action="{{ route('surattugas.index') }}" method="GET" class="form-inline">
-        <div class="input-group">
-            <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">
-            <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
         </div>
     </form>
     <a href="/surattugas/create" class="btn btn-primary btn-sm">Tambah Surat Tugas Baru</a>
@@ -24,6 +18,17 @@
     {{ session('success')}}
 </div>
 @endif
+
+<form action="{{ route('surattugas.index') }}" method="GET" class="form-inline">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+    </div>
+</form>
 
 @if ($surattugas->count())
 <div class="table-responsive">
