@@ -85,7 +85,7 @@
         <div class="row mb-3">
             <div class="col-md-8">
                 <label for="keterangan" class="form-label">Keterangan</label>
-                <textarea class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan" required style="width: 100%; height: 150px;">{{ old('keterangan') }}</textarea>
+                <textarea class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan" required style="width: 100%; height: 100px;">{{ old('keterangan') }}</textarea>
                 @error('keterangan')
                 <div class="invalid-feedback">
                     {{ $message }}
