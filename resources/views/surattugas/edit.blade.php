@@ -121,6 +121,7 @@
 
         <button type="button" class="btn btn-success" id="add-dosen-button">+ Dosen</button>
         <button type="submit" class="btn btn-primary">Update Surat Tugas</button>
+        <a href="/surattugas" class="btn btn-secondary">Kembali</a>
     </form>
 </div>
 

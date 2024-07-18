@@ -240,9 +240,13 @@ public function store(Request $request)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SuratTugas $suratTugas)
+    public function destroy($id)
     {
-        SuratTugas::destroy($suratTugas->id);
-        return redirect('/surattugas')->with('success', 'Data  sudah terhapus!');
+        $suratTugas = SuratTugas::findOrFail($id);
+
+        // Hapus surat tugas berdasarkan keterangan yang sama
+        SuratTugas::where('keterangan', $suratTugas->keterangan)->delete();
+    
+        return redirect('/surattugas')->with('success', 'Surat Tugas berhasil dihapus');
     }
 }

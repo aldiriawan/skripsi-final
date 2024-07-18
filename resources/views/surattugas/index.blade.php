@@ -10,18 +10,18 @@
             <button type="submit" class="btn btn-primary btn-sm">Import</button>
         </div>
     </form>
-    <a href="/surattugas/create" class="btn btn-primary btn-sm">Tambah Surat Tugas Baru</a>
+    <a href="/surattugas/create" class="btn btn-primary">Tambah Surat Tugas Baru</a>
 </div>
 
 @if (session()->has('success'))
-<div class="alert alert-success col-lg-8" role="alert">
+<div class="alert alert-success col-lg-5" role="alert">
     {{ session('success')}}
 </div>
 @endif
 
 <form action="{{ route('surattugas.index') }}" method="GET" class="form-inline">
     <div class="row mb-3">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="input-group">
                 <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">
                 <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>

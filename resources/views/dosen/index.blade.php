@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3 class="mt-3">Daftar Dosen</h3>
+            <h3 class="mt-3">{{ $title }}</h3>
             <div class="btn-group">
                 {{-- FILTER BERDASARKAN PRODI
                 @php
@@ -22,7 +22,7 @@
         </div>
         
         @if (session()->has('success'))
-        <div class="alert alert-success col-lg-8" role="alert">
+        <div class="alert alert-success col-lg-12" role="alert">
             {{ session('success')}}
         </div>
         @endif
