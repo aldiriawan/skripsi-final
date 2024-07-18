@@ -2,17 +2,17 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h3>Ubah Surat Tugas</h3>
+    <h3>Edit Surat Tugas</h3>
 </div>
 
 <div class="col-lg-10">
     <form method="post" action="/surattugas/{{ $suratTugas->id }}" class="mb-5" enctype="multipart/form-data">
-        @csrf      
+        @csrf
         @method('PUT')
         <div class="row mb-3">
             <div class="col-md-3">
                 <label for="nomor" class="form-label">Nomor Surat</label>
-                <input type="text" class="form-control @error('nomor') is-invalid @enderror" id="nomor" name="nomor" required autofocus value="{{ old('nomor', $suratTugas->nomor) }}">
+                <input type="text" class="form-control @error('nomor') is-invalid @enderror" id="nomor" name="nomor" required value="{{ old('nomor', $suratTugas->nomor) }}">
                 @error('nomor')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -86,7 +86,7 @@
         <div class="row mb-3">
             <div class="col-md-8">
                 <label for="keterangan" class="form-label">Keterangan</label>
-                <textarea class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan" required style="width: 100%; height: 150px;">{{ old('keterangan', $suratTugas->keterangan) }}</textarea>
+                <textarea class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan" required style="width: 100%; height: 100px;">{{ old('keterangan', $suratTugas->keterangan) }}</textarea>
                 @error('keterangan')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -102,23 +102,21 @@
                 </select>
             </div>
         </div>
-
+{{-- 
         <div id="dosen-container" class="row mb-3">
             @foreach ($suratTugas->dosen as $dosenTugas)
             <div class="col-md-4">
-                <label for="dosen" class="form-label">Nama Dosen</label>
-                <div class="input-group">
-                    <select class="form-select" name="dosen_id[]">
-                        @foreach ($dosen as $d)
-                        <option value="{{ $d->id }}" {{ $dosenTugas->id == $d->id ? 'selected' : '' }}>{{ $d->nama }}</option>
-                        @endforeach
-                    </select>
-                    <button type="button" class="btn btn-success" id="add-dosen-button">+</button>
-                </div>
+                <label for="dosen_id" class="form-label">Dosen</label>
+                <select class="form-select" id="dosen_id" name="dosen_id">
+                    @foreach ($dosen as $d)
+                    <option value="{{ $d->id }}" {{ $suratTugas->dosen_id == $d->id ? 'selected' : '' }}>{{ $d->nama }}</option>
+                    @endforeach
+                </select>
             </div>
             @endforeach
-        </div>
+        </div> --}}
 
+        <button type="button" class="btn btn-success" id="add-dosen-button">+ Dosen</button>
         <button type="submit" class="btn btn-primary">Update Surat Tugas</button>
     </form>
 </div>
@@ -127,7 +125,7 @@
     document.getElementById('add-dosen-button').addEventListener('click', function() {
         var dosenContainer = document.getElementById('dosen-container');
         var newDosenField = document.createElement('div');
-        newDosenField.classList.add('col-md-4', 'mt-2');
+        newDosenField.classList.add('col-md-4', 'dosen-field');
         newDosenField.innerHTML = `
             <label for="dosen" class="form-label">Nama Dosen</label>
             <div class="input-group">
@@ -145,6 +143,12 @@
             dosenContainer.removeChild(newDosenField);
         });
     });
-</script>
 
+    document.querySelectorAll('.remove-dosen-button').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var dosenField = button.closest('.dosen-field');
+            dosenField.parentNode.removeChild(dosenField);
+        });
+    });
+</script>
 @endsection

@@ -29,41 +29,41 @@
         </div>
     </div>
 </form>
-
 @if ($surattugas->count())
-<div class="table-responsive">
-    <table class="table table-striped table-sm custom-table">
-        <thead class="thead-dark">
-            <tr>
-                <th style="width: 15%;">Nomor Surat</th>
-                <th style="width: 25%;">Nama Dosen</th>
-                <th style="width: 15%;">Tanggal Dibuat</th>
-                <th style="width: 35%;">Keterangan</th>
-                <th style="width: 10%;"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($surattugas as $s)
-            <tr>
-                <td>{{ $s->nomor }}</td>
-                <td>{{ $s->dosen ? $s->dosen->nama : 'Dosen tidak ditemukan' }}</td>
-                <td>{{ \Carbon\Carbon::parse($s->tanggal)->format('d M Y') }}</td>
-                <td>{{ $s->keterangan }}</td>
-                <td class="text-center">
-                    <a href="/surattugas/{{ $s->id }}" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detail</a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <!-- Menampilkan pagination links -->
-    <div class="d-flex">
-        {{ $surattugas->appends(['search' => request()->query('search')])->links() }}
+    <div class="table-responsive">
+        <table class="table table-striped table-sm custom-table">
+            <thead class="thead-dark">
+                <tr>
+                    <th style="width: 15%;">Nomor Surat</th>
+                    <th style="width: 25%;">Nama Dosen</th>
+                    <th style="width: 15%;">Tanggal Dibuat</th>
+                    <th style="width: 35%;">Keterangan</th>
+                    <th style="width: 10%;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($surattugas as $s)
+                    <tr>
+                        <td>{{ $s['nomor'] }}</td>
+                        <td>{{ $s['nama_dosen'] }}</td>
+                        <td>{{ $s['tanggal'] }}</td>
+                        <td>{{ $s['keterangan'] }}</td>
+                        <td class="text-center">
+                            <a href="/surattugas/{{ $s['id'] }}" class="btn btn-info btn-sm"><i class="bi bi-eye"></i> Detail</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <!-- Menampilkan pagination links -->
+        <div class="d-flex justify-content-center">
+            {{ $surattugas->links() }}
+        </div>
     </div>
-</div>
 @else
-<p class="text-center fs-4">Data tidak ditemukan.</p>
+    <p class="text-center fs-4">Data tidak ditemukan.</p>
 @endif
+
 
 @endsection
 
