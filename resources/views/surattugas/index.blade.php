@@ -12,10 +12,8 @@
     </form>
     <form action="{{ route('surattugas.index') }}" method="GET" class="form-inline">
         <div class="input-group">
-            <input type="text" class="form-control form-control-sm" name="search" placeholder="Cari...">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary btn-sm" type="submit"><i class="bi bi-search"></i></button>
-            </div>
+            <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">
+            <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
         </div>
     </form>
     <a href="/surattugas/create" class="btn btn-primary btn-sm">Tambah Surat Tugas Baru</a>
@@ -32,11 +30,11 @@
     <table class="table table-striped table-sm custom-table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Nomor Surat</th>
-                <th scope="col">Nama Dosen</th>
-                <th scope="col">Tanggal Surat Dibuat</th>
-                <th scope="col">Keterangan</th>
-                <th scope="col"></th>
+                <th style="width: 15%;">Nomor Surat</th>
+                <th style="width: 25%;">Nama Dosen</th>
+                <th style="width: 15%;">Tanggal Dibuat</th>
+                <th style="width: 35%;">Keterangan</th>
+                <th style="width: 10%;"></th>
             </tr>
         </thead>
         <tbody>
@@ -67,10 +65,17 @@
 @push('styles')
 <style>
     .custom-table {
-        font-size: 12px; /* Ukuran font tabel lebih kecil */
+        font-size: 14px; /* Ukuran font tabel lebih besar */
+        border-collapse: collapse; /* Menggabungkan garis tabel */
+        width: 100%; /* Lebar tabel penuh */
     }
     .custom-table th, .custom-table td {
-        padding: 8px; /* Padding lebih kecil */
+        padding: 10px; /* Padding sel dalam tabel */
+        text-align: left; /* Teks rata kiri dalam sel */
+    }
+    .custom-table th {
+        background-color: #343a40; /* Warna latar header */
+        color: #fff; /* Warna teks header */
     }
     .custom-table .btn {
         font-size: 12px; /* Ukuran font tombol */
