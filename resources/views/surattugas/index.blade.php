@@ -10,6 +10,14 @@
             <button type="submit" class="btn btn-primary btn-sm">Import</button>
         </div>
     </form>
+    <form action="{{ route('surattugas.index') }}" method="GET" class="form-inline">
+        <div class="input-group">
+            <input type="text" class="form-control form-control-sm" name="search" placeholder="Cari...">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary btn-sm" type="submit"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+    </form>
     <a href="/surattugas/create" class="btn btn-primary btn-sm">Tambah Surat Tugas Baru</a>
 </div>
 
@@ -47,7 +55,7 @@
     </table>
     <!-- Menampilkan pagination links -->
     <div class="d-flex justify-content-center">
-        {{ $surattugas->links() }}
+        {{ $surattugas->appends(['search' => request()->query('search')])->links() }}
     </div>
 </div>
 @else
