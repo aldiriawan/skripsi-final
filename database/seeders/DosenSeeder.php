@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Dosen;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DosenSeeder extends Seeder
 {
@@ -13,7 +12,6 @@ class DosenSeeder extends Seeder
      */
     public function run(): void
     {
-        // Dosen Informatika
         Dosen::create([
             'nama' => 'Aditya Wikan Mahastama, S.Kom., M.Cs.',
             'program_studi' => 'Informatika'
@@ -27,11 +25,6 @@ class DosenSeeder extends Seeder
         Dosen::create([
             'nama' => 'Andhika Galuh Prabawati, S.Kom., M.Kom.',
             'program_studi' => 'Sistem Informasi'
-        ]);
-
-        Dosen::create([
-            'nama' => 'Antonius Rachmat C., S.Kom., M.Cs.',
-            'program_studi' => 'Informatika'
         ]);
 
         Dosen::create([
@@ -60,6 +53,26 @@ class DosenSeeder extends Seeder
         ]);
 
         Dosen::create([
+            'nama' => 'Dr. Antonius Rachmat C., S.Kom., M.Cs.',
+            'program_studi' => 'Informatika'
+        ]);
+
+        Dosen::create([
+            'nama' => 'Dr. Ir. Sri Suwarno, M.Eng.',
+            'program_studi' => 'Informatika'
+        ]);
+
+        Dosen::create([
+            'nama' => 'Dr. Phil. Lucia Dwi Krisnawati, S.S., M.A.',
+            'program_studi' => 'Informatika'
+        ]);
+
+        Dosen::create([
+            'nama' => 'Dr. Rosa Delima, S.Kom., M.Kom',
+            'program_studi' => 'Informatika'
+        ]);
+
+        Dosen::create([
             'nama' => 'Drs. Jong Jek Siang, M.Sc.',
             'program_studi' => 'Sistem Informasi'
         ]);
@@ -82,11 +95,6 @@ class DosenSeeder extends Seeder
         Dosen::create([
             'nama' => 'Gabriel Indra Widi Tamtama, S.Kom., M.Kom.',
             'program_studi' => 'Sistem Informasi'
-        ]);
-
-        Dosen::create([
-            'nama' => 'Gani Indriyanta, MT',
-            'program_studi' => 'Informatika'
         ]);
 
         Dosen::create([
@@ -120,7 +128,7 @@ class DosenSeeder extends Seeder
         ]);
 
         Dosen::create([
-            'nama' => 'Junius Karel Tampubolon,S.Si., M.T.',
+            'nama' => 'Junius Karel Tampubolon, S.Si., M.T.',
             'program_studi' => 'Informatika'
         ]);
 
@@ -131,7 +139,7 @@ class DosenSeeder extends Seeder
 
         Dosen::create([
             'nama' => 'Kristian Adi Nugraha, S.Kom., M.T',
-           'program_studi' => 'Informatika'
+            'program_studi' => 'Informatika'
         ]);
 
         Dosen::create([
@@ -145,12 +153,12 @@ class DosenSeeder extends Seeder
         ]);
 
         Dosen::create([
-            'nama' => 'Matahari Bhakti Nendya, S.Kom., M.T',
+            'nama' => 'Maria Nila Anggia Rini S.T., M.T.I',
             'program_studi' => 'Informatika'
         ]);
 
         Dosen::create([
-            'nama' => 'Maria Nila Anggia Rini S.T., M.T.I',
+            'nama' => 'Matahari Bhakti Nendya, S.Kom., M.T',
             'program_studi' => 'Informatika'
         ]);
 
@@ -166,16 +174,6 @@ class DosenSeeder extends Seeder
 
         Dosen::create([
             'nama' => 'Restyandito, S.Kom, MSIS., Ph.D',
-            'program_studi' => 'Informatika'
-        ]);
-
-        Dosen::create([
-            'nama' => 'Rosa Delima, S.Kom., M.Kom',
-            'program_studi' => 'Informatika'
-        ]);
-
-        Dosen::create([
-            'nama' => 'Sri Suwarno, M.Eng.',
             'program_studi' => 'Informatika'
         ]);
 

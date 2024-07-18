@@ -10,7 +10,7 @@ class SuratKetetapanController extends Controller
     public function index()
     {
         return view('suratketetapan.index', [
-            'title' => 'Surat Ketetapan',
+            'title' => 'Daftar ST/SK',
             'surattugas' => SuratTugas::all()
         ]);
     }

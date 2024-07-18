@@ -35,7 +35,7 @@ class PublikasiController extends Controller
         $surattugas = $surattugasQuery->orderBy('created_at', 'desc')->get();
 
         return view('publikasi.index', [
-            'title' => 'Detail Publikasi',
+            'title' => 'Daftar Publikasi',
             'surattugas' => $surattugas,
             'selectedTingkat' => $selectedTingkat, // Mengirimkan parameter yang dipilih ke view
             // Sisipkan data lain yang diperlukan untuk tampilan Anda di sini

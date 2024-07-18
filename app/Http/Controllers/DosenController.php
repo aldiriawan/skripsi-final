@@ -123,7 +123,7 @@ class DosenController extends Controller
     }
 
         return view('dosen.index', [
-            'title' => 'Data Dosen',
+            'title' => 'Daftar Dosen',
             'dosen' => $dosen,
             'selectedDosen' => $selectedDosen,
             'penunjang' => $penunjang,
@@ -143,7 +143,7 @@ class DosenController extends Controller
     public function create()
     {
         return view('dosen.create', [
-            'title' => 'Tambah Dosen Baru',
+            'title' => 'Buat Dosen Baru',
             'dosen' => Dosen::all(),
         ]);
     }
@@ -179,7 +179,7 @@ class DosenController extends Controller
     public function edit(Dosen $dosen)
     {
         return view('dosen.edit', [
-            'title' => 'Edit Data Dosen',
+            'title' => 'Ubah Data Dosen',
             'dosen' => $dosen,
         ]);
     }

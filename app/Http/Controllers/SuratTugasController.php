@@ -25,7 +25,7 @@ class SuratTugasController extends Controller
         $suratTugas = SuratTugas::orderBy('created_at', 'desc')->paginate(10);
 
         return view('surattugas.index', [
-            'title' => 'Data Surat Tugas',
+            'title' => 'Daftar Surat Tugas',
             'surattugas' => $suratTugas,
             'dosen' => Dosen::all(),
             'peran' => Peran::all(),
@@ -55,7 +55,7 @@ class SuratTugasController extends Controller
     public function create()
     {
         return view('surattugas.create', [
-            'title' => 'Buat Data Surat Tugas',
+            'title' => 'Buat Surat Tugas Baru',
             'surattugas' => SuratTugas::all(),
             'dosen' => Dosen::all(),
             'peran' => Peran::all(),
@@ -107,7 +107,7 @@ class SuratTugasController extends Controller
     public function edit(SuratTugas $suratTugas)
     {
         return view('surattugas.edit', [
-            'title' => 'Edit Data Surat Tugas',
+            'title' => 'Ubah Surat Tugas',
             'surattugas' => $suratTugas,
             'dosen' => Dosen::all(),
             'peran' => Peran::all(),
