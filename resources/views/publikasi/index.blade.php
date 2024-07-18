@@ -72,12 +72,13 @@
             @foreach ($surattugas as $s)
             <tr>
                 <td class="judul-col">{{ $s->keterangan }}</td>
-                <td>{{ $s->dosen ? $s->dosen->nama : 'Dosen tidak ditemukan' }}</td>
-                <td>{{ $s->tingkat ? $s->tingkat->nama_tingkat : 'Tingkat tidak ditemukan' }}</td>
+                <td>{{ $s->penulis_dosen }}</td>
+                <td>{{ $s->nama_tingkat }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
+    {{ $surattugas->links() }}
 </div>
 @else
 <p class="text-center fs-4">Data tidak ditemukan.</p>

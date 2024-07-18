@@ -20,29 +20,27 @@ class SuratTugasController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-{
-    $query = SuratTugas::query();
+    {
+        $query = SuratTugas::query();
 
-    // Filter berdasarkan pencarian nomor surat, nama dosen, atau keterangan surat
-    if ($request->filled('search')) {
-        $search = $request->input('search');
-        $query->where('nomor', 'like', "%$search%")
-              ->orWhereHas('dosen', function ($q) use ($search) {
-                  $q->where('nama', 'like', "%$search%");
-              })
-              ->orWhere('keterangan', 'like', "%$search%");
+        // Filter berdasarkan pencarian nomor surat, nama dosen, atau keterangan surat
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where('nomor', 'like', "%$search%")
+                ->orWhereHas('dosen', function ($q) use ($search) {
+                    $q->where('nama', 'like', "%$search%");
+                })
+                ->orWhere('keterangan', 'like', "%$search%");
+        }
+
+        // Ambil semua surat tugas, diurutkan berdasarkan tanggal surat dibuat (descending) dan menggunakan paginate()
+        $suratTugas = $query->orderBy('tanggal', 'desc')->paginate(10);
+
+        return view('surattugas.index', [
+            'title' => 'Daftar Surat Tugas',
+            'surattugas' => $suratTugas,
+        ]);
     }
-
-    // Ambil semua surat tugas, diurutkan berdasarkan tanggal surat dibuat (descending) dan menggunakan paginate()
-    $suratTugas = $query->orderBy('tanggal', 'desc')->paginate(10);
-
-    return view('surattugas.index', [
-        'title' => 'Daftar Surat Tugas',
-        'surattugas' => $suratTugas,
-    ]);
-}
-
-
 
 
     public function ImportExcelData(Request $request)
