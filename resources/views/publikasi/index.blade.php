@@ -2,16 +2,42 @@
 
 @section('container')
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="mt-3">Daftar Publikasi</h3>
+    <h3 class="mt-3">Daftar Publikasi (
+        @if($selectedTingkat)
+            @if($selectedTingkat === 'Lokal')
+                Jurnal Lokal
+            @elseif($selectedTingkat === 'Nasional')
+                Jurnal Nasional
+            @elseif($selectedTingkat === 'Internasional')
+                Jurnal Internasional
+            @elseif($selectedTingkat === 'Sinta 1')
+                Sinta 1
+            @elseif($selectedTingkat === 'Sinta 2')
+                Sinta 2
+            @elseif($selectedTingkat === 'Sinta 3')
+                Sinta 3
+            @elseif($selectedTingkat === 'Sinta 4')
+                Sinta 4
+            @elseif($selectedTingkat === 'Sinta 5')
+                Sinta 5
+            @elseif($selectedTingkat === 'Sinta 6')
+                Sinta 6
+            @else
+                {{ $selectedTingkat }}
+            @endif
+        @else
+        @endif )
+    </h3>
     <div class="btn-group">
         @php
-            $selectedTingkat = request('tingkat');
-            $buttonLabel = $selectedTingkat ? $selectedTingkat : 'Pilih Tingkatan';
+            $selectedTingkat = request('tingkat') ?? 'Semua Tingkatan';
+            $buttonLabel = $selectedTingkat !== 'Semua Tingkatan' ? $selectedTingkat : 'Semua Tingkatan';
         @endphp
         <button type="button" class="btn btn-secondary dropdown-toggle mx-1" data-bs-toggle="dropdown" aria-expanded="false">
             {{ $buttonLabel }}
         </button>
         <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/publikasi?tingkat=Semua Tingkatan">Semua Tingkatan</a></li>
             <li><a class="dropdown-item" href="/publikasi?tingkat=Lokal">Jurnal Lokal</a></li>
             <li><a class="dropdown-item" href="/publikasi?tingkat=Nasional">Jurnal Nasional</a></li>
             <li><a class="dropdown-item" href="/publikasi?tingkat=Internasional">Jurnal Internasional</a></li>
@@ -23,6 +49,7 @@
             <li><a class="dropdown-item" href="/publikasi?tingkat=Sinta 6">Sinta 6</a></li>
         </ul>
     </div>
+    
 </div>
 
 <form method="GET" action="/publikasi">
@@ -35,33 +62,6 @@
         </div>
     </div>
 </form>
-
-<h4>
-    @if($selectedTingkat)
-        @if($selectedTingkat === 'Lokal')
-            Jurnal Lokal
-        @elseif($selectedTingkat === 'Nasional')
-            Jurnal Nasional
-        @elseif($selectedTingkat === 'Internasional')
-            Jurnal Internasional
-        @elseif($selectedTingkat === 'Sinta 1')
-            Sinta 1
-        @elseif($selectedTingkat === 'Sinta 2')
-            Sinta 2
-        @elseif($selectedTingkat === 'Sinta 3')
-            Sinta 3
-        @elseif($selectedTingkat === 'Sinta 4')
-            Sinta 4
-        @elseif($selectedTingkat === 'Sinta 5')
-            Sinta 5
-        @elseif($selectedTingkat === 'Sinta 6')
-            Sinta 6
-        @else
-            {{ $selectedTingkat }}
-        @endif
-    @else
-    @endif
-</h4>
 
 @if (session()->has('success'))
 <div class="alert alert-success col-lg-8" role="alert">
