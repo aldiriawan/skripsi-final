@@ -89,7 +89,7 @@
             @endforeach
         </tbody>
     </table>
-    {{ $surattugas->links() }}
+    {{ $surattugas->appends(['tingkat' => $selectedTingkat, 'search' => $search])->links() }}
 </div>
 @else
 <p class="text-center fs-4">Data tidak ditemukan.</p>
