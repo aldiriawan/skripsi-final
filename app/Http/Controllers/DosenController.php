@@ -14,131 +14,131 @@ class DosenController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        $search = $request->query('search');
-        $program_studi = $request->query('program_studi');
-        $dosen_id = $request->query('dosen_id'); // Mendapatkan ID dosen yang dipilih
-        $tahun = $request->query('tahun'); // Mendapatkan tahun yang dipilih
-        $query = Dosen::query();
+{
+    $search = $request->query('search');
+    $program_studi = $request->query('program_studi');
+    $dosen_id = $request->query('dosen_id'); // Mendapatkan ID dosen yang dipilih
+    $tahun = $request->query('tahun'); // Mendapatkan tahun yang dipilih
+    $query = Dosen::query();
 
-        if ($search) {
-            $query->where('nama', 'like', '%' . $search . '%');
-        }
+    if ($search) {
+        $query->where('nama', 'like', '%' . $search . '%');
+    }
 
-        if ($program_studi) {
-            $query->where('program_studi', $program_studi);
-        }
+    if ($program_studi) {
+        $query->where('program_studi', $program_studi);
+    }
 
-        $dosen = $query->get();
-        $selectedDosen = null;
-        $penunjang = collect();
-        $tingkatSuratCounts = [];
-        $selectedDosenId = null; // Inisialisasi variabel
+    $query->orderBy('nama', 'asc'); // Tambahkan ini untuk mengurutkan nama dosen dari A-Z
 
-        // Koding Bagian Penunjang
-        if ($dosen_id) {
-            $selectedDosen = Dosen::find($dosen_id);
-            if ($selectedDosen) {
-                $penunjang = SuratTugas::where('dosen_id', $dosen_id)
-                ->where('jenis_id', 4)
-                ->where('visibility', true)
-                ->when($tahun, function ($query) use ($tahun) {
-                    $query->whereYear('waktu_awal', $tahun);
-                })
-                ->orderBy('waktu_akhir', 'desc')  // Urutkan berdasarkan waktu_akhir dari terbaru ke terlama
-                ->limit(10)  // Batasi hasil maksimal 10 data
-                ->get();
+    $dosen = $query->get();
+    $selectedDosen = null;
+    $penunjang = collect();
+    $tingkatSuratCounts = [];
+    $selectedDosenId = null; // Inisialisasi variabel
 
-        
-                $selectedDosenId = $request->input('dosen_id');
-                // Menghitung jumlah tingkat surat untuk setiap tingkat (S1, S2, S3, S4, S5, S6)
-                $tingkatSuratCounts = [
-                    'S1' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 4)->whereYear('waktu_awal', $tahun)->count(),
-                    'S2' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 5)->whereYear('waktu_awal', $tahun)->count(),
-                    'S3' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 6)->whereYear('waktu_awal', $tahun)->count(),
-                    'S4' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 7)->whereYear('waktu_awal', $tahun)->count(),
-                    'S5' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 8)->whereYear('waktu_awal', $tahun)->count(),
-                    'S6' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 9)->whereYear('waktu_awal', $tahun)->count(),
-                    '-' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 2)->whereYear('waktu_awal', $tahun)->count(),
-                ];
-            }
-        }
+    // Koding Bagian Penunjang
+    if ($dosen_id) {
+        $selectedDosen = Dosen::find($dosen_id);
+        if ($selectedDosen) {
+            $penunjang = SuratTugas::where('dosen_id', $dosen_id)
+            ->where('jenis_id', 4)
+            ->where('visibility', false)
+            ->orderBy('waktu_akhir', 'desc')  // Urutkan berdasarkan waktu_akhir dari terbaru ke terlama
+            ->limit(10)  // Batasi hasil maksimal 10 data
+            ->get();
 
-        // Mengambil jumlah publikasi
-        $jumlahPublikasiInternasional = 0;
-        $jumlahPublikasiNasional = 0;
-        $jumlahHKI = 0;
-
-        if ($selectedDosenId) {
-            $jumlahPublikasiInternasional = SuratTugas::where('dosen_id', $selectedDosenId)
-                ->where('tingkat_id', 1)
-                ->when($tahun, function ($query) use ($tahun) {
-                    $query->whereYear('waktu_awal', $tahun);
-                })
-                ->count();
-
-            $jumlahPublikasiNasional = SuratTugas::where('dosen_id', $selectedDosenId)
-                ->where('tingkat_id', 2)
-                ->when($tahun, function ($query) use ($tahun) {
-                    $query->whereYear('waktu_awal', $tahun);
-                })
-                ->count();
-
-            $jumlahHKI = SuratTugas::where('dosen_id', $selectedDosenId)
-                ->where('jenis_id', 3)
-                ->when($tahun, function ($query) use ($tahun) {
-                    $query->whereYear('waktu_awal', $tahun);
-                })
-                ->count();
-        }
-
-    $selectedDosenId = $request->query('dosen_id');
-    $selectedDosen = Dosen::find($selectedDosenId);
-
-    // Query untuk menghitung jumlah berdasarkan jenis_id per tahun
-    $suratTugasCounts = DB::table('surat_tugas')
-        ->select(DB::raw('YEAR(tanggal) as tahun'), 
-                 DB::raw('SUM(CASE WHEN jenis_id = 1 THEN 1 ELSE 0 END) as total_pengajaran'), // pengajaran
-                 DB::raw('SUM(CASE WHEN jenis_id = 2 THEN 1 ELSE 0 END) as total_penelitian'),  // penelitian
-                 DB::raw('SUM(CASE WHEN jenis_id = 3 THEN 1 ELSE 0 END) as total_pengabdian'), // pengabdian
-                 DB::raw('SUM(CASE WHEN jenis_id = 4 THEN 1 ELSE 0 END) as total_penunjang')) // penunjang
-        ->where('dosen_id', $selectedDosenId)
-        ->groupBy(DB::raw('YEAR(tanggal)'))
-        ->orderBy('tahun')
-        ->get();
     
-    $years = [2021, 2022, 2023, 2024];
-    $pengajaranData = [];
-    $penelitianData = [];
-    $pengabdianData = [];
-    $penunjangData = [];
-
-    foreach ($years as $year) {
-        $data = $suratTugasCounts->firstWhere('tahun', $year);
-
-        $pengajaranData[] = $data ? $data->total_pengajaran : 0;
-        $penelitianData[] = $data ? $data->total_penelitian : 0;
-        $pengabdianData[] = $data ? $data->total_pengabdian : 0;
-        $penunjangData[] = $data ? $data->total_penunjang : 0;
+            $selectedDosenId = $request->input('dosen_id');
+            // Menghitung jumlah tingkat surat untuk setiap tingkat (S1, S2, S3, S4, S5, S6)
+            $tingkatSuratCounts = [
+                'S1' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 4)->whereYear('waktu_awal', $tahun)->count(),
+                'S2' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 5)->whereYear('waktu_awal', $tahun)->count(),
+                'S3' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 6)->whereYear('waktu_awal', $tahun)->count(),
+                'S4' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 7)->whereYear('waktu_awal', $tahun)->count(),
+                'S5' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 8)->whereYear('waktu_awal', $tahun)->count(),
+                'S6' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 9)->whereYear('waktu_awal', $tahun)->count(),
+                '-' => SuratTugas::where('dosen_id', $selectedDosenId)->where('tingkat_id', 2)->whereYear('waktu_awal', $tahun)->count(),
+            ];
+        }
     }
 
-        return view('dosen.index', [
-            'title' => 'Daftar Dosen',
-            'dosen' => $dosen,
-            'selectedDosen' => $selectedDosen,
-            'penunjang' => $penunjang,
-            'jumlahPublikasiInternasional' => $jumlahPublikasiInternasional,
-            'jumlahPublikasiNasional' => $jumlahPublikasiNasional,
-            'jumlahHKI' => $jumlahHKI,
-            'selectedDosenId' => $selectedDosenId,
-            'tahun' => $tahun, // Menambahkan tahun ke view
-            'tingkatSuratCounts' => $tingkatSuratCounts,
-            'pengajaranData' => $pengajaranData,
-            'penelitianData' => $penelitianData,
-            'pengabdianData' => $pengabdianData,
-            'penunjangData' => $penunjangData,
-        ]);
+    // Mengambil jumlah publikasi
+    $jumlahPublikasiInternasional = 0;
+    $jumlahPublikasiNasional = 0;
+    $jumlahHKI = 0;
+
+    if ($selectedDosenId) {
+        $jumlahPublikasiInternasional = SuratTugas::where('dosen_id', $selectedDosenId)
+            ->where('tingkat_id', 1)
+            ->when($tahun, function ($query) use ($tahun) {
+                $query->whereYear('waktu_awal', $tahun);
+            })
+            ->count();
+
+        $jumlahPublikasiNasional = SuratTugas::where('dosen_id', $selectedDosenId)
+            ->where('tingkat_id', 2)
+            ->when($tahun, function ($query) use ($tahun) {
+                $query->whereYear('waktu_awal', $tahun);
+            })
+            ->count();
+
+        $jumlahHKI = SuratTugas::where('dosen_id', $selectedDosenId)
+            ->where('jenis_id', 3)
+            ->when($tahun, function ($query) use ($tahun) {
+                $query->whereYear('waktu_awal', $tahun);
+            })
+            ->count();
     }
+
+$selectedDosenId = $request->query('dosen_id');
+$selectedDosen = Dosen::find($selectedDosenId);
+
+// Query untuk menghitung jumlah berdasarkan jenis_id per tahun
+$suratTugasCounts = DB::table('surat_tugas')
+    ->select(DB::raw('YEAR(tanggal) as tahun'), 
+             DB::raw('SUM(CASE WHEN jenis_id = 1 THEN 1 ELSE 0 END) as total_pengajaran'), // pengajaran
+             DB::raw('SUM(CASE WHEN jenis_id = 2 THEN 1 ELSE 0 END) as total_penelitian'),  // penelitian
+             DB::raw('SUM(CASE WHEN jenis_id = 3 THEN 1 ELSE 0 END) as total_pengabdian'), // pengabdian
+             DB::raw('SUM(CASE WHEN jenis_id = 4 THEN 1 ELSE 0 END) as total_penunjang')) // penunjang
+    ->where('dosen_id', $selectedDosenId)
+    ->groupBy(DB::raw('YEAR(tanggal)'))
+    ->orderBy('tahun')
+    ->get();
+
+$years = [2021, 2022, 2023, 2024];
+$pengajaranData = [];
+$penelitianData = [];
+$pengabdianData = [];
+$penunjangData = [];
+
+foreach ($years as $year) {
+    $data = $suratTugasCounts->firstWhere('tahun', $year);
+
+    $pengajaranData[] = $data ? $data->total_pengajaran : 0;
+    $penelitianData[] = $data ? $data->total_penelitian : 0;
+    $pengabdianData[] = $data ? $data->total_pengabdian : 0;
+    $penunjangData[] = $data ? $data->total_penunjang : 0;
+}
+
+    return view('dosen.index', [
+        'title' => 'Daftar Dosen',
+        'dosen' => $dosen,
+        'selectedDosen' => $selectedDosen,
+        'penunjang' => $penunjang,
+        'jumlahPublikasiInternasional' => $jumlahPublikasiInternasional,
+        'jumlahPublikasiNasional' => $jumlahPublikasiNasional,
+        'jumlahHKI' => $jumlahHKI,
+        'selectedDosenId' => $selectedDosenId,
+        'tahun' => $tahun, // Menambahkan tahun ke view
+        'tingkatSuratCounts' => $tingkatSuratCounts,
+        'pengajaranData' => $pengajaranData,
+        'penelitianData' => $penelitianData,
+        'pengabdianData' => $pengabdianData,
+        'penunjangData' => $penunjangData,
+    ]);
+}
+
 
     public function create()
     {

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('surat_tugas', function (Blueprint $table) {
-            $table->boolean('visibility')->default(true); // Default value is true
+            $table->boolean('visibility')->default(false);
         });
     }
 
