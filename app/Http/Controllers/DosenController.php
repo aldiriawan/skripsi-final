@@ -167,7 +167,10 @@ class DosenController extends Controller
 
     public function show(Dosen $dosen)
     {
-        //
+        return view('dosen.show', [
+            'title' => 'Administrasi Data Dosen',
+            'dosen' => $dosen,
+        ]);
     }
 
     /**

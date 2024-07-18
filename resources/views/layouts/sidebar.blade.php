@@ -26,7 +26,7 @@
                         <svg class="bi">
                             <use xlink:href="#file-earmark-text" />
                         </svg>
-                        <span class="text-sidebar">Data Dosen</span>
+                        <span class="text-sidebar">Daftar Dosen</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -35,7 +35,7 @@
                         <svg class="bi">
                             <use xlink:href="#file-earmark-text" />
                         </svg>
-                        <span class="text-sidebar">Data Surat Tugas</span>
+                        <span class="text-sidebar">Daftar Surat Tugas</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -44,7 +44,7 @@
                         <svg class="bi">
                             <use xlink:href="#file-earmark-text" />
                         </svg>
-                        <span class="text-sidebar">Data Publikasi</span>
+                        <span class="text-sidebar">Daftar Publikasi</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -53,7 +53,16 @@
                         <svg class="bi">
                             <use xlink:href="#file-earmark-text" />
                         </svg>
-                        <span class="text-sidebar">Data ST/SK</span>
+                        <span class="text-sidebar">Daftar ST/SK</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('user') ? 'active' : '' }}"
+                        aria-current="page" href="/dosen/show">
+                        <svg class="bi">
+                            <use xlink:href="#file-earmark-text" />
+                        </svg>
+                        <span class="text-sidebar">Administrasi Data Dosen</span>
                     </a>
                 </li>
                 <li class="nav-item">

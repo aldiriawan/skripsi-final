@@ -6,6 +6,8 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3 class="my-3">Dosen</h3>
             <div class="btn-group">
+                
+                {{-- FILTER BERDASARKAN PRODI
                 @php
                     $selectedProgramStudi = request('program_studi');
                     $buttonLabel = $selectedProgramStudi ? $selectedProgramStudi : 'Pilih Program Studi';
@@ -16,8 +18,14 @@
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/dosen?program_studi=Informatika">Informatika</a></li>
                     <li><a class="dropdown-item" href="/dosen?program_studi=Sistem%20Informasi">Sistem Informasi</a></li>
-                </ul>
-                <a href="/dosen/create" class="btn btn-primary"><i class="bi bi-plus"></i></a>
+                </ul> --}}
+                {{-- Form Pencarian --}}
+                <form action="/dosen" method="GET" class="d-flex align-items-center">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Cari Nama Dosen" value="{{ request('search') }}">
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                    </div>
+                </form>
             </div>
         </div>
         
@@ -59,7 +67,7 @@
             <div class="col-md-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4 class="mt-3">{{ $selectedDosen->nama }}</h4>
-                    <div class="d-flex">
+                    {{-- <div class="d-flex">
                         <a href="/dosen/{{ $selectedDosen->id }}/edit" class="btn btn-warning btn-sm me-2">
                             <i class="bi bi-pencil-square"></i>
                             <span class="visually-hidden">Edit</span>
@@ -72,7 +80,7 @@
                                 <span class="visually-hidden">Delete</span>
                             </button>
                         </form>
-                    </div>
+                    </div> --}}
                     
                 </div>
                 <hr></hr>
