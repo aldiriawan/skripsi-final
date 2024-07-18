@@ -23,7 +23,7 @@
             <div class="col-md-6">
                 <p><strong>Bukti :</strong> {{ optional($suratTugas->bukti)->nama ?? '[-]' }}</p>
                 <p><strong>Jenis :</strong> {{ optional($suratTugas->jenis)->nama ?? '[-]' }}</p>
-                <p><strong>Tingkat :</strong> {{ optional($suratTugas->tingkat)->nama ?? '[-]' }}</p>
+                <p><strong>Akreditasi :</strong> {{ optional($suratTugas->akreditasi)->nama ?? '[-]' }}</p>
                 <p><strong>Peran :</strong> {{ optional($suratTugas->peran)->nama ?? '[-]' }}</p>
                 <p><strong>Publikasi :</strong> {{ optional($suratTugas->publikasi)->nama ?? '[-]' }}</p>
             </div>

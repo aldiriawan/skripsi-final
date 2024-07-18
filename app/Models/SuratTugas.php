@@ -6,8 +6,9 @@ use App\Models\Bukti;
 use App\Models\Dosen;
 use App\Models\Jenis;
 use App\Models\Peran;
-use App\Models\Tingkat;
+use App\Models\Kategori;
 use App\Models\Publikasi;
+use App\Models\Akreditasi;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -44,8 +45,13 @@ class SuratTugas extends Model
         return $this->belongsTo(Jenis::class, 'jenis_id');
     }
 
-    public function tingkat()
+    public function akreditasi()
     {
-        return $this->belongsTo(Tingkat::class, 'tingkat_id');
+        return $this->belongsTo(Akreditasi::class, 'akreditasi_id');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 }

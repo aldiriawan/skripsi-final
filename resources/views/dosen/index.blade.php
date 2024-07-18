@@ -142,15 +142,15 @@
                             <thead>
                                 <tr>
                                     <th colspan="2"></th>
-                                    @foreach ($tingkatSuratCounts as $tingkat => $count)
-                                    <th>{{ $tingkat }}</th>             
+                                    @foreach ($akreditasiSuratCounts as $akreditasi => $count)
+                                    <th>{{ $akreditasi }}</th>             
                                     @endforeach
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td colspan="2" style="text-align: left;">Jurnal Nasional</td>
-                                    @foreach ($tingkatSuratCounts as $tingkat => $count)
+                                    @foreach ($akreditasiSuratCounts as $akreditasi => $count)
                                     <td>{{ $count }}</td>              
                                     @endforeach
                                 </tr>

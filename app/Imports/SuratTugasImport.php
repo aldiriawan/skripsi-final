@@ -24,7 +24,8 @@ class SuratTugasImport implements ToCollection, WithHeadingRow
                 'waktu_akhir' => $row['waktu_akhir'],
                 'bukti_id' => $row['bukti'],
                 'jenis_id' => $row['jenis'],
-                'tingkat_id' => $row['tingkat'],
+                'akreditasi_id' => $row['akreditasi'],
+                'kategori_id' =>$row['kategori'],
                 'peran_id' => $row['peran_id'],
                 'publikasi_id' => $row['publikasi_id'],
                 'visibility' => false, // Nilai Default

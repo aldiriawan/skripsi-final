@@ -56,7 +56,7 @@
             </tbody>
         </table>
         <!-- Menampilkan pagination links -->
-        <div class="d-flex justify-content-center">
+        <div class="d-flex">
             {{ $surattugas->links() }}
         </div>
     </div>

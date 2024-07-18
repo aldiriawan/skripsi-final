@@ -2,11 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Peran;
-use App\Models\Publikasi;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\BuktiSeeder;
+use Database\Seeders\DosenSeeder;
+use Database\Seeders\JenisSeeder;
+use Database\Seeders\PeranSeeder;
+use Database\Seeders\PublikasiSeeder;
+use Database\Seeders\AkreditasiSeeder;
+use Database\Seeders\KategoriSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,7 +33,8 @@ class DatabaseSeeder extends Seeder
             JenisSeeder::class,
             PeranSeeder::class,
             PublikasiSeeder::class,
-            TingkatSeeder::class,
+            AkreditasiSeeder::class,
+            KategoriSeeder::class,
         ]);
     }
 }

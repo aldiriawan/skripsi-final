@@ -94,10 +94,10 @@ class DashboardController extends Controller
 
         // Koding untuk Publikasi : -----------------------
         // Fetch data for Jurnal Nasional
-    $jurnalNasionalData = SuratTugas::whereIn('tingkat_id', [2, 4, 5, 6, 7, 8, 9])
-    ->selectRaw('tingkat_id, COUNT(*) as count')
-    ->groupBy('tingkat_id')
-    ->pluck('count', 'tingkat_id');
+    $jurnalNasionalData = SuratTugas::whereIn('akreditasi_id', [2, 4, 5, 6, 7, 8, 9])
+    ->selectRaw('akreditasi_id, COUNT(*) as count')
+    ->groupBy('akreditasi_id')
+    ->pluck('count', 'akreditasi_id');
 
 $jurnalNasionalData = [
 $jurnalNasionalData[2] ?? 0,

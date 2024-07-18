@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('publikasi', function (Blueprint $table) {
+        Schema::create('akreditasi', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_publikasi');
+            $table->string('nama_akreditasi');
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('publikasi');
+        Schema::dropIfExists('akreditasi');
     }
 };

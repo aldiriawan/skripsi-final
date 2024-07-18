@@ -7,7 +7,7 @@ use App\Models\Dosen;
 use App\Models\Jenis;
 use App\Models\Peran;
 use App\Models\Bukti;
-use App\Models\Tingkat;
+use App\Models\Akreditasi;
 use App\Models\Publikasi;
 use Illuminate\Http\Request;
 use App\Imports\SuratTugasImport;
@@ -98,7 +98,7 @@ class SuratTugasController extends Controller
         'peran' => Peran::all(),
         'jenis' => Jenis::all(),
         'bukti' => Bukti::all(),
-        'tingkat' => Tingkat::all(),
+        'akreditasi' => Akreditasi::all(),
         'publikasi' => Publikasi::all(),
     ]);
 }
@@ -175,7 +175,7 @@ public function store(Request $request)
             'peran' => Peran::all(),
             'jenis' => Jenis::all(),
             'bukti' => Bukti::all(),
-            'tingkat' => Tingkat::all(),
+            'akreditasi' => Akreditasi::all(),
             'publikasi' => Publikasi::all(),
         ]);
     }    
@@ -193,7 +193,7 @@ public function store(Request $request)
             'bukti_id' => 'required|integer',
             'jenis_id' => 'required|integer',
             'publikasi_id' => 'required|integer',
-            'tingkat_id' => 'required|integer',
+            'akreditasi' => 'required|integer',
             'keterangan' => 'required|string',
             'peran_id' => 'required|integer',
             'dosen_id' => 'required|array', // Pastikan dosen_id adalah array
@@ -209,7 +209,7 @@ public function store(Request $request)
             'bukti_id' => $request->bukti_id,
             'jenis_id' => $request->jenis_id,
             'publikasi_id' => $request->publikasi_id,
-            'tingkat_id' => $request->tingkat_id,
+            'akreditasi' => $request->akreditasi_id,
             'keterangan' => $request->keterangan,
             'peran_id' => $request->peran_id,
         ]);
@@ -227,7 +227,7 @@ public function store(Request $request)
                 'bukti_id' => $suratTugas->bukti_id,
                 'jenis_id' => $suratTugas->jenis_id,
                 'publikasi_id' => $suratTugas->publikasi_id,
-                'tingkat_id' => $suratTugas->tingkat_id,
+                'akreditasi_id' => $suratTugas->akreditasi_id,
                 'keterangan' => $suratTugas->keterangan,
                 'peran_id' => $suratTugas->peran_id,
                 'dosen_id' => $dosenId,

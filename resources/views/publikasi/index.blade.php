@@ -3,50 +3,50 @@
 @section('container')
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h3 class="mt-3">{{ $title }} (
-        @if($selectedTingkat)
-            @if($selectedTingkat === 'Lokal')
+        @if($selectedAkreditasi)
+            @if($selectedAkreditasi === 'Lokal')
                 Jurnal Lokal
-            @elseif($selectedTingkat === 'Nasional')
+            @elseif($selectedAkreditasi === 'Nasional')
                 Jurnal Nasional
-            @elseif($selectedTingkat === 'Internasional')
+            @elseif($selectedAkreditasi === 'Internasional')
                 Jurnal Internasional
-            @elseif($selectedTingkat === 'Sinta 1')
+            @elseif($selectedAkreditasi === 'Sinta 1')
                 Sinta 1
-            @elseif($selectedTingkat === 'Sinta 2')
+            @elseif($selectedAkreditasi === 'Sinta 2')
                 Sinta 2
-            @elseif($selectedTingkat === 'Sinta 3')
+            @elseif($selectedAkreditasi === 'Sinta 3')
                 Sinta 3
-            @elseif($selectedTingkat === 'Sinta 4')
+            @elseif($selectedAkreditasi === 'Sinta 4')
                 Sinta 4
-            @elseif($selectedTingkat === 'Sinta 5')
+            @elseif($selectedAkreditasi === 'Sinta 5')
                 Sinta 5
-            @elseif($selectedTingkat === 'Sinta 6')
+            @elseif($selectedAkreditasi === 'Sinta 6')
                 Sinta 6
             @else
-                {{ $selectedTingkat }}
+                {{ $selectedAkreditasi }}
             @endif
         @else
         @endif )
     </h3>
     <div class="btn-group">
         @php
-            $selectedTingkat = request('tingkat') ?? 'Semua Tingkatan';
-            $buttonLabel = $selectedTingkat !== 'Semua Tingkatan' ? $selectedTingkat : 'Semua Tingkatan';
+            $selectedAkreditasi = request('akreditasi') ?? 'Semua Akreditasi';
+            $buttonLabel = $selectedAkreditasi !== 'Semua Akreditasi' ? $selectedAkreditasi : 'Semua Akreditasi';
         @endphp
         <button type="button" class="btn btn-secondary dropdown-toggle mx-1" data-bs-toggle="dropdown" aria-expanded="false">
             {{ $buttonLabel }}
         </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/publikasi?tingkat=Semua Tingkatan">Semua Tingkatan</a></li>
-            <li><a class="dropdown-item" href="/publikasi?tingkat=Lokal">Jurnal Lokal</a></li>
-            <li><a class="dropdown-item" href="/publikasi?tingkat=Nasional">Jurnal Nasional</a></li>
-            <li><a class="dropdown-item" href="/publikasi?tingkat=Internasional">Jurnal Internasional</a></li>
-            <li><a class="dropdown-item" href="/publikasi?tingkat=Sinta 1">Sinta 1</a></li>
-            <li><a class="dropdown-item" href="/publikasi?tingkat=Sinta 2">Sinta 2</a></li>
-            <li><a class="dropdown-item" href="/publikasi?tingkat=Sinta 3">Sinta 3</a></li>
-            <li><a class="dropdown-item" href="/publikasi?tingkat=Sinta 4">Sinta 4</a></li>
-            <li><a class="dropdown-item" href="/publikasi?tingkat=Sinta 5">Sinta 5</a></li>
-            <li><a class="dropdown-item" href="/publikasi?tingkat=Sinta 6">Sinta 6</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Semua Akreditasi">Semua  Akreditasi</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Lokal">Jurnal Lokal</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Nasional">Jurnal Nasional</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Internasional">Jurnal Internasional</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 1">Sinta 1</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 2">Sinta 2</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 3">Sinta 3</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 4">Sinta 4</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 5">Sinta 5</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 6">Sinta 6</a></li>
         </ul>
     </div>
     
@@ -76,7 +76,7 @@
             <tr>
                 <th scope="col" class="judul-col">Judul</th>
                 <th scope="col">Penulis Dosen</th>
-                <th scope="col">Tingkat</th>
+                <th scope="col">Akreditasi</th>
             </tr>
         </thead>
         <tbody>
@@ -84,12 +84,12 @@
             <tr>
                 <td class="judul-col">{{ $s->keterangan }}</td>
                 <td>{{ $s->penulis_dosen }}</td>
-                <td>{{ $s->nama_tingkat }}</td>
+                <td>{{ $s->nama_akreditasi}}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    {{ $surattugas->appends(['tingkat' => $selectedTingkat, 'search' => $search])->links() }}
+    {{ $surattugas->appends(['akreditasi' => $selectedAkreditasi, 'search' => $search])->links() }}
 </div>
 @else
 <p class="text-center fs-4">Data tidak ditemukan.</p>

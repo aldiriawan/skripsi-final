@@ -12,26 +12,26 @@ class PublikasiController extends Controller
      */
     public function index(Request $request)
 {
-    $selectedTingkat = $request->query('tingkat', 'Semua Tingkatan');
+    $selectedAkreditasi = $request->query('akreditasi', 'Semua Akreditasi');
     $search = $request->query('search');
     
-    // Filter berdasarkan tingkat jika dipilih dan bukan 'Semua Tingkatan'
+    // Filter berdasarkan akreditasi jika dipilih dan bukan 'Semua Akreditasi'
     $surattugasQuery = DB::table('surat_tugas')
-        ->select('keterangan', DB::raw('GROUP_CONCAT(dosen.nama SEPARATOR ", ") as penulis_dosen'), 'tingkat.nama_tingkat', 'surat_tugas.created_at')
+        ->select('keterangan', DB::raw('GROUP_CONCAT(dosen.nama SEPARATOR ", ") as penulis_dosen'), 'akreditasi.nama_akreditasi', 'surat_tugas.created_at')
         ->join('dosen', 'surat_tugas.dosen_id', '=', 'dosen.id')
-        ->join('tingkat', 'surat_tugas.tingkat_id', '=', 'tingkat.id')
+        ->join('akreditasi', 'surat_tugas.akreditasi_id', '=', 'akreditasi.id')
         ->where('jenis_id', 2) // penelitian
-        ->groupBy('keterangan', 'tingkat.nama_tingkat', 'surat_tugas.created_at');
+        ->groupBy('keterangan', 'akreditasi.nama_akreditasi', 'surat_tugas.created_at');
     
-    if ($selectedTingkat !== 'Semua Tingkatan') {
-        $surattugasQuery->where('tingkat.nama_tingkat', $selectedTingkat);
+    if ($selectedAkreditasi !== 'Semua Akreditasian') {
+        $surattugasQuery->where('akreditasi.nama_akreditasi', $selectedAkreditasi);
     }
     
     if ($search) {
         $surattugasQuery->where(function($query) use ($search) {
             $query->where('keterangan', 'like', "%{$search}%")
                 ->orWhere('dosen.nama', 'like', "%{$search}%")
-                ->orWhere('tingkat.nama_tingkat', 'like', "%{$search}%");
+                ->orWhere('akreditasi.nama_akreditasi', 'like', "%{$search}%");
         });
     }
     
@@ -41,7 +41,7 @@ class PublikasiController extends Controller
     return view('publikasi.index', [
         'title' => 'Daftar Publikasi',
         'surattugas' => $surattugas,
-        'selectedTingkat' => $selectedTingkat, // Mengirimkan parameter yang dipilih ke view
+        'selectedAkreditasi' => $selectedAkreditasi, // Mengirimkan parameter yang dipilih ke view
         'search' => $search, // Mengirimkan kata kunci pencarian ke view
     ]);
 }

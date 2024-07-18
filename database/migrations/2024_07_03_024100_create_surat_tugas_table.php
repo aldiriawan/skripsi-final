@@ -21,7 +21,8 @@ return new class extends Migration
             $table->date('waktu_akhir')->nullable();
             $table->foreignId('bukti_id')->nullable();
             $table->foreignId('jenis_id')->nullable();
-            $table->foreignId('tingkat_id')->nullable();
+            $table->foreignId('akreditasi_id')->nullable();
+            $table->foreignId('kategori_id')->nullable();
             $table->foreignId('peran_id')->nullable();
             $table->foreignId('publikasi_id')->nullable();
             $table->timestamps();
