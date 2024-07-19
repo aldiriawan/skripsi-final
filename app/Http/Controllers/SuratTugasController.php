@@ -109,7 +109,7 @@ class SuratTugasController extends Controller
 public function store(Request $request)
 {
     $validatedData = $request->validate([
-        'nomor' => 'required',
+        'nomor' => 'required|unique:surat_tugas',
         'dosen_id' => 'required|array',
         'tanggal' => 'required|date',
         'keterangan' => 'required',
@@ -192,8 +192,8 @@ public function store(Request $request)
             'waktu_akhir' => 'required|date',
             'bukti_id' => 'required|integer',
             'jenis_id' => 'required|integer',
-            'publikasi_id' => '|integer',
-            'akreditasi' => '|integer',
+            'publikasi_id' => 'integer',
+            'akreditasi' => 'integer',
             'keterangan' => 'required|string',
             'peran_id' => 'required|integer',
             'dosen_id' => 'required|array', // Pastikan dosen_id adalah array

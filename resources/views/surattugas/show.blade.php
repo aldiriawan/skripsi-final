@@ -21,11 +21,11 @@
                 </ul>
             </div>
             <div class="col-md-6">
-                <p><strong>Bukti :</strong> {{ optional($suratTugas->bukti)->nama ?? '[-]' }}</p>
-                <p><strong>Jenis :</strong> {{ optional($suratTugas->jenis)->nama ?? '[-]' }}</p>
-                <p><strong>Akreditasi :</strong> {{ optional($suratTugas->akreditasi)->nama ?? '[-]' }}</p>
-                <p><strong>Peran :</strong> {{ optional($suratTugas->peran)->nama ?? '[-]' }}</p>
-                <p><strong>Publikasi :</strong> {{ optional($suratTugas->publikasi)->nama ?? '[-]' }}</p>
+                <p><strong>Bukti :</strong> {{ optional($suratTugas->bukti)->nama_bukti ?? '[-]' }}</p>
+                <p><strong>Jenis :</strong> {{ optional($suratTugas->jenis)->nama_jenis ?? '[-]' }}</p>
+                <p><strong>Peran :</strong> {{ optional($suratTugas->peran)->nama_peran ?? '[-]' }}</p>
+                <p><strong>Akreditasi :</strong> {{ optional($suratTugas->akreditasi)->nama_akreditasi ?? '[-]' }}</p>
+                <p><strong>Publikasi :</strong> {{ optional($suratTugas->publikasi)->nama_publikasi ?? '[-]' }}</p>
             </div>
         </div>
         <div class="d-flex justify-content-between mt-4">
