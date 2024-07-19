@@ -23,7 +23,7 @@ class PublikasiController extends Controller
         ->where('jenis_id', 2) // penelitian
         ->groupBy('keterangan', 'akreditasi.nama_akreditasi', 'surat_tugas.created_at');
     
-    if ($selectedAkreditasi !== 'Semua Akreditasian') {
+    if ($selectedAkreditasi !== 'Semua Akreditasi') {
         $surattugasQuery->where('akreditasi.nama_akreditasi', $selectedAkreditasi);
     }
     

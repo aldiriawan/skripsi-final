@@ -47,6 +47,10 @@
             <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 4">Sinta 4</a></li>
             <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 5">Sinta 5</a></li>
             <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 6">Sinta 6</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Q1">Q1</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Q2">Q2</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Q3">Q3</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Q4">Q4</a></li>
         </ul>
     </div>
     
@@ -54,7 +58,7 @@
 
 <form method="GET" action="/publikasi">
     <div class="row mb-3">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') }}">
                 <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>

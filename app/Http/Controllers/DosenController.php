@@ -69,15 +69,16 @@ class DosenController extends Controller
     $jumlahHKI = 0;
 
     if ($selectedDosenId) {
-        $jumlahPublikasiInternasional = SuratTugas::where('dosen_id', $selectedDosenId)
-            ->where('akreditasi_id', 1)
-            ->when($tahun, function ($query) use ($tahun) {
-                $query->whereYear('waktu_awal', $tahun);
-            })
-            ->count();
-
+        
         $jumlahPublikasiNasional = SuratTugas::where('dosen_id', $selectedDosenId)
-            ->where('akreditasi_id', 2)
+        ->where('akreditasi_id', 2)
+        ->when($tahun, function ($query) use ($tahun) {
+            $query->whereYear('waktu_awal', $tahun);
+        })
+        ->count();
+        
+        $jumlahPublikasiInternasional = SuratTugas::where('dosen_id', $selectedDosenId)
+            ->where('akreditasi_id', 3)
             ->when($tahun, function ($query) use ($tahun) {
                 $query->whereYear('waktu_awal', $tahun);
             })

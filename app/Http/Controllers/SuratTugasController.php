@@ -117,7 +117,7 @@ public function store(Request $request)
         'waktu_akhir' => 'required|date',
         'bukti_id' => 'required',
         'jenis_id' => 'required',
-        'tingkat_id' => 'required',
+        'akreditasi_id' => 'required',
         'peran_id' => 'required',
         'publikasi_id' => 'required'
     ]);
@@ -139,7 +139,7 @@ public function store(Request $request)
      */
     public function show($id)
 {
-    $suratTugas = SuratTugas::with(['dosen', 'peran', 'jenis', 'bukti', 'tingkat', 'publikasi'])->findOrFail($id);
+    $suratTugas = SuratTugas::with(['dosen', 'peran', 'jenis', 'bukti', 'akreditasi', 'publikasi'])->findOrFail($id);
     
     // Mengumpulkan semua dosen yang terlibat dalam keterangan yang sama
     $relatedSuratTugas = SuratTugas::where('keterangan', $suratTugas->keterangan)
