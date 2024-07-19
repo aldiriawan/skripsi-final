@@ -5,7 +5,7 @@
     <h1 class="h2">Edit Data Dosen</h1>
 </div>
 
-<div class="col-lg-8">
+<div class="col-lg-6">
     <form method="post" action="/dosen/{{ $dosen->id }}" class="mb-5" enctype="multipart/form-data">
         @method('put')
         @csrf

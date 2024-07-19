@@ -51,7 +51,7 @@ class DosenController extends Controller
     
             $selectedDosenId = $request->input('dosen_id');
             // Menghitung jumlah akreditasi surat untuk setiap akreditasi (S1, S2, S3, S4, S5, S6)
-            $akreditasiSuratCounts = [
+            $akreditasiNasionalCounts = [
                 'S1' => SuratTugas::where('dosen_id', $selectedDosenId)->where('akreditasi_id', 4)->whereYear('waktu_awal', $tahun)->count(),
                 'S2' => SuratTugas::where('dosen_id', $selectedDosenId)->where('akreditasi_id', 5)->whereYear('waktu_awal', $tahun)->count(),
                 'S3' => SuratTugas::where('dosen_id', $selectedDosenId)->where('akreditasi_id', 6)->whereYear('waktu_awal', $tahun)->count(),
@@ -59,6 +59,14 @@ class DosenController extends Controller
                 'S5' => SuratTugas::where('dosen_id', $selectedDosenId)->where('akreditasi_id', 8)->whereYear('waktu_awal', $tahun)->count(),
                 'S6' => SuratTugas::where('dosen_id', $selectedDosenId)->where('akreditasi_id', 9)->whereYear('waktu_awal', $tahun)->count(),
                 '-' => SuratTugas::where('dosen_id', $selectedDosenId)->where('akreditasi_id', 2)->whereYear('waktu_awal', $tahun)->count(),
+            ];
+
+            $akreditasiInternasionalCounts = [
+                'Q1' => SuratTugas::where('dosen_id', $selectedDosenId)->where('akreditasi_id', 10)->whereYear('waktu_awal', $tahun)->count(),
+                'Q2' => SuratTugas::where('dosen_id', $selectedDosenId)->where('akreditasi_id', 11)->whereYear('waktu_awal', $tahun)->count(),
+                'Q3' => SuratTugas::where('dosen_id', $selectedDosenId)->where('akreditasi_id', 12)->whereYear('waktu_awal', $tahun)->count(),
+                'Q4' => SuratTugas::where('dosen_id', $selectedDosenId)->where('akreditasi_id', 13)->whereYear('waktu_awal', $tahun)->count(),
+                'No Q' => SuratTugas::where('dosen_id', $selectedDosenId)->where('akreditasi_id', 3)->whereYear('waktu_awal', $tahun)->count(),
             ];
         }
     }
@@ -132,7 +140,8 @@ foreach ($years as $year) {
         'jumlahHKI' => $jumlahHKI,
         'selectedDosenId' => $selectedDosenId,
         'tahun' => $tahun, // Menambahkan tahun ke view
-        'akreditasiSuratCounts' => $akreditasiSuratCounts,
+        'akreditasiNasionalCounts' => $akreditasiNasionalCounts,
+        'akreditasiInternasionalCounts' => $akreditasiInternasionalCounts,
         'pengajaranData' => $pengajaranData,
         'penelitianData' => $penelitianData,
         'pengabdianData' => $pengabdianData,
@@ -209,7 +218,7 @@ foreach ($years as $year) {
         return redirect('/dosen')->with('success', 'Data sudah terhapus!');
     }
 
-    public function toggleVisibility(Request $request, $id)
+    public function toggleVisibility($id)
     {
     $suratTugas = SuratTugas::findOrFail($id);
     $suratTugas->visibility = !$suratTugas->visibility;

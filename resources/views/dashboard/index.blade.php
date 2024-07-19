@@ -82,16 +82,29 @@
                     <h4 class="my-3">Scope Kegiatan</h4>
                     <div class="btn-group mb-1">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            2024
+                            {{ $selectedYear }}
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/#">2022</a></li>
-                            <li><a class="dropdown-item" href="/#">2023</a></li>
-                            <li><a class="dropdown-item" href="/#">2024</a></li>
+                            @foreach($years as $year)
+                                <li><a class="dropdown-item" href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
-                <canvas id="scopeKegiatanChart" class="large-bar-chart"></canvas>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6 class="my-3">Penelitian</h6>
+                        <canvas id="penelitianChart" class="small-pie-chart"></canvas>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 class="my-3">Pengabdian</h6>
+                        <canvas id="pengabdianChart" class="small-pie-chart"></canvas>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 class="my-3">Penunjang</h6>
+                        <canvas id="penunjangChart" class="small-pie-chart"></canvas>
+                    </div>
+                </div>
             </div>
             <!-- Publikasi -->
             <div class="col-md-12 mb-3">
@@ -118,6 +131,13 @@
         max-height: 400px;
         margin: 0 auto;
     }
+/* 
+    .small-pie-chart {
+        max-width: 250px;
+        max-height: 250px;
+        margin: 0 auto;
+    } */
+
     .smaller-pie-chart {
         max-width: 150px;
         max-height: 150px;
@@ -424,6 +444,64 @@
             }
         });
     });
+    document.addEventListener('DOMContentLoaded', function() {
+    // Data for Scope Kegiatan
+    const scopeKegiatanData = @json($scopeKegiatanData);
+
+    // Function to create pie chart
+    function createPieChart(ctx, data, labels) {
+        return new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: [
+                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C0C0C0'
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                const total = tooltipItem.dataset.data.reduce((acc, val) => acc + val, 0);
+                                const value = tooltipItem.raw;
+                                const percentage = ((value / total) * 100).toFixed(2);
+                                return `${tooltipItem.label}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Penelitian Chart
+    const penelitianCtx = document.getElementById('penelitianChart').getContext('2d');
+    const penelitianData = Object.values(scopeKegiatanData['Penelitian']);
+    const penelitianLabels = Object.keys(scopeKegiatanData['Penelitian']);
+    createPieChart(penelitianCtx, penelitianData, penelitianLabels);
+
+    // Pengabdian Chart
+    const pengabdianCtx = document.getElementById('pengabdianChart').getContext('2d');
+    const pengabdianData = Object.values(scopeKegiatanData['Pengabdian']);
+    const pengabdianLabels = Object.keys(scopeKegiatanData['Pengabdian']);
+    createPieChart(pengabdianCtx, pengabdianData, pengabdianLabels);
+
+    // Penunjang Chart
+    const penunjangCtx = document.getElementById('penunjangChart').getContext('2d');
+    const penunjangData = Object.values(scopeKegiatanData['Penunjang']);
+    const penunjangLabels = Object.keys(scopeKegiatanData['Penunjang']);
+    createPieChart(penunjangCtx, penunjangData, penunjangLabels);
+    });
+
+
     document.addEventListener('DOMContentLoaded', function() {
         // Jurnal Internasional
         var jurnalInternasionalCtx = document.getElementById('jurnalInternasionalChart').getContext('2d');

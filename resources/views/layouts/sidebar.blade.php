@@ -57,8 +57,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dosen/show') ? 'active' : '' }}"
-                        aria-current="page" href="/dosen/show">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('administrasidosen') ? 'active' : '' }}"
+                        aria-current="page" href="/dosen">
                         <svg class="bi">
                             <use xlink:href="#file-earmark-text" />
                         </svg>

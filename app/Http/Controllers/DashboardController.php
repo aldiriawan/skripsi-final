@@ -92,34 +92,60 @@ class DashboardController extends Controller
         ->whereIn('id', array_merge(array_keys($topDosenData->toArray()), array_keys($bottomDosenData->toArray())))
         ->pluck('nama', 'id');
 
+    // Koding untuk Scope Kegiatan : -----------------------
+    // Dropdown tahun
+    $years = [2021, 2022, 2023, 2024];
+    $selectedYear = $request->input('year', 2024);
+
+    // Data untuk Pie Chart berdasarkan jenis_id dan kategori_id
+    $scopeKegiatanData = [
+        'Penelitian' => DB::table('surat_tugas')
+            ->where('jenis_id', 2)
+            ->whereYear('tanggal', $selectedYear)
+            ->select('kategori_id', DB::raw('COUNT(*) as count'))
+            ->groupBy('kategori_id')
+            ->pluck('count', 'kategori_id')->toArray(),
+        'Pengabdian' => DB::table('surat_tugas')
+            ->where('jenis_id', 3)
+            ->whereYear('tanggal', $selectedYear)
+            ->select('kategori_id', DB::raw('COUNT(*) as count'))
+            ->groupBy('kategori_id')
+            ->pluck('count', 'kategori_id')->toArray(),
+        'Penunjang' => DB::table('surat_tugas')
+            ->where('jenis_id', 4)
+            ->whereYear('tanggal', $selectedYear)
+            ->select('kategori_id', DB::raw('COUNT(*) as count'))
+            ->groupBy('kategori_id')
+            ->pluck('count', 'kategori_id')->toArray(),
+    ];
+
         // Koding untuk Publikasi : -----------------------
         // Fetch data for Jurnal Nasional
-    $jurnalNasionalData = SuratTugas::whereIn('akreditasi_id', [2, 4, 5, 6, 7, 8, 9])
-    ->selectRaw('akreditasi_id, COUNT(*) as count')
-    ->groupBy('akreditasi_id')
-    ->pluck('count', 'akreditasi_id');
+        $jurnalNasionalData = SuratTugas::whereIn('akreditasi_id', [2, 4, 5, 6, 7, 8, 9])
+        ->selectRaw('akreditasi_id, COUNT(*) as count')
+        ->groupBy('akreditasi_id')
+        ->pluck('count', 'akreditasi_id');
 
-$jurnalNasionalData = [
-$jurnalNasionalData[2] ?? 0,
-$jurnalNasionalData[4] ?? 0,
-$jurnalNasionalData[5] ?? 0,
-$jurnalNasionalData[6] ?? 0,
-$jurnalNasionalData[7] ?? 0,
-$jurnalNasionalData[8] ?? 0,
-$jurnalNasionalData[9] ?? 0
-];
+        $jurnalNasionalData = [
+        $jurnalNasionalData[2] ?? 0,
+        $jurnalNasionalData[4] ?? 0,
+        $jurnalNasionalData[5] ?? 0,
+        $jurnalNasionalData[6] ?? 0,
+        $jurnalNasionalData[7] ?? 0,
+        $jurnalNasionalData[8] ?? 0,
+        $jurnalNasionalData[9] ?? 0
+        ];
 
-// Fetch data for Prosiding
-$prosidingData = SuratTugas::whereIn('publikasi_id', [1, 2])
-->selectRaw('publikasi_id, COUNT(*) as count')
-->groupBy('publikasi_id')
-->pluck('count', 'publikasi_id');
+        // Fetch data for Prosiding
+        $prosidingData = SuratTugas::whereIn('publikasi_id', [1, 2])
+        ->selectRaw('publikasi_id, COUNT(*) as count')
+        ->groupBy('publikasi_id')
+        ->pluck('count', 'publikasi_id');
 
-$prosidingData = [
-$prosidingData[1] ?? 0,
-$prosidingData[2] ?? 0
-];
-        
+        $prosidingData = [
+        $prosidingData[1] ?? 0,
+        $prosidingData[2] ?? 0
+        ];
     
         return view('dashboard.index', [
             'title' => 'Dashboard',
@@ -137,9 +163,12 @@ $prosidingData[2] ?? 0
             'topDosenData' => $topDosenData,
             'bottomDosenData' => $bottomDosenData,
             'dosenNames' => $dosenNames,
+            // View untuk Scope Kegiatan
+            'selectedYear' => $selectedYear,
+            'scopeKegiatanData' => $scopeKegiatanData,
             // View untuk Publikasi
             'jurnalNasionalData' => $jurnalNasionalData,
-            'prosidingData' => $prosidingData
+            'prosidingData' => $prosidingData,
         ]);
     }
     

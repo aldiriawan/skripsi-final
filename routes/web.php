@@ -20,6 +20,8 @@ Route::get('/user', function () {
     ]);
 })->middleware('auth');
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
 Route::resource('/', DashboardController::class)->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');

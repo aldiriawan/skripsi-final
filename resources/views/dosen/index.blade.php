@@ -117,23 +117,17 @@
                             <thead>
                                 <tr>
                                     <th colspan="2"></th>
-                                    <th>Q1</th>
-                                    <th>Q2</th>
-                                    <th>Q3</th>
-                                    <th>Q4</th>
-                                    <th>Q</th>
-                                    <th>-</th>
+                                    @foreach ($akreditasiInternasionalCounts as $akreditasi => $count)
+                                    <th>{{ $akreditasi }}</th>             
+                                    @endforeach
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td colspan="2" style="text-align: left;">Jurnal Internasional</td>
-                                    <td>soon</td>
-                                    <td>soon</td>
-                                    <td>soon</td>
-                                    <td>soon</td>
-                                    <td>soon</td>
-                                    <td>soon</td>
+                                    @foreach ($akreditasiInternasionalCounts as $akreditasi => $count)
+                                    <td>{{ $count }}</td>              
+                                    @endforeach
                                 </tr>
                             </tbody>
                         </table>    
@@ -142,7 +136,7 @@
                             <thead>
                                 <tr>
                                     <th colspan="2"></th>
-                                    @foreach ($akreditasiSuratCounts as $akreditasi => $count)
+                                    @foreach ($akreditasiNasionalCounts as $akreditasi => $count)
                                     <th>{{ $akreditasi }}</th>             
                                     @endforeach
                                 </tr>
@@ -150,7 +144,7 @@
                             <tbody>
                                 <tr>
                                     <td colspan="2" style="text-align: left;">Jurnal Nasional</td>
-                                    @foreach ($akreditasiSuratCounts as $akreditasi => $count)
+                                    @foreach ($akreditasiNasionalCounts as $akreditasi => $count)
                                     <td>{{ $count }}</td>              
                                     @endforeach
                                 </tr>
