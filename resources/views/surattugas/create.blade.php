@@ -106,7 +106,7 @@
         </div>
 
         <div id="dosen-container" class="row mb-3">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label for="dosen" class="form-label">Nama Dosen</label>
                 <div class="input-group">
                     <select class="form-select" name="dosen_id[]">
@@ -127,7 +127,7 @@
     document.getElementById('add-dosen-button').addEventListener('click', function() {
         var dosenContainer = document.getElementById('dosen-container');
         var newDosenField = document.createElement('div');
-        newDosenField.classList.add('col-md-4');
+        newDosenField.classList.add('col-md-6');
         newDosenField.innerHTML = `
             <label for="dosen" class="form-label">Nama Dosen</label>
             <div class="input-group">
