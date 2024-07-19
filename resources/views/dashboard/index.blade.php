@@ -80,7 +80,7 @@
             <div class="col-md-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4 class="my-3">Scope Kegiatan</h4>
-                    <div class="btn-group mb-1">
+                    <div class="btn-group">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ $selectedYear }}
                         </button>

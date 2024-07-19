@@ -34,7 +34,8 @@ class DosenController extends Controller
     $dosen = $query->get();
     $selectedDosen = null;
     $penunjang = collect();
-    $akreditasiSuratCounts = [];
+    $akreditasiNasionalCounts = [];
+    $akreditasiInternasionalCounts = [];
     $selectedDosenId = null; // Inisialisasi variabel
 
     // Koding Bagian Penunjang
@@ -100,35 +101,35 @@ class DosenController extends Controller
             ->count();
     }
 
-$selectedDosenId = $request->query('dosen_id');
-$selectedDosen = Dosen::find($selectedDosenId);
+    $selectedDosenId = $request->query('dosen_id');
+    $selectedDosen = Dosen::find($selectedDosenId);
 
-// Query untuk menghitung jumlah berdasarkan jenis_id per tahun
-$suratTugasCounts = DB::table('surat_tugas')
-    ->select(DB::raw('YEAR(tanggal) as tahun'), 
-             DB::raw('SUM(CASE WHEN jenis_id = 1 THEN 1 ELSE 0 END) as total_pengajaran'), // pengajaran
-             DB::raw('SUM(CASE WHEN jenis_id = 2 THEN 1 ELSE 0 END) as total_penelitian'),  // penelitian
-             DB::raw('SUM(CASE WHEN jenis_id = 3 THEN 1 ELSE 0 END) as total_pengabdian'), // pengabdian
-             DB::raw('SUM(CASE WHEN jenis_id = 4 THEN 1 ELSE 0 END) as total_penunjang')) // penunjang
-    ->where('dosen_id', $selectedDosenId)
-    ->groupBy(DB::raw('YEAR(tanggal)'))
-    ->orderBy('tahun')
-    ->get();
+    // Query untuk menghitung jumlah berdasarkan jenis_id per tahun
+    $suratTugasCounts = DB::table('surat_tugas')
+        ->select(DB::raw('YEAR(tanggal) as tahun'), 
+                DB::raw('SUM(CASE WHEN jenis_id = 1 THEN 1 ELSE 0 END) as total_pengajaran'), // pengajaran
+                DB::raw('SUM(CASE WHEN jenis_id = 2 THEN 1 ELSE 0 END) as total_penelitian'),  // penelitian
+                DB::raw('SUM(CASE WHEN jenis_id = 3 THEN 1 ELSE 0 END) as total_pengabdian'), // pengabdian
+                DB::raw('SUM(CASE WHEN jenis_id = 4 THEN 1 ELSE 0 END) as total_penunjang')) // penunjang
+        ->where('dosen_id', $selectedDosenId)
+        ->groupBy(DB::raw('YEAR(tanggal)'))
+        ->orderBy('tahun')
+        ->get();
 
-$years = [2021, 2022, 2023, 2024];
-$pengajaranData = [];
-$penelitianData = [];
-$pengabdianData = [];
-$penunjangData = [];
+    $years = [2021, 2022, 2023, 2024];
+    $pengajaranData = [];
+    $penelitianData = [];
+    $pengabdianData = [];
+    $penunjangData = [];
 
-foreach ($years as $year) {
-    $data = $suratTugasCounts->firstWhere('tahun', $year);
+    foreach ($years as $year) {
+        $data = $suratTugasCounts->firstWhere('tahun', $year);
 
-    $pengajaranData[] = $data ? $data->total_pengajaran : 0;
-    $penelitianData[] = $data ? $data->total_penelitian : 0;
-    $pengabdianData[] = $data ? $data->total_pengabdian : 0;
-    $penunjangData[] = $data ? $data->total_penunjang : 0;
-}
+        $pengajaranData[] = $data ? $data->total_pengajaran : 0;
+        $penelitianData[] = $data ? $data->total_penelitian : 0;
+        $pengabdianData[] = $data ? $data->total_pengabdian : 0;
+        $penunjangData[] = $data ? $data->total_penunjang : 0;
+    }
 
     return view('dosen.index', [
         'title' => 'Daftar Dosen',
