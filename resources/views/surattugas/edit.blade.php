@@ -65,17 +65,19 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" id="jenis-publikasi-container" style="display: none;">
                 <label for="publikasi" class="form-label">Jenis Publikasi</label>
-                <select class="form-select" name="publikasi_id">
+                <select class="form-select" id="publikasi" name="publikasi_id">
                     @foreach ($publikasi as $p)
+                    @if ($p->jenis_id != 2)
                     <option value="{{ $p->id }}" {{ old('publikasi_id', $suratTugas->publikasi_id) == $p->id ? 'selected' : '' }}>{{ $p->nama_publikasi }}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" id="akreditasi-container" style="display: none;">
                 <label for="akreditasi" class="form-label">Akreditasi Surat</label>
-                <select class="form-select" name="akreditasi_id">
+                <select class="form-select" id="akreditasi" name="akreditasi_id">
                     @foreach ($akreditasi as $t)
                     <option value="{{ $t->id }}" {{ old('akreditasi_id', $suratTugas->akreditasi_id) == $t->id ? 'selected' : '' }}>{{ $t->nama_akreditasi }}</option>
                     @endforeach
@@ -153,6 +155,28 @@
             var dosenField = button.closest('.dosen-field');
             dosenField.parentNode.removeChild(dosenField);
         });
+    });
+
+    document.getElementById('jenis').addEventListener('change', function() {
+        var jenisSurat = this.value;
+        var jenisPublikasiContainer = document.getElementById('jenis-publikasi-container');
+        var akreditasiContainer = document.getElementById('akreditasi-container');
+        
+        if (jenisSurat == 2) { // Assuming 'Penelitian' has ID 2
+            jenisPublikasiContainer.style.display = 'block';
+            akreditasiContainer.style.display = 'block';
+        } else {
+            jenisPublikasiContainer.style.display = 'none';
+            akreditasiContainer.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var jenisSurat = document.getElementById('jenis').value;
+        if (jenisSurat == 2) { // Assuming 'Penelitian' has ID 2
+            document.getElementById('jenis-publikasi-container').style.display = 'block';
+            document.getElementById('akreditasi-container').style.display = 'block';
+        }
     });
 </script>
 @endsection

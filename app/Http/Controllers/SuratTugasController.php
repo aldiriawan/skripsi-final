@@ -117,9 +117,9 @@ public function store(Request $request)
         'waktu_akhir' => 'required|date',
         'bukti_id' => 'required',
         'jenis_id' => 'required',
-        'akreditasi_id' => 'required',
+        'akreditasi_id' => '',
         'peran_id' => 'required',
-        'publikasi_id' => 'required'
+        'publikasi_id' => ''
     ]);
 
     $validatedData['user_id'] = auth()->user()->id;
@@ -192,8 +192,8 @@ public function store(Request $request)
             'waktu_akhir' => 'required|date',
             'bukti_id' => 'required|integer',
             'jenis_id' => 'required|integer',
-            'publikasi_id' => 'required|integer',
-            'akreditasi' => 'required|integer',
+            'publikasi_id' => '|integer',
+            'akreditasi' => '|integer',
             'keterangan' => 'required|string',
             'peran_id' => 'required|integer',
             'dosen_id' => 'required|array', // Pastikan dosen_id adalah array

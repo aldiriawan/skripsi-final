@@ -21,6 +21,7 @@ Route::get('/user', function () {
 })->middleware('auth');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::put('/surattugas/{id}', [SuratTugasController::class, 'update'])->name('surattugas.update');
 
 Route::resource('/', DashboardController::class)->middleware('auth');
 
