@@ -21,7 +21,7 @@
             <hr class="my-3">
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dosen') ? 'active' : '' }}"
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dosen*') ? 'active' : '' }}"
                         aria-current="page" href="/dosen?dosen_id=1">
                         <svg class="bi">
                             <use xlink:href="#file-earmark-text" />
@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('surattugas') ? 'active' : '' }}"
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('surattugas*') ? 'active' : '' }}"
                         aria-current="page" href="/surattugas">
                         <svg class="bi">
                             <use xlink:href="#file-earmark-text" />
@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('publikasi') ? 'active' : '' }}"
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('publikasi*') ? 'active' : '' }}"
                         aria-current="page" href="/publikasi">
                         <svg class="bi">
                             <use xlink:href="#file-earmark-text" />
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('suratketetapan') ? 'active' : '' }}"
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('suratketetapan*') ? 'active' : '' }}"
                         aria-current="page" href="/suratketetapan">
                         <svg class="bi">
                             <use xlink:href="#file-earmark-text" />
