@@ -17,6 +17,11 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li>
+                    <a class="dropdown-item" href="/user/{{ auth()->user()->id }}/edit">
+                        <i class="bi bi-person"></i> Edit User
+                    </a>
+                </li>
+                <li>
                     <form action="/logout" method="post">
                         @csrf
                         <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button>
@@ -26,4 +31,5 @@
         </li>
         @endauth
     </ul>
+    
 </header>

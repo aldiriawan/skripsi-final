@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -14,12 +15,6 @@ use App\Http\Controllers\SuratKetetapanController;
 //     ]);
 // })->middleware('auth');
 
-Route::get('/user', function () {
-    return view('user.index', [
-        'title' => 'Data User'
-    ]);
-})->middleware('auth');
-
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 Route::put('/surattugas/{id}', [SuratTugasController::class, 'update'])->name('surattugas.update');
 
@@ -29,6 +24,7 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 Route::post('surattugas/import', [SuratTugasController::class, 'ImportExcelData']);
+Route::resource('/user', UserController::class)->middleware('auth');
 Route::resource('/dosen', DosenController::class)->middleware('auth');
 Route::resource('/surattugas', SuratTugasController::class)->middleware('auth');
 Route::resource('/publikasi', PublikasiController::class)->middleware('auth');

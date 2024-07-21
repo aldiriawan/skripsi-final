@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="d-flex justify-content-between align-items-center">
-    <h2 class="my-3">{{ $title }}</h2>
+    <h3 class="my-3">{{ $title }}</h3>
     <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             {{ $selectedYear }}
