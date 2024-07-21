@@ -72,6 +72,10 @@ class DosenController extends Controller
         }
     }
 
+    $selectedDosenId = $request->query('dosen_id');
+    $selectedDosen = Dosen::find($selectedDosenId);
+    $tahun = $request->query('tahun', 2024);  // Default ke tahun 2024
+
     // Mengambil jumlah publikasi
     $jumlahPublikasiInternasional = 0;
     $jumlahPublikasiNasional = 0;
@@ -80,11 +84,11 @@ class DosenController extends Controller
     if ($selectedDosenId) {
         
         $jumlahPublikasiNasional = SuratTugas::where('dosen_id', $selectedDosenId)
-        ->where('akreditasi_id', 2)
-        ->when($tahun, function ($query) use ($tahun) {
-            $query->whereYear('waktu_awal', $tahun);
-        })
-        ->count();
+            ->where('akreditasi_id', 2)
+            ->when($tahun, function ($query) use ($tahun) {
+                $query->whereYear('waktu_awal', $tahun);
+            })
+            ->count();
         
         $jumlahPublikasiInternasional = SuratTugas::where('dosen_id', $selectedDosenId)
             ->where('akreditasi_id', 3)
@@ -100,9 +104,6 @@ class DosenController extends Controller
             })
             ->count();
     }
-
-    $selectedDosenId = $request->query('dosen_id');
-    $selectedDosen = Dosen::find($selectedDosenId);
 
     // Query untuk menghitung jumlah berdasarkan jenis_id per tahun
     $suratTugasCounts = DB::table('surat_tugas')

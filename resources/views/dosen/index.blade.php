@@ -71,28 +71,13 @@
             <div class="col-md-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4 class="mt-3">{{ $selectedDosen->nama }}</h4>
-                    {{-- <div class="d-flex">
-                        <a href="/dosen/{{ $selectedDosen->id }}/edit" class="btn btn-warning btn-sm me-2">
-                            <i class="bi bi-pencil-square"></i>
-                            <span class="visually-hidden">Edit</span>
-                        </a>
-                        <form action="/dosen/{{ $selectedDosen->id }}" method="post" class="d-inline">
-                            @method('delete')
-                            @csrf
-                            <button class="btn btn-danger btn-sm border-0" onclick="return confirm('Apakah Anda yakin?')">
-                                <i class="bi bi-trash"></i>
-                                <span class="visually-hidden">Delete</span>
-                            </button>
-                        </form>
-                    </div> --}}
-                    
                 </div>
                 <hr></hr>
                 <!-- Grafik Batang -->
                 <h4 class="text-center">Kinerja Dosen Pertahun</h4>
                 <canvas id="barChart" style="max-height: 200px; max-width: auto"></canvas>
             </div>
-
+            <!-- Publikasi -->
             <div class="row">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     @php
@@ -157,13 +142,13 @@
                 
             </div>
             <div class="col-md-12">
-        <div style="display: flex; flex-wrap: wrap; align-items: center;">
-            <p style="margin-bottom: 0; margin-right: 3rem; font-size: 14px;"><strong>Jurnal Nasional:</strong> {{ $jumlahPublikasiNasional }}</p>
-            <p style="margin-bottom: 0; margin-right: 3rem;  font-size: 14px;"><strong>Jurnal Internasional:</strong> {{ $jumlahPublikasiInternasional }}</p>
-            <p style="margin-bottom: 0; margin-right: 3rem;  font-size: 14px;"><strong>Jumlah HKI:</strong> {{ $jumlahHKI }}</p>
-            <p style="margin-bottom: 0; margin-right: 3rem;  font-size: 14px;"><strong>Jumlah Paten:</strong></p>
-        </div>
-    </div>
+                <div style="display: flex; flex-wrap: wrap; align-items: center;">
+                    <p style="margin-bottom: 0; margin-right: 3rem; font-size: 14px;"><strong>Jurnal Nasional:</strong> {{ $jumlahPublikasiNasional }}</p>
+                    <p style="margin-bottom: 0; margin-right: 3rem;  font-size: 14px;"><strong>Jurnal Internasional:</strong> {{ $jumlahPublikasiInternasional }}</p>
+                    <p style="margin-bottom: 0; margin-right: 3rem;  font-size: 14px;"><strong>Jumlah HKI:</strong> {{ $jumlahHKI }}</p>
+                    <p style="margin-bottom: 0; margin-right: 3rem;  font-size: 14px;"><strong>Jumlah Paten:</strong></p>
+                </div>
+            </div>
    <!-- Penunjang -->                     
             <div class="col-md-12 mt-3">
                 <!-- List -->
