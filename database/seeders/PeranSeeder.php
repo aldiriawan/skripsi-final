@@ -14,15 +14,7 @@ class PeranSeeder extends Seeder
     public function run(): void
     {
         Peran::create([
-            'nama_peran' => 'Peserta'
-        ]);
-
-        Peran::create([
-            'nama_peran' => 'Penulis/Pencipta'
-        ]);
-
-        Peran::create([
-            'nama_peran' => 'Tim/Panitia'
+            'nama_peran' => 'Moderator'
         ]);
 
         Peran::create([
@@ -34,11 +26,19 @@ class PeranSeeder extends Seeder
         ]);
 
         Peran::create([
-            'nama_peran' => 'Moderator'
+            'nama_peran' => 'Penulis/Pencipta'
+        ]);
+
+        Peran::create([
+            'nama_peran' => 'Peserta'
         ]);
 
         Peran::create([
             'nama_peran' => 'Reviewer'
+        ]);
+
+        Peran::create([
+            'nama_peran' => 'Tim/Panitia'
         ]);
     }
 }
