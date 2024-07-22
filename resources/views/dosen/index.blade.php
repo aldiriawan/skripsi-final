@@ -171,7 +171,7 @@
                 <div class="indicator {{ $colorClass }}"></div>
                 <!-- Keterangan -->
                 <div class="ms-2 text-truncate" style="max-width: 100%; font-size: 0.8rem;">
-                    {{ \Illuminate\Support\Str::limit($data->keterangan, 80, '...') }} | {{ \Carbon\Carbon::parse($data->waktu_awal)->format('d M Y') }} - {{ \Carbon\Carbon::parse($data->waktu_akhir)->format('d M Y') }}
+                    {{ \Illuminate\Support\Str::limit($data->keterangan, 75, '...') }} | {{ \Carbon\Carbon::parse($data->waktu_awal)->format('d M Y') }} - {{ \Carbon\Carbon::parse($data->waktu_akhir)->format('d M Y') }}
                 </div>
                 <!-- Checkbox untuk visibilitas -->
                 <form action="/surat_tugas/{{ $data->id }}/toggle-visibility" method="post" class="ms-auto">
