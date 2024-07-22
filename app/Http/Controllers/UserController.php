@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -50,8 +51,8 @@ class UserController extends Controller
     {
         $user = Auth::user(); // Mendapatkan data pengguna yang sedang login
         return view('user.edit', [
-            'title' => 'Ubah Data User',
-            'user' => User::all()
+            'title' => 'Ubah Data Pengguna',
+            'user' => $user
         ]);
     }
 
@@ -61,17 +62,34 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $rules = [
-            'name' => 'required',
-            'username' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'name' => 'required|string|max:255',
+            'username' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'password' => 'nullable|string|min:6|confirmed',
         ];
 
         $validatedData = $request->validate($rules);
 
-        User::where('id', $user->id)
-            ->update($validatedData);
-        return redirect('/user')->with('success', 'Data User sudah diubah!');
+        // Update user details
+        $user->update([
+            'name' => $validatedData['name'],
+            'username' => $validatedData['username'],
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password'] ? bcrypt($validatedData['password']) : $user->password,
+        ]);
+
+        return redirect('/user')->with('success', 'Pengguna berhasil diperbarui!');
     }
 
     /**

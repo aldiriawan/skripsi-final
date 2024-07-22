@@ -59,14 +59,14 @@
                         <span class="text-sidebar">Data Dosen</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('administrasisurattugas') ? 'active' : '' }}" href="/administrasisurattugas">
                         <i class="bi bi-gear-fill"></i>
                         <span class="text-sidebar">Data Surat Tugas</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('administrasiuser') ? 'active' : '' }}" href="/administrasiuser">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('administrasiuser') ? 'active' : '' }}" href="/user">
                         <i class="bi bi-gear-fill"></i>
                         <span class="text-sidebar">Data User</span>
                     </a>
