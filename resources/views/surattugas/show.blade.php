@@ -28,10 +28,10 @@
                 <p><strong>Publikasi :</strong> {{ optional($suratTugas->publikasi)->nama_publikasi ?? '[-]' }}</p>
             </div>
         </div>
-        <div class="d-flex justify-content-between mt-4">
-            <div class="btn-group" role="group">
+        <div class="d-flex justify-content-left mt-4">
+            <div class="btn-group rounded-buttons" role="group">
                 <a href="/surattugas" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Kembali</a>
-                <a href="/surattugas/{{ $suratTugas->id }}/edit" class="btn btn-warning btn-sm mr-2"><i class="bi bi-pencil"></i> Edit</a>
+                <a href="/surattugas/{{ $suratTugas->id }}/edit" class="btn btn-warning btn-sm mx-2"><i class="bi bi-pencil"></i> Edit</a>
                 <form action="/surattugas/{{ $suratTugas->id }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');" style="display:inline;">
                     @csrf
                     @method('DELETE')

@@ -196,7 +196,7 @@ public function store(Request $request)
             'akreditasi' => 'integer',
             'keterangan' => 'required|string',
             'peran_id' => 'required|integer',
-            'dosen_id' => 'required|array', // Pastikan dosen_id adalah array
+            'dosen_id' => 'required|array|min:1', // Pastikan dosen_id adalah array
             'dosen_id.*' => 'integer', // Pastikan setiap elemen dalam array adalah integer
         ]);
     

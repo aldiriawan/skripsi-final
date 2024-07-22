@@ -110,20 +110,30 @@
             <div class="col-md-4 dosen-field">
                 <label for="dosen_id" class="form-label">Dosen</label>
                 <div class="input-group">
-                    <select class="form-select" name="dosen_id[]">
+                    <select class="form-select @error('dosen_id') is-invalid @enderror" name="dosen_id[]">
                         @foreach ($dosenList as $d)
                         <option value="{{ $d->id }}" {{ $st->dosen_id == $d->id ? 'selected' : '' }}>{{ $d->nama }}</option>
                         @endforeach
                     </select>
                     <button type="button" class="btn btn-danger remove-dosen-button">-</button>
+                    @error('dosen_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
             </div>
             @endforeach
         </div>
 
-        <button type="button" class="btn btn-success" id="add-dosen-button">+ Dosen</button>
-        <button type="submit" class="btn btn-primary">Update Surat Tugas</button>
-        <a href="/surattugas" class="btn btn-secondary">Kembali</a>
+        <button type="button" class="btn btn-success btn-sm" id="add-dosen-button">+ Dosen</button>
+        @error('dosen_id')
+        <div class="text-danger">
+            {{ $message }}
+        </div>
+        @enderror
+        <button type="submit" class="btn btn-primary btn-sm">Update Surat Tugas</button>
+        <a href="/surattugas" class="btn btn-secondary btn-sm">Kembali</a>
     </form>
 </div>
 
