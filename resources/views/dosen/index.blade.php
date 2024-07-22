@@ -150,39 +150,40 @@
                 </div>
             </div>
    <!-- Penunjang -->                     
-            <div class="col-md-12 mt-3">
-                <!-- List -->
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="mb-0">Penunjang</h4>
-                    <a href="/suratketetapan" class="btn btn-secondary">Detail</a>
+<div class="col-md-12 mt-3">
+    <!-- List -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">Penunjang</h4>
+        <a href="/suratketetapan" class="btn btn-secondary">Detail</a>
+    </div>
+    <ul class="list-unstyled">
+        @foreach ($penunjang as $data)
+            <li class="d-flex align-items-center mb-2">
+                <!-- Indikator bulat -->
+                @php
+                    $waktu_akhir = \Carbon\Carbon::parse($data->waktu_akhir);
+                    $now = now();
+                    $colorClass = $waktu_akhir->isFuture() ? 
+                        ($waktu_akhir->lessThanOrEqualTo($now->copy()->addDays(7)) ? 'bg-warning' : 'bg-success') :
+                        'bg-danger';
+                @endphp
+        
+                <div class="indicator {{ $colorClass }}"></div>
+                <!-- Keterangan -->
+                <div class="ms-2 text-truncate" style="max-width: 100%; font-size: 0.8rem;">
+                    {{ \Illuminate\Support\Str::limit($data->keterangan, 80, '...') }} | {{ \Carbon\Carbon::parse($data->waktu_awal)->format('d M Y') }} - {{ \Carbon\Carbon::parse($data->waktu_akhir)->format('d M Y') }}
                 </div>
-                <ul class="list-unstyled">
-                    @foreach ($penunjang as $data)
-                        <li class="d-flex align-items-center mb-2">
-                            <!-- Indikator bulat -->
-                            @php
-                                $waktu_akhir = \Carbon\Carbon::parse($data->waktu_akhir);
-                                $now = now();
-                                $colorClass = $waktu_akhir->isFuture() ? 
-                                    ($waktu_akhir->lessThanOrEqualTo($now->copy()->addDays(7)) ? 'bg-warning' : 'bg-success') :
-                                    'bg-danger';
-                            @endphp
-                
-                            <div class="indicator {{ $colorClass }}"></div>
-                            <!-- Keterangan -->
-                            <div class="ms-2 text-truncate" style="max-width: 100%; font-size: 0.8rem;">
-                                {{ $data->keterangan }} | {{ \Carbon\Carbon::parse($data->waktu_awal)->format('d M Y') }} - {{ \Carbon\Carbon::parse($data->waktu_akhir)->format('d M Y') }}
-                            </div>
-                            <!-- Checkbox untuk visibilitas -->
-                            <form action="/surat_tugas/{{ $data->id }}/toggle-visibility" method="post" class="ms-auto">
-                                @csrf
-                                @method('PATCH')
-                                <input type="checkbox" name="visibility" onchange="this.form.submit()" {{ $data->visibility ? 'checked' : '' }}>
-                            </form>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>               
+                <!-- Checkbox untuk visibilitas -->
+                <form action="/surat_tugas/{{ $data->id }}/toggle-visibility" method="post" class="ms-auto">
+                    @csrf
+                    @method('PATCH')
+                    <input type="checkbox" name="visibility" onchange="this.form.submit()" {{ $data->visibility ? 'checked' : '' }}>
+                </form>
+            </li>
+        @endforeach
+    </ul>
+</div>
+             
         </div>
         @endif
     </div>
