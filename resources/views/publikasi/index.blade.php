@@ -37,26 +37,27 @@
             {{ $buttonLabel }}
         </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Semua Akreditasi">Semua  Akreditasi</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Lokal">Jurnal Lokal</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Nasional">Jurnal Nasional</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Internasional">Jurnal Internasional</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 1">Sinta 1</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 2">Sinta 2</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 3">Sinta 3</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 4">Sinta 4</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 5">Sinta 5</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 6">Sinta 6</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Q1">Q1</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Q2">Q2</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Q3">Q3</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Q4">Q4</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Semua Akreditasi&search={{ request('search') }}">Semua Akreditasi</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Lokal&search={{ request('search') }}">Jurnal Lokal</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Nasional&search={{ request('search') }}">Jurnal Nasional</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Internasional&search={{ request('search') }}">Jurnal Internasional</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 1&search={{ request('search') }}">Sinta 1</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 2&search={{ request('search') }}">Sinta 2</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 3&search={{ request('search') }}">Sinta 3</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 4&search={{ request('search') }}">Sinta 4</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 5&search={{ request('search') }}">Sinta 5</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 6&search={{ request('search') }}">Sinta 6</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Q1&search={{ request('search') }}">Q1</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Q2&search={{ request('search') }}">Q2</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Q3&search={{ request('search') }}">Q3</a></li>
+            <li><a class="dropdown-item" href="/publikasi?akreditasi=Q4&search={{ request('search') }}">Q4</a></li>
         </ul>
     </div>
     
 </div>
 
 <form method="GET" action="/publikasi">
+    <input type="hidden" name="akreditasi" value="{{ request('akreditasi') }}">
     <div class="row mb-3">
         <div class="col-md-5">
             <div class="input-group">
