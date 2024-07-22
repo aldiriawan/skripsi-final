@@ -107,7 +107,7 @@
 
         <div id="dosen-container" class="row mb-3">
             @foreach ($sameKeteranganSuratTugas as $st)
-            <div class="col-md-4 dosen-field">
+            <div class="col-md-6 dosen-field">
                 <label for="dosen_id" class="form-label">Dosen</label>
                 <div class="input-group">
                     <select class="form-select @error('dosen_id') is-invalid @enderror" name="dosen_id[]">

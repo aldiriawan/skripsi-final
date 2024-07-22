@@ -4,9 +4,7 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h3 class="mt-3">{{ $title }} (
         @if($selectedAkreditasi)
-            @if($selectedAkreditasi === 'Lokal')
-                Jurnal Lokal
-            @elseif($selectedAkreditasi === 'Nasional')
+            @if($selectedAkreditasi === 'Nasional')
                 Jurnal Nasional
             @elseif($selectedAkreditasi === 'Internasional')
                 Jurnal Internasional
@@ -38,7 +36,6 @@
         </button>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/publikasi?akreditasi=Semua Akreditasi&search={{ request('search') }}">Semua Akreditasi</a></li>
-            <li><a class="dropdown-item" href="/publikasi?akreditasi=Lokal&search={{ request('search') }}">Jurnal Lokal</a></li>
             <li><a class="dropdown-item" href="/publikasi?akreditasi=Nasional&search={{ request('search') }}">Jurnal Nasional</a></li>
             <li><a class="dropdown-item" href="/publikasi?akreditasi=Internasional&search={{ request('search') }}">Jurnal Internasional</a></li>
             <li><a class="dropdown-item" href="/publikasi?akreditasi=Sinta 1&search={{ request('search') }}">Sinta 1</a></li>

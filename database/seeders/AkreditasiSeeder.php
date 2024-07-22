@@ -15,10 +15,6 @@ class AkreditasiSeeder extends Seeder
     public function run(): void
     {
         Akreditasi::create([
-            'nama_akreditasi' => 'Lokal',
-        ]);
-
-        Akreditasi::create([
             'nama_akreditasi' => 'Nasional',
         ]);
 
