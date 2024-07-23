@@ -8,14 +8,14 @@
             <div class="col-md-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4 class="my-3">Komposisi Beban Dosen</h4>
-                    <div class="btn-group mb-1">
+                    <div class="btn-group">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            2024
+                            {{ $selectedYear }}
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/#">2022</a></li>
-                            <li><a class="dropdown-item" href="/#">2023</a></li>
-                            <li><a class="dropdown-item" href="/#">2024</a></li>
+                            @foreach($years as $year)
+                                <li><a class="dropdown-item" href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -54,14 +54,14 @@
             <div class="col-md-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4 class="my-3">Dosen dengan Beban Terbesar</h4>
-                    <div class="btn-group mb-1">
+                    <div class="btn-group">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            2024
+                            {{ $selectedYear }}
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/#">2022</a></li>
-                            <li><a class="dropdown-item" href="/#">2023</a></li>
-                            <li><a class="dropdown-item" href="/#">2024</a></li>
+                            @foreach($years as $year)
+                                <li><a class="dropdown-item" href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -109,6 +109,16 @@
             <!-- Publikasi -->
             <div class="col-md-12 mb-3">
                 <h4 class="my-3">Publikasi</h4>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ $selectedYear }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        @foreach($years as $year)
+                            <li><a class="dropdown-item" href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
                 <div class="row">
                     <div class="col-md-5">
                         <canvas id="jurnalInternasionalChart" class="large-pie-chart"></canvas>
@@ -505,8 +515,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Jurnal Internasional
         var jurnalInternasionalCtx = document.getElementById('jurnalInternasionalChart').getContext('2d');
-        var jurnalInternasionalData = [25, 20, 15, 10, 5, 25]; // Dummy data for Q1, Q2, Q3, Q4, No Q, -
-        var jurnalInternasionalLabels = ['Q1', 'Q2', 'Q3', 'Q4', 'No Q', '-'];
+        var jurnalInternasionalData = @json($jurnalInternasionalData);
+        var jurnalInternasionalLabels = ['Q1', 'Q2', 'Q3', 'Q4', 'No Q'];
 
         var jurnalInternasionalChart = new Chart(jurnalInternasionalCtx, {
             type: 'pie',

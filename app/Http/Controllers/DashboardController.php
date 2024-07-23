@@ -16,8 +16,11 @@ class DashboardController extends Controller
     {
         // Koding untuk Komposisi Beban Dosen : -------------------------
         // Data untuk keseluruhan
+        $years = [2021, 2022, 2023, 2024];
+        $selectedYear = $request->input('year', 2024);
         $data = DB::table('surat_tugas')
             ->select(DB::raw('jenis_id, COUNT(*) as count'))
+            ->whereYear('tanggal', $selectedYear)
             ->groupBy('jenis_id')
             ->pluck('count', 'jenis_id')->toArray();
     
@@ -25,6 +28,7 @@ class DashboardController extends Controller
             $dataInformatika = DB::table('surat_tugas')
                 ->join('dosen', 'surat_tugas.dosen_id', '=', 'dosen.id')
                 ->where('dosen.program_studi', 'Informatika')
+                ->whereYear('tanggal', $selectedYear)
                 ->select(DB::raw('jenis_id, COUNT(*) as count'))
                 ->groupBy('jenis_id')
                 ->pluck('count', 'jenis_id')->toArray();
@@ -33,6 +37,7 @@ class DashboardController extends Controller
         $dataSistemInformasi = DB::table('surat_tugas')
             ->join('dosen', 'surat_tugas.dosen_id', '=', 'dosen.id')
             ->where('dosen.program_studi', 'Sistem Informasi')
+            ->whereYear('tanggal', $selectedYear)
             ->select(DB::raw('jenis_id, COUNT(*) as count'))
             ->groupBy('jenis_id')
             ->pluck('count', 'jenis_id')->toArray();
@@ -66,8 +71,11 @@ class DashboardController extends Controller
     
         // Koding untuk Beban Tugas Terbanyak dan Terendah : -----------------------
         // Ambil data dosen dengan surat tugas terbanyak
+        $years = [2021, 2022, 2023, 2024];
+        $selectedYear = $request->input('year', 2024);
         $topDosenData = DB::table('surat_tugas')
         ->select(DB::raw('dosen_id, COUNT(*) as count'))
+        ->whereYear('tanggal', $selectedYear)
         ->groupBy('dosen_id')
         ->orderByRaw('COUNT(*) DESC')
         ->limit(5)
@@ -79,6 +87,7 @@ class DashboardController extends Controller
         // Ambil data dosen dengan surat tugas tersedikit
         $bottomDosenData = DB::table('surat_tugas')
         ->select(DB::raw('dosen_id, COUNT(*) as count'))
+        ->whereYear('tanggal', $selectedYear)
         ->groupBy('dosen_id')
         ->orderByRaw('COUNT(*) ASC')
         ->limit(5)
@@ -120,31 +129,50 @@ class DashboardController extends Controller
     ];
 
         // Koding untuk Publikasi : -----------------------
-        // Fetch data for Jurnal Nasional
-        $jurnalNasionalData = SuratTugas::whereIn('akreditasi_id', [2, 4, 5, 6, 7, 8, 9])
+        $years = [2021, 2022, 2023, 2024];
+        $selectedYear = $request->input('year', 2024);
+        // Fetch data for Jurnal Internasional
+        $jurnalInternasionalData = SuratTugas::whereIn('akreditasi_id', [2, 9, 10, 11, 12])
         ->selectRaw('akreditasi_id, COUNT(*) as count')
+        ->whereYear('tanggal', $selectedYear)
+        ->groupBy('akreditasi_id')
+        ->pluck('count', 'akreditasi_id');
+
+        $jurnalInternasionalData = [
+        $jurnalInternasionalData[2] ?? 0,
+        $jurnalInternasionalData[9] ?? 0,
+        $jurnalInternasionalData[10] ?? 0,
+        $jurnalInternasionalData[11] ?? 0,
+        $jurnalInternasionalData[12] ?? 0,
+        ];
+
+        // Fetch data for Jurnal Nasional
+        $jurnalNasionalData = SuratTugas::whereIn('akreditasi_id', [1, 3, 4, 5, 6, 7, 8])
+        ->selectRaw('akreditasi_id, COUNT(*) as count')
+        ->whereYear('tanggal', $selectedYear)
         ->groupBy('akreditasi_id')
         ->pluck('count', 'akreditasi_id');
 
         $jurnalNasionalData = [
-        $jurnalNasionalData[2] ?? 0,
+        $jurnalNasionalData[1] ?? 0,
+        $jurnalNasionalData[3] ?? 0,
         $jurnalNasionalData[4] ?? 0,
         $jurnalNasionalData[5] ?? 0,
         $jurnalNasionalData[6] ?? 0,
         $jurnalNasionalData[7] ?? 0,
         $jurnalNasionalData[8] ?? 0,
-        $jurnalNasionalData[9] ?? 0
         ];
 
         // Fetch data for Prosiding
-        $prosidingData = SuratTugas::whereIn('publikasi_id', [1, 2])
+        $prosidingData = SuratTugas::whereIn('publikasi_id', [3, 4])
         ->selectRaw('publikasi_id, COUNT(*) as count')
+        ->whereYear('tanggal', $selectedYear)
         ->groupBy('publikasi_id')
         ->pluck('count', 'publikasi_id');
 
         $prosidingData = [
-        $prosidingData[1] ?? 0,
-        $prosidingData[2] ?? 0
+        $prosidingData[3] ?? 0,
+        $prosidingData[4] ?? 0
         ];
     
         return view('dashboard.index', [
@@ -167,6 +195,7 @@ class DashboardController extends Controller
             'selectedYear' => $selectedYear,
             'scopeKegiatanData' => $scopeKegiatanData,
             // View untuk Publikasi
+            'jurnalInternasionalData' => $jurnalInternasionalData,
             'jurnalNasionalData' => $jurnalNasionalData,
             'prosidingData' => $prosidingData,
         ]);

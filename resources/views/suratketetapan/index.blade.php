@@ -50,7 +50,7 @@
     <tbody>
         @forelse ($suratTugas as $data)
             <tr>
-                <td>
+                <td class="text-center">
                     <!-- Indikator bulat -->
                     @php
                         $waktu_akhir = \Carbon\Carbon::parse($data->waktu_akhir);
