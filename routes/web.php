@@ -32,3 +32,6 @@ Route::resource('/suratketetapan', SuratKetetapanController::class)->middleware(
 
 Route::patch('/surat_tugas/{id}/toggle-visibility', [DosenController::class, 'toggleVisibility'])->name('surat_tugas.toggleVisibility');
 
+Route::get('/dosen/show', [DosenController::class, 'show'])->name('dosen.show');
+
+

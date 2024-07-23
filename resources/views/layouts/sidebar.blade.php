@@ -54,11 +54,12 @@
             </div>
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('administrasidosen') ? 'active' : '' }}" href="/administrasidosen">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dosen/show') ? 'active' : '' }}" href="{{ route('dosen.show') }}">
                         <i class="bi bi-gear-fill"></i>
                         <span class="text-sidebar">Data Dosen</span>
                     </a>
                 </li>
+                
                 {{-- <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('administrasisurattugas') ? 'active' : '' }}" href="/administrasisurattugas">
                         <i class="bi bi-gear-fill"></i>
