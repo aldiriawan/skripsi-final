@@ -8,7 +8,7 @@
             <!-- Dashboard Section -->
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 text-decoration-none {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="/dashboard?year=2024">
+                    <a class="nav-link d-flex align-items-center gap-2 text-decoration-none {{ Request::is('dashboard') ? 'active' : '' }}" aria-current="page" href="/dashboard?year=2024">
                         <i class="bi bi-house-fill"></i>
                         <span class="text-sidebar">Dashboard</span>
                     </a>
