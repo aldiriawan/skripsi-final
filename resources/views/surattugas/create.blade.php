@@ -118,7 +118,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Tambah Surat Tugas</button>
+        <button type="submit" class="btn btn-primary">Tambah Surat Tugas Baru</button>
         <a href="/surattugas" class="btn btn-secondary">Kembali</a>
     </form>
 </div>

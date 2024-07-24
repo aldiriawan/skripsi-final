@@ -191,7 +191,7 @@ class DosenController extends Controller
     public function edit(Dosen $dosen)
     {
         return view('dosen.edit', [
-            'title' => 'Ubah Data Dosen',
+            'title' => 'Edit Dosen',
             'dosen' => $dosen,
         ]);
     }

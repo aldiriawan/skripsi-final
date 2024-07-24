@@ -46,6 +46,7 @@
                     <tr class="text-center">
                         <th scope="col">#</th>
                         <th scope="col">Nama Lengkap</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,6 +56,7 @@
                         <td>
                             <a href="/dosen?dosen_id={{ $d->id }}" class="detail-dosen text-decoration-none text-dark {{ request('dosen_id') == $d->id ? 'fw-bold' : '' }}">{{ $d->nama }}</a>
                         </td>
+                        {{-- <td><a href="/dosen/{{ $d->id }}/edit" class="btn btn-warning btn-sm mx-2"><i class="bi bi-pencil"></i> Edit</a></td> --}}
                     </tr>
                     @endforeach
                 </tbody>

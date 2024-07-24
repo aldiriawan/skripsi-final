@@ -11,9 +11,7 @@
 </div>
 @endif
 
-<div class="card col-lg-8 mx-auto my-4 custom-card shadow">
-    <div class="card-body">
-        <h5 class="card-title mb-4 text-center">Edit Pengguna</h5>
+<div class="col-lg-6">
         <form action="{{ route('user.update', $user->id) }}" method="POST">
             @csrf
             @method('PUT')
@@ -46,8 +44,8 @@
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-            <a href="/user" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i>Kembali</a>
+            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+            <a href="/user" class="btn btn-secondary"><i></i>Kembali</a>
         </form>
     </div>
 </div>

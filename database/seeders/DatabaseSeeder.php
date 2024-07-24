@@ -21,10 +21,31 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'Aldi Riawan',
-            'username' => 'aldie3103',
-            'email' => 'aldi.riawan@gmail.com',
-            'password' => bcrypt('password')
+            'name' => 'Dekan',
+            'username' => 'dekan',
+            'email' => 'dekan@ti.ukdw.ac.id',
+            'password' => 'dekan1234'
+        ]);
+
+        User::create([
+            'name' => 'Kaprodi Informatika',
+            'username' => 'kaprodiinf',
+            'email' => 'kaprodi.inf@staff.ukdw.ac.id',
+            'password' => 'kaprodiinf1234'
+        ]);
+
+        User::create([
+            'name' => 'Kaprodi Sistem Informasi',
+            'username' => 'kaprodisi',
+            'email' => 'kaprodi.si@staff.ukdw.ac.id',
+            'password' => 'kaprodisi1234'
+        ]);
+
+        User::create([
+            'name' => 'Admin',
+            'username' => 'admin',
+            'email' => 'admin@ti.ukdw.ac.id',
+            'password' => 'admin1234'
         ]);
 
         $this->call([

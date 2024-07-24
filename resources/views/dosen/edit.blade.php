@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Edit Data Dosen</h1>
+    <h3>{{ $title }}</h3>
 </div>
 
 <div class="col-lg-6">
@@ -32,7 +32,8 @@
             </div>
             @enderror
         </div>
-        <button type="submit" class="btn btn-primary">Update Data Dosen</button>
+        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+        <a href="/dosen" class="btn btn-secondary"><i></i>Kembali</a>
     </form>
 </div>
 

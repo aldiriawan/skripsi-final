@@ -132,7 +132,7 @@
             {{ $message }}
         </div>
         @enderror
-        <button type="submit" class="btn btn-primary btn-sm">Update Surat Tugas</button>
+        <button type="submit" class="btn btn-primary btn-sm">Simpan Perubahan</button>
         <a href="/surattugas" class="btn btn-secondary btn-sm">Kembali</a>
     </form>
 </div>

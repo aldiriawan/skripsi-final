@@ -51,7 +51,7 @@ class UserController extends Controller
     {
         $user = Auth::user(); // Mendapatkan data pengguna yang sedang login
         return view('user.edit', [
-            'title' => 'Ubah Data Pengguna',
+            'title' => 'Edit User',
             'user' => $user
         ]);
     }

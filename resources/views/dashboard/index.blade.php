@@ -1,36 +1,43 @@
 @extends('layouts.main')
 
 @section('container')
+
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-between align-items-center">
+        <h3 class="my-3">{{ $title }}</h3>
+        <div class="btn-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ $selectedYear }}
+            </button>
+            <ul class="dropdown-menu">
+                @foreach($years as $year)
+                    <li><a class="dropdown-item" href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a></li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+    <hr>
+</div>
 <div class="row">
     <!-- Komposisi Beban Dosen -->
     <div class="col-md-5">
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="my-3">Komposisi Beban Dosen</h4>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ $selectedYear }}
-                        </button>
-                        <ul class="dropdown-menu">
-                            @foreach($years as $year)
-                                <li><a class="dropdown-item" href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    <h4 class="">Komposisi Beban Dosen</h4>
                 </div>
                 <canvas id="pieChart" class="small-pie-chart"></canvas>
             </div>
-
+    
             <!-- Pie Chart Informatika -->
-            <div class="col-md-4">
-                <h8 class="my-3">Informatika</h8>
+            <div class="col-md-6 d-flex flex-column align-items-center mb-3">
+                <h8 class="mb-2">Informatika</h8>
                 <canvas id="pieChartInformatika" class="smaller-pie-chart"></canvas>
             </div>
-
+    
             <!-- Pie Chart Sistem Informasi -->
-            <div class="col-md-4">
-                <h8 class="my-3">Sistem Informasi</h8>
+            <div class="col-md-6 d-flex flex-column align-items-center mb-3">
+                <h8 class="mb-2">Sistem Informasi</h8>
                 <canvas id="pieChartSistemInformasi" class="smaller-pie-chart"></canvas>
             </div>
         </div>
@@ -40,7 +47,7 @@
     <div class="col-md-7">
         <div class="row">
             <div class="col-md-12 mb-3">
-                <h4 class="my-3">Kinerja Dosen per Tahun</h4>
+                <h4 class="mb-1 text-center">Kinerja Dosen Pertahun</h4>
                 <canvas id="barChart" class="large-bar-chart"></canvas>
             </div>
         </div>
@@ -49,85 +56,68 @@
 
 <!-- Dosen dengan Beban Terbesar dan Terendah -->
 <div class="row mt-4">
+    <!-- Dosen dengan Beban Terbesar dan Dosen dengan Beban Terendah -->
     <div class="col-md-5">
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4 class="my-3">Dosen dengan Beban Terbesar</h4>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ $selectedYear }}
-                        </button>
-                        <ul class="dropdown-menu">
-                            @foreach($years as $year)
-                                <li><a class="dropdown-item" href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
                 </div>
                 <canvas id="topDosenChart" class="large-bar-chart"></canvas>
             </div>
             <div class="col-md-12 mb-3">
-                <h4 class="my-3">Dosen dengan Beban Terendah</h4>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="my-3">Dosen dengan Beban Terendah</h4>
+                </div>
                 <canvas id="bottomDosenChart" class="large-bar-chart"></canvas>
             </div>
         </div>
     </div>
 
-    <!-- Scope Kegiatan dan Publikasi -->
-    <div class="col-md-5">
+    <!-- Scope Kegiatan -->
+    <div class="col-md-7">
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h4 class="my-3">Scope Kegiatan</h4>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ $selectedYear }}
-                        </button>
-                        <ul class="dropdown-menu">
-                            @foreach($years as $year)
-                                <li><a class="dropdown-item" href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                        <h6 class="my-3">Penelitian</h6>
-                        <canvas id="penelitianChart" class="small-pie-chart"></canvas>
+                    <div class="col-md-4 d-flex flex-column align-items-center mb-3">
+                        <h6 class="my-2">Penelitian</h6>
+                        <canvas id="penelitianChart" class="equal-size-pie-chart"></canvas>
                     </div>
-                    <div class="col-md-4">
-                        <h6 class="my-3">Pengabdian</h6>
-                        <canvas id="pengabdianChart" class="small-pie-chart"></canvas>
+                    <div class="col-md-4 d-flex flex-column align-items-center mb-3">
+                        <h6 class="my-2">Pengabdian</h6>
+                        <canvas id="pengabdianChart" class="equal-size-pie-chart"></canvas>
                     </div>
-                    <div class="col-md-4">
-                        <h6 class="my-3">Penunjang</h6>
-                        <canvas id="penunjangChart" class="small-pie-chart"></canvas>
+                    <div class="col-md-4 d-flex flex-column align-items-center mb-3">
+                        <h6 class="my-2">Penunjang</h6>
+                        <canvas id="penunjangChart" class="equal-size-pie-chart"></canvas>
                     </div>
                 </div>
             </div>
-            <!-- Publikasi -->
+        </div>
+    </div>
+
+    <!-- Publikasi -->
+    <div class="col-md-8">
+        <div class="row">
             <div class="col-md-12 mb-3">
-                <h4 class="my-3">Publikasi</h4>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ $selectedYear }}
-                    </button>
-                    <ul class="dropdown-menu">
-                        @foreach($years as $year)
-                            <li><a class="dropdown-item" href="{{ route('dashboard.index', ['year' => $year]) }}">{{ $year }}</a></li>
-                        @endforeach
-                    </ul>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="my-3">Publikasi</h4>
                 </div>
                 <div class="row">
-                    <div class="col-md-5">
-                        <canvas id="jurnalInternasionalChart" class="large-pie-chart"></canvas>
+                    <div class="col-md-4 d-flex flex-column align-items-center mb-3">
+                        <h6 class="my-2">Jurnal Internasional</h6>
+                        <canvas id="jurnalInternasionalChart" class="equal-size-pie-chart"></canvas>
                     </div>
-                    <div class="col-md-5">
-                        <canvas id="jurnalNasionalChart" class="large-pie-chart"></canvas>
+                    <div class="col-md-4 d-flex flex-column align-items-center mb-3">
+                        <h6 class="my-2">Jurnal Nasional</h6>
+                        <canvas id="jurnalNasionalChart" class="equal-size-pie-chart"></canvas>
                     </div>
-                    <div class="col-md-5">
-                        <canvas id="prosidingChart" class="smaller-pie-chart"></canvas>
+                    <div class="col-md-4 d-flex flex-column align-items-center mb-3">
+                        <h6 class="my-2">Prosiding</h6>
+                        <canvas id="prosidingChart" class="equal-size-pie-chart"></canvas>
                     </div>
                 </div>
             </div>
@@ -135,28 +125,43 @@
     </div>
 </div>
 
+
 <style>
     .small-pie-chart {
-        max-width: 400px;
-        max-height: 400px;
+        max-width: 300px;
+        max-height: 300px;
         margin: 0 auto;
     }
-/* 
-    .small-pie-chart {
-        max-width: 250px;
-        max-height: 250px;
-        margin: 0 auto;
-    } */
 
     .smaller-pie-chart {
-        max-width: 150px;
-        max-height: 150px;
+        max-width: 100px;
+        max-height: 100px;
         margin: 0 auto;
     }
     .large-bar-chart {
         max-width: 100%;
         max-height: 350px;
     }
+
+     .small-pie-chart, .large-pie-chart, .smaller-pie-chart {
+        height: 200px; /* Atur tinggi yang sama */
+        width: 100%; /* Atur lebar yang sama */
+    }
+    .large-pie-chart {
+        height: 250px; /* Ukuran khusus untuk chart besar */
+    }
+    .smaller-pie-chart {
+        height: 150px; /* Ukuran khusus untuk chart kecil */
+    }
+
+    .mb-1 {
+        margin-bottom: 0.25rem !important;
+    }
+    .my-2 {
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -354,8 +359,8 @@
                     x: {
                         stacked: false,
                         ticks: {
-                            maxRotation: 90,
-                            minRotation: 45
+                            maxRotation: 0,
+                            minRotation: 0
                         },
                     },
                     y: {
@@ -457,18 +462,17 @@
     document.addEventListener('DOMContentLoaded', function() {
     // Data for Scope Kegiatan
     const scopeKegiatanData = @json($scopeKegiatanData);
+    var scopeKegiatanLabels = ['Nasional', 'Internasional'];
 
     // Function to create pie chart
-    function createPieChart(ctx, data, labels) {
+    function createPieChart(ctx, data, labels, colors) {
         return new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: labels,
+                labels: scopeKegiatanLabels,
                 datasets: [{
                     data: data,
-                    backgroundColor: [
-                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C0C0C0'
-                    ],
+                    backgroundColor: colors,
                 }]
             },
             options: {
@@ -491,29 +495,35 @@
             }
         });
     }
+    
+    // Define colors for each pie chart
+    const penelitianColors = ['#4BC0C0', '#36A2EB', '#add8e6'];
+    const pengabdianColors = ['#32CD32', '#228B22', '#add8e6'];
+    const penunjangColors = ['#DC143C', '#FFB6C1', '#36A2EB'];
 
     // Penelitian Chart
     const penelitianCtx = document.getElementById('penelitianChart').getContext('2d');
     const penelitianData = Object.values(scopeKegiatanData['Penelitian']);
     const penelitianLabels = Object.keys(scopeKegiatanData['Penelitian']);
-    createPieChart(penelitianCtx, penelitianData, penelitianLabels);
+    createPieChart(penelitianCtx, penelitianData, penelitianLabels, penelitianColors);
 
     // Pengabdian Chart
     const pengabdianCtx = document.getElementById('pengabdianChart').getContext('2d');
     const pengabdianData = Object.values(scopeKegiatanData['Pengabdian']);
     const pengabdianLabels = Object.keys(scopeKegiatanData['Pengabdian']);
-    createPieChart(pengabdianCtx, pengabdianData, pengabdianLabels);
+    createPieChart(pengabdianCtx, pengabdianData, pengabdianLabels, pengabdianColors);
 
     // Penunjang Chart
     const penunjangCtx = document.getElementById('penunjangChart').getContext('2d');
     const penunjangData = Object.values(scopeKegiatanData['Penunjang']);
     const penunjangLabels = Object.keys(scopeKegiatanData['Penunjang']);
-    createPieChart(penunjangCtx, penunjangData, penunjangLabels);
-    });
+    createPieChart(penunjangCtx, penunjangData, penunjangLabels, penunjangColors);
+});
 
 
+
+    // Jurnal Internasional
     document.addEventListener('DOMContentLoaded', function() {
-        // Jurnal Internasional
         var jurnalInternasionalCtx = document.getElementById('jurnalInternasionalChart').getContext('2d');
         var jurnalInternasionalData = @json($jurnalInternasionalData);
         var jurnalInternasionalLabels = ['Q1', 'Q2', 'Q3', 'Q4', 'No Q'];
@@ -524,7 +534,7 @@
                 labels: jurnalInternasionalLabels,
                 datasets: [{
                     data: jurnalInternasionalData,
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
+                    backgroundColor: ['#4169e1', '#87ceeb', '#87cefa', '#b0e0e6', '#add8e6', '#fffaf0'],
                 }]
             },
             options: {
@@ -540,7 +550,7 @@
         // Jurnal Nasional
         var jurnalNasionalCtx = document.getElementById('jurnalNasionalChart').getContext('2d');
         var jurnalNasionalData = @json($jurnalNasionalData);
-        var jurnalNasionalLabels = ['S1', 'S2', 'S3', 'S4', 'S5', 'S6', '-'];
+        var jurnalNasionalLabels = ['Sinta 1', 'Sinta 2', 'Sinta 3', 'Sinta 4', 'Sinta 5', 'Sinta 6', '-'];
 
         var jurnalNasionalChart = new Chart(jurnalNasionalCtx, {
             type: 'pie',
@@ -548,7 +558,7 @@
                 labels: jurnalNasionalLabels,
                 datasets: [{
                     data: jurnalNasionalData,
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#C0C0C0'],
+                    backgroundColor: ['#4169e1', '#87ceeb', '#87cefa', '#b0e0e6', '#add8e6', '#fffaf0', '#d3d3d3'],
                 }]
             },
             options: {
@@ -572,7 +582,7 @@
                 labels: prosidingLabels,
                 datasets: [{
                     data: prosidingData,
-                    backgroundColor: ['#FF6384', '#36A2EB'],
+                    backgroundColor: ['#4169e1', '#87ceeb'],
                 }]
             },
             options: {

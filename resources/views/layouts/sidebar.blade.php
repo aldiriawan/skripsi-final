@@ -8,7 +8,7 @@
             <!-- Dashboard Section -->
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 text-decoration-none {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="/">
+                    <a class="nav-link d-flex align-items-center gap-2 text-decoration-none {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="/dashboard?year=2024">
                         <i class="bi bi-house-fill"></i>
                         <span class="text-sidebar">Dashboard</span>
                     </a>
@@ -54,9 +54,15 @@
             </div>
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dosen/show') ? 'active' : '' }}" href="{{ route('dosen.show') }}">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dosen/show') ? 'active' : '' }}" href="/dosen/create">
                         <i class="bi bi-gear-fill"></i>
-                        <span class="text-sidebar">Data Dosen</span>
+                        <span class="text-sidebar">Tambah Data Dosen</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dosen/show') ? 'active' : '' }}" href="/dosen">
+                        <i class="bi bi-gear-fill"></i>
+                        <span class="text-sidebar">Edit Data Dosen</span>
                     </a>
                 </li>
                 

@@ -22,7 +22,7 @@
         </ul>
     </div>
 </div>
-<div class="d-flex justify-content-left mt-4">
+<div class="d-flex justify-content-center mt-4">
     <div class="btn-group rounded-buttons" role="group">
         <a href="/user" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Kembali</a>
         <a href="{{ route('user.edit', auth()->user()->id) }}" class="btn btn-warning btn-sm mx-2"><i class="bi bi-pencil"></i> Edit</a>
