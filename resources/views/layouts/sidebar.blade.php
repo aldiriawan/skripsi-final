@@ -22,7 +22,7 @@
             </div>
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dosen*') ? 'active' : '' }}" href="/dosen?dosen_id=1">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dosen') ? 'active' : '' }}" href="/dosen?dosen_id=1">
                         <i class="bi bi-person-fill"></i>
                         <span class="text-sidebar">Daftar Dosen</span>
                     </a>
@@ -54,7 +54,7 @@
             </div>
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dosen/show') ? 'active' : '' }}" href="/dosen/create">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dosen/create') ? 'active' : '' }}" href="/dosen/create">
                         <i class="bi bi-gear-fill"></i>
                         <span class="text-sidebar">Tambah Data Dosen</span>
                     </a>
