@@ -94,7 +94,9 @@
     {{ $surattugas->appends(['akreditasi' => $selectedAkreditasi, 'search' => $search])->links() }}
 </div>
 @else
-<p class="text-center fs-4">Data tidak ditemukan.</p>
+<tr>
+    <td colspan="5" class="text-center">Tidak ada data.</td>
+</tr>
 @endif
 
 <style>

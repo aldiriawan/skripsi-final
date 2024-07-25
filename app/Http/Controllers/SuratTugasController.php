@@ -234,7 +234,7 @@ public function store(Request $request)
             ]);
         }
     
-        return redirect('/surattugas')->with('success', 'Surat Tugas berhasil diperbarui');
+        return redirect('/surattugas')->with('success', 'Surat Tugas berhasil diperbarui!');
     }
 
     /**
@@ -247,6 +247,6 @@ public function store(Request $request)
         // Hapus surat tugas berdasarkan keterangan yang sama
         SuratTugas::where('keterangan', $suratTugas->keterangan)->delete();
     
-        return redirect('/surattugas')->with('success', 'Surat Tugas berhasil dihapus');
+        return redirect('/surattugas')->with('success', 'Surat Tugas berhasil dihapus!');
     }
 }
