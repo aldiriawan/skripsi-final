@@ -211,13 +211,13 @@ class DosenController extends Controller
         Dosen::where('id', $dosen->id)
             ->update($validatedData);
 
-        return redirect('/dosen')->with('success', 'Data Dosen sudah diubah!');
+        return redirect('/dosen')->with('success', 'Data Dosen berhasil diperbarui!');
     }
 
     public function destroy(Dosen $dosen)
     {
         Dosen::destroy($dosen->id);
-        return redirect('/dosen')->with('success', 'Data sudah terhapus!');
+        return redirect('/dosen')->with('success', 'Data Dosen berhasil dihapus!');
     }
 
     public function toggleVisibility($id)

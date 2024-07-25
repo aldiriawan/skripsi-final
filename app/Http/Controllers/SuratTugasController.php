@@ -234,7 +234,7 @@ public function store(Request $request)
             ]);
         }
     
-        return redirect('/surattugas')->with('success', 'Surat Tugas berhasil diupdate');
+        return redirect('/surattugas')->with('success', 'Surat Tugas berhasil diperbarui');
     }
 
     /**
