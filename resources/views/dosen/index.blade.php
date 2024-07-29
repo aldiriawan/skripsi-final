@@ -27,47 +27,45 @@
         </div>
         @endif
 
-{{-- Form Pencarian --}}
-<form action="/dosen" method="GET" class="d-flex align-items-center">
-    <div class="row mb-3">
-        <div class="col-md-12">
-            <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">
-                <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+    {{-- Form Pencarian --}}
+    <form action="/dosen" method="GET" class="d-flex align-items-center">
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                </div>
             </div>
         </div>
+    </form>
+    @if ($dosen->count())
+    <div class="table-responsive small">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">Nama Lengkap</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($dosen as $d)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>
+                        <a href="/dosen?dosen_id={{ $d->id }}" class="detail-dosen text-decoration-none text-dark {{ request('dosen_id') == $d->id ? 'fw-bold' : '' }}">{{ $d->nama }}</a>
+                    </td>
+                </tr>
+                 @endforeach
+            </tbody>
+        </table>
     </div>
-</form>
-
-        @if ($dosen->count())
-        <div class="table-responsive small">
-            <table class="table table-striped table-sm">
-                <thead>
-                    <tr class="text-center">
-                        <th scope="col">#</th>
-                        <th scope="col">Nama Lengkap</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($dosen as $d)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>
-                            <a href="/dosen?dosen_id={{ $d->id }}" class="detail-dosen text-decoration-none text-dark {{ request('dosen_id') == $d->id ? 'fw-bold' : '' }}">{{ $d->nama }}</a>
-                        </td>
-                        {{-- <td><a href="/dosen/{{ $d->id }}/edit" class="btn btn-warning btn-sm mx-2"><i class="bi bi-pencil"></i> Edit</a></td> --}}
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        @else
-        <tr>
-            <td colspan="5" class="text-center">Tidak ada data.</td>
-        </tr>
-        @endif
-    </div>
+    @else
+    <tr>
+        <td colspan="5" class="text-center">Tidak ada data.</td>
+    </tr>
+    @endif
+</div>
 
     <div class="col-md-8">
         @if ($selectedDosen)
@@ -141,10 +139,8 @@
                         </table>
                     </div>                  
                 </div>
-            </div>
-            
-                
-            </div>
+            </div>  
+        </div>
             <div class="col-md-12">
                 <div style="display: flex; flex-wrap: wrap; align-items: center;">
                     <p style="margin-bottom: 0; margin-right: 3rem; font-size: 14px;"><strong>Jurnal Nasional:</strong> {{ $jumlahPublikasiNasional }}</p>
@@ -186,9 +182,8 @@
             </li>
         @endforeach
     </ul>
-</div>
-             
-        </div>
+    </div>       
+    </div>
         @endif
     </div>
 </div>

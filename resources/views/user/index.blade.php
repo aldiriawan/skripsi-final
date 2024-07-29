@@ -23,14 +23,8 @@
     </div>
 </div>
 <div class="d-flex justify-content-center mt-4">
-    <div class="btn-group rounded-buttons" role="group">
-        <a href="/user" class="btn btn-secondary btn-sm"><i class="bi bi-arrow-left"></i> Kembali</a>
+    <div class="btn-group" role="group">
         <a href="{{ route('user.edit', auth()->user()->id) }}" class="btn btn-warning btn-sm mx-2"><i class="bi bi-pencil"></i> Edit</a>
-        <form action="{{ route('user.destroy', auth()->user()->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Hapus</button>
-        </form>
     </div>
 </div>
 

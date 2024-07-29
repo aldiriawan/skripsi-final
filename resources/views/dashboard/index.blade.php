@@ -18,6 +18,7 @@
     </div>
     <hr>
 </div>
+
 <div class="row">
     <!-- Komposisi Beban Dosen -->
     <div class="col-md-5">
@@ -125,7 +126,6 @@
     </div>
 </div>
 
-
 <style>
     .small-pie-chart {
         max-width: 300px;
@@ -161,13 +161,12 @@
         margin-top: 0.5rem !important;
         margin-bottom: 0.5rem !important;
     }
-
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Data for Pie Chart
+        // Data for Komposisi Beban Dosen
         var pieCtx = document.getElementById('pieChart').getContext('2d');
         var pieData = @json($data);
         var pieLabels = ['Pengajaran', 'Penelitian', 'Pengabdian', 'Penunjang'];
@@ -294,7 +293,7 @@
             },
         });
 
-        // Data for Bar Chart
+        // Data for Kinerja Dosen perTahun
         var barCtx = document.getElementById('barChart').getContext('2d');
         var barLabels = @json($years);
         var pengajaranData = @json($pengajaranData);
@@ -371,7 +370,7 @@
             }
         });
 
-        // Data for Top Dosen Chart
+        // Data for Dosen Terbesar
         var topDosenCtx = document.getElementById('topDosenChart').getContext('2d');
         var topDosenData = @json($topDosenData);
         var dosenNames = @json($dosenNames);
@@ -415,7 +414,7 @@
             }
         });
 
-        // Data for Bottom Dosen Chart
+        // Data for Dosen Terendah
         var bottomDosenCtx = document.getElementById('bottomDosenChart').getContext('2d');
         var bottomDosenData = @json($bottomDosenData);
         var bottomDosenNames = @json($dosenNames);

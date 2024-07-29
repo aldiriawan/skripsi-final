@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Dosen;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DosenController;
@@ -33,5 +34,12 @@ Route::resource('/suratketetapan', SuratKetetapanController::class)->middleware(
 Route::patch('/surat_tugas/{id}/toggle-visibility', [DosenController::class, 'toggleVisibility'])->name('surat_tugas.toggleVisibility');
 
 Route::get('/dosen/show', [DosenController::class, 'show'])->name('dosen.show');
+
+Route::get('/show', function () {
+    return view('index', [
+        'title' => 'Daftar Dosen',
+        'dosen' => Dosen::all()
+    ]);
+})->middleware('auth');
 
 

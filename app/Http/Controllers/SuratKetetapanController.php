@@ -15,7 +15,6 @@ class SuratKetetapanController extends Controller
         // Mendapatkan keyword untuk pencarian
         $search = $request->input('search');
 
-        // Query dasar untuk surat tugas
         $query = SuratTugas::where('jenis_id', 4)
             ->whereYear('waktu_akhir', $tahun)
             ->where('visibility', false);

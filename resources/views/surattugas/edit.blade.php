@@ -133,7 +133,7 @@
         </div>
         @enderror
         <button type="submit" class="btn btn-primary btn-sm">Simpan Perubahan</button>
-        <a href="/surattugas" class="btn btn-secondary btn-sm">Kembali</a>
+        <a href="/surattugas/{{ $suratTugas->id }}" class="btn btn-secondary btn-sm">Kembali</a>
     </form>
 </div>
 

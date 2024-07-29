@@ -22,7 +22,6 @@
         <div class="mb-3">
             <label for="program_studi" class="form-label">Program Studi</label>
             <select class="form-select @error('program_studi') is-invalid @enderror" id="program_studi" name="program_studi" required>
-                <option value="">Pilih Program Studi</option>
                 <option value="Informatika" {{ old('program_studi') == 'Informatika' ? 'selected' : '' }}>Informatika</option>
                 <option value="Sistem Informasi" {{ old('program_studi') == 'Sistem Informasi' ? 'selected' : '' }}>Sistem Informasi</option>
             </select>
@@ -32,8 +31,9 @@
             </div>
             @enderror
         </div>
+        
         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-        <a href="/dosen" class="btn btn-secondary"><i></i>Kembali</a>
+        <a href="/show" class="btn btn-secondary"><i></i>Kembali</a>
     </form>
 </div>
 

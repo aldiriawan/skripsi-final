@@ -60,20 +60,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dosen/show') ? 'active' : '' }}" href="/dosen">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('show') ? 'active' : '' }}" href="/show">
                         <i class="bi bi-gear-fill"></i>
                         <span class="text-sidebar">Edit Data Dosen</span>
                     </a>
                 </li>
-                
-                {{-- <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('administrasisurattugas') ? 'active' : '' }}" href="/administrasisurattugas">
-                        <i class="bi bi-gear-fill"></i>
-                        <span class="text-sidebar">Data Surat Tugas</span>
-                    </a>
-                </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('administrasiuser') ? 'active' : '' }}" href="/user">
+                    <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('user') ? 'active' : '' }}" href="/user">
                         <i class="bi bi-gear-fill"></i>
                         <span class="text-sidebar">Data User</span>
                     </a>
