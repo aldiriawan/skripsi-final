@@ -73,19 +73,19 @@ class SuratTugasController extends Controller
          ]);
      }
 
-    // public function ImportExcelData(Request $request)
-    // {
-    //     $request->validate([
-    //         'import_file' => [
-    //             'required',
-    //             'file'
-    //         ],
-    //     ]);
+    public function ImportExcelData(Request $request)
+    {
+        $request->validate([
+            'import_file' => [
+                'required',
+                'file'
+            ],
+        ]);
 
-    //     Excel::import(new SuratTugasImport, $request->file('import_file'));
+        Excel::import(new SuratTugasImport, $request->file('import_file'));
 
-    //     return redirect()->back()->with('success', 'Import Sukses');
-    // }
+        return redirect()->back()->with('success', 'Import Sukses');
+    }
     /**
      * Show the form for creating a new resource.
      */

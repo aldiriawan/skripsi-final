@@ -3,13 +3,13 @@
 @section('container')
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h3 class="mt-3">{{ $title }}</h3>
-    {{-- <form action="/surattugas/import" method="post" enctype="multipart/form-data" class="d-flex align-items-center">
+    <form action="/surattugas/import" method="post" enctype="multipart/form-data" class="d-flex align-items-center">
         @csrf
         <div class="input-group">
             <input type="file" class="form-control-file" name="import_file">
             <button type="submit" class="btn btn-primary btn-sm">Import</button>
         </div>
-    </form> --}}
+    </form>
     <a href="/surattugas/create" class="btn btn-primary">Tambah Surat Tugas Baru</a>
 </div>
 
