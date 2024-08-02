@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,13 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Dosen extends Model
 {
     use HasFactory;
-
     protected $table = 'dosen';
-
     protected $guarded = [
         'id'
     ];
-
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
@@ -25,13 +20,10 @@ class Dosen extends Model
                 ->orWhere('telepon', 'like', '%' . $search . '%');
         });
     }
-
-
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
     public function surattugas()
     {
         return $this->hasMany(SuratTugas::class);

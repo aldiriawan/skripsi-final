@@ -18,11 +18,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class SuratTugasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
-     public function index(Request $request)
+    public function index(Request $request)
      {
          $query = SuratTugas::query();
      
