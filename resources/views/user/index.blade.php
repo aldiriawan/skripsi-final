@@ -27,7 +27,5 @@
         <a href="{{ route('user.edit', auth()->user()->id) }}" class="btn btn-warning btn-sm mx-2"><i class="bi bi-pencil"></i> Edit</a>
     </div>
 </div>
-
 @endif
-
 @endsection
